@@ -50,8 +50,8 @@ public class NoCompilador extends javax.swing.JFrame {
      * Creates new form Compilador
      */
     public NoCompilador() {
-        initComponents();
-        inicio();
+        initComponents(); //llamada al metodo de inicio de los componentes
+        inicio(); //llamada al metodo principal
     }
 
     //metodo inicio() principal
@@ -272,31 +272,31 @@ public class NoCompilador extends javax.swing.JFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
-
+    //metodo boton nuevo
     private void btnNuevoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnNuevoActionPerformed
         directorio.New();
         clearFields();
     }//GEN-LAST:event_btnNuevoActionPerformed
-
+    //metodo boton abrir
     private void btnAbrirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAbrirActionPerformed
         if (directorio.Open()) {
             colorAnalysis();
             clearFields();
         }
     }//GEN-LAST:event_btnAbrirActionPerformed
-
+    //metodo boton guardar
     private void btnGuardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGuardarActionPerformed
         if (directorio.Save()) {
             clearFields();
         }
     }//GEN-LAST:event_btnGuardarActionPerformed
-
+    //metodo boton guardar como
     private void btnGuardarCActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGuardarCActionPerformed
         if (directorio.SaveAs()) {
             clearFields();
         }
     }//GEN-LAST:event_btnGuardarCActionPerformed
-
+    //metodo boton compilar
     private void btnCompilarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCompilarActionPerformed
         if (getTitle().contains("*") || getTitle().equals(title)) {
             if (directorio.Save()) {
@@ -306,7 +306,7 @@ public class NoCompilador extends javax.swing.JFrame {
             compile();
         }
     }//GEN-LAST:event_btnCompilarActionPerformed
-
+    //metodo boton ejecturar action
     private void btnEjecutarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEjecutarActionPerformed
         btnCompilar.doClick();
         if (codeCompile) {
@@ -372,6 +372,7 @@ public class NoCompilador extends javax.swing.JFrame {
             }
         }
     }
+    //metodo compilar
 
     private void compile() {
         clearFields();
@@ -382,6 +383,7 @@ public class NoCompilador extends javax.swing.JFrame {
         printConsole();
         codeCompile = true;
     }
+    //metodo analizador lexico
 
     private void lexicalAnalysis() {
         // Extraer tokens
@@ -406,6 +408,7 @@ public class NoCompilador extends javax.swing.JFrame {
             System.out.println("Error al escribir en el archivo... " + ex.getMessage());
         }
     }
+    //metodo analizador sintactico
 
     private void syntacticAnalysis() {
         Grammar gramatica = new Grammar(tokens, errors);
@@ -554,6 +557,7 @@ public class NoCompilador extends javax.swing.JFrame {
         // gramatica.show();
     }
 
+    //metodo boton analizador semantico
     private void semanticAnalysis() {
         HashMap<String, String> identDataType = new HashMap<>();
         identDataType.put("color", "COLOR");

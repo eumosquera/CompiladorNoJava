@@ -1,13 +1,13 @@
-import compilerTools.TextColor;
-import java.awt.Color;
+import compilerTools.Token;
 
 %%
-%class LexerColor
-%type TextColor
-%char
+%class Lexer
+%type Token
+%line
+%column
 %{
-    private TextColor textColor(long start, int size, Color color){
-        return new TextColor((int) start, size, color);
+    private Token token(String lexeme, String lexicalComp, int line, int column){
+        return new Token(lexeme, lexicalComp, line+1, column+1);
     }
 %}
 /* Variables básicas de comentarios y espacios */
@@ -26,99 +26,96 @@ Comentario = {ComentarioTradicional} | {FinDeLineaComentario} | {ComentarioDeDoc
 Letra = [A-Za-zÑñ_ÁÉÍÓÚáéíóúÜü]
 Digito = [0-9]
 Identificador = {Letra}({Letra}|{Digito})*
+Numero = {Digito} ({Digito})*
 
 /* Número */
 Numero = 0 | [1-9][0-9]*
 %%
 
 /* Comentarios o espacios en blanco */
-{Comentario} { return textColor(yychar, yylength(), new Color(146, 146, 146)); }
-{EspacioEnBlanco} { /*Ignorar*/ }
+{Comentario}|{EspacioEnBlanco} { /*Ignorar*/ }
 
-/* Identificador */
-\${Identificador} { /*Ignorar*/ }
 
-/* Tipos de dato */
-número |
-color { return textColor(yychar, yylength(), new Color(148, 58, 173)); }
+/*Numero*/
+{Numero} "." {Numero} { return token(yytext(), "REAL", yyline, yycolumn); }
+{Numero} { return token(yytext(), "NUMERO", yyline, yycolumn); }
 
-/* Número */
-{Numero} { return textColor(yychar, yylength(), new Color(35, 120, 147)); }
+/*Operadores*/
+"+" { return token(yytext(), "SUMA", yyline, yycolumn); }
+"-" { return token(yytext(), "RESTA", yyline, yycolumn); }
+"/" { return token(yytext(), "DIVISION", yyline, yycolumn); }
+"*" { return token(yytext(), "MULTIPLICACION", yyline, yycolumn); }
 
-/* Colores */
-#[{Letra}{Digito}]{6} { return textColor(yychar, yylength(), new Color(224, 195, 12)); }
+/*aritmeticos*/
+"==" { return token(yytext(), "IGUAL", yyline, yycolumn); }
+"!=" { return token(yytext(), "DIFERENTE", yyline, yycolumn); }
+">" { return token(yytext(), "MAYORQUE", yyline, yycolumn); }
+"<" { return token(yytext(), "MENORQUE", yyline, yycolumn); }
+">=" { return token(yytext(), "MAYORIGUALQUE", yyline, yycolumn); }
+"<=" { return token(yytext(), "MENORIGUALQUE", yyline, yycolumn); }
+/*signos*/
+"." { return token(yytext(), "PUNTO", yyline, yycolumn); }
+"," { return token(yytext(), "COMA", yyline, yycolumn); }
+":" { return token(yytext(), "DOSPUNTOS", yyline, yycolumn); }
+";" { return token(yytext(), "PUNTOCOMA", yyline, yycolumn); }
+\' { return token(yytext(), "COMILLASIMPLE", yyline, yycolumn); }
+\" [a-zA-Z0-9_.-]* \" { return token(yytext(), "CADENA", yyline, yycolumn); }
+/*asignacion*/
+"=" { return token(yytext(), "ASIGNACION", yyline, yycolumn); }
 
-/* Operadores de agrupación */
-"("|")"|"{"|"}" { return textColor(yychar, yylength(), new Color(169, 155, 179)); }
 
-/* Signos de puntuación */
-","|
-";" { return textColor(yychar, yylength(), new Color(169, 155, 179)); }
+\" { return token(yytext(), "COMILLADOBLE", yyline, yycolumn); }
+\( { return token(yytext(), "PARENTESISABIERTO", yyline, yycolumn); }
+\) { return token(yytext(), "PARENTESISCERRADO", yyline, yycolumn); }
+\{ { return token(yytext(), "LLAVEABIERTO", yyline, yycolumn); }
+\} { return token(yytext(), "LLAVECERRADO", yyline, yycolumn); }
+\[ { return token(yytext(), "CORCHETEABIERTO", yyline, yycolumn); }
+\] { return token(yytext(), "CORCHETECERRADO", yyline, yycolumn); }
+/*incrementos*/
+"++" { return token(yytext(), "INCREMENTO", yyline, yycolumn); }
+"--" { return token(yytext(), "DECREMENTO", yyline, yycolumn); }
 
-/* Operador de asignación */
---> { return textColor(yychar, yylength(), new Color(169, 155, 179)); }
+/*Palabras reservadas*/
+"IMPORT" | "import" | "Import" { return token(yytext(), "IMPORT", yyline, yycolumn); }
+"DEF" | "def" | "Def" { return token(yytext(), "DEF", yyline, yycolumn); }
+"CLASS" | "class" | "Class" { return token(yytext(), "CLASS", yyline, yycolumn); }
+"IF" | "if" | "If" { return token(yytext(), "IF", yyline, yycolumn); }
+"ELSE" | "else" | "Else" { return token(yytext(), "ELSE", yyline, yycolumn); }
+"FOR" | "for" | "For" { return token(yytext(), "FOR", yyline, yycolumn); }
+"IN" | "in" | "In" { return token(yytext(), "IN", yyline, yycolumn); }
+"RANGE" | "range" | "Range" { return token(yytext(), "RANGE", yyline, yycolumn); }
+"SELF" | "self" | "Self" { return token(yytext(), "SELF", yyline, yycolumn); }
+"WHILE" | "while" | "While" { return token(yytext(), "WHILE", yyline, yycolumn); }
+"TRY" | "try" | "Try" { return token(yytext(), "TRY", yyline, yycolumn); }
+"EXCEPT" | "except" | "Except" { return token(yytext(), "EXCEPT", yyline, yycolumn); }
+"RETURN" | "return" | "Return" { return token(yytext(), "RETURN", yyline, yycolumn); }
+"BREAK" | "break" | "Break" { return token(yytext(), "BREAK", yyline, yycolumn); }
+"NEXT" | "next" | "Next" { return token(yytext(), "NEXT", yyline, yycolumn); }
+"INPUT" | "input" | "Input" { return token(yytext(), "INPUT", yyline, yycolumn); }
+"OUTPUT" | "output" | "Output" { return token(yytext(), "OUTPUT", yyline, yycolumn); }
+"PRINT" | "print" | "Print" { return token(yytext(), "PRINT", yyline, yycolumn); }
+/*Tipo de dato*/
+"INT" | "int" | "Int" { return token(yytext(), "INT", yyline, yycolumn); }
+"FLOAT" | "float" | "Float" { return token(yytext(), "FLOAT", yyline, yycolumn); }
+"BOOLEAN" | "boolean" | "Boolean" { return token(yytext(), "BOOLEAN", yyline, yycolumn); }
+"STRING" | "string" | "String" { return token(yytext(), "STRING", yyline, yycolumn); }
+/*booleano*/
+"TRUE" | "true" | "True" { return token(yytext(), "TRUE", yyline, yycolumn); }
+"FALSE" | "false" | "False" { return token(yytext(), "FALSE", yyline, yycolumn); }
+/*Matematicos*/
+"POWER" | "power" | "Power" { return token(yytext(), "POWER", yyline, yycolumn); }
+"SQRT" | "sqrt" | "Sqrt" { return token(yytext(), "SQRT", yyline, yycolumn); }
+/*logicos*/
+"AND" | "and" | "And" { return token(yytext(), "AND", yyline, yycolumn); }
+"OR" | "or" | "Or" { return token(yytext(), "OR", yyline, yycolumn); }
+"NOT" | "not" | "Not" { return token(yytext(), "NOT", yyline, yycolumn); }
+/*data base*/
+"BEGIN" | "begin" | "Begin" { return token(yytext(), "BEGIN", yyline, yycolumn); }
+"END" | "end" | "End" { return token(yytext(), "END", yyline, yycolumn); }
+/*identificadores*/
+/* IDs */
+{Identificador} { return token(yytext(), "ID", yyline, yycolumn); }
 
-/* Movimiento */
-adelante |
-atrás |
-izquierda |
-derecha |
-norte |
-sur |
-este |
-oeste { return textColor(yychar, yylength(), new Color(17, 94, 153)); }
 
-/* Pintar */
-pintar { return textColor(yychar, yylength(), new Color(212, 129, 6)); }
-
-/* Detener pintar */
-detenerPintar { return textColor(yychar, yylength(), new Color(255, 64, 129)); }
-
-/* Tomar */
-tomar |
-poner { return textColor(yychar, yylength(), new Color(102, 41, 120)); }
-
-/* Lanzar Moneda */
-lanzarMoneda { return textColor(yychar, yylength(), new Color(239, 108, 0)); }
-
-/* Ver */
-izquierdaEsObstáculo |
-izquierdaEsClaro |
-izquierdaEsBaliza |
-izquierdaEsBlanco |
-izquierdaEsNegro |
-frenteEsObstáculo |
-frenteEsClaro |
-frenteEsBaliza |
-frenteEsBlanco |
-frenteEsNegro |
-derechaEsObstáculo |
-derechaEsClaro |
-derechaEsBaliza |
-derechaEsBlanco |
-derechaEsNegro { return textColor(yychar, yylength(), new Color(150, 0, 80)); }
-
-/* Repetir */
-repetir |
-repetirMientras { return textColor(yychar, yylength(), new Color(121, 107, 255)); }
-
-/* Detener repetir */
-interrumpir { return textColor(yychar, yylength(), new Color(255, 64, 129)); }
-
-/* Estructura si */
-si |
-sino { return textColor(yychar, yylength(), new Color(48, 63, 159)); }
-
-/* Operadores lógicos */
-"&" |
-"|" { return textColor(yychar, yylength(), new Color(46, 125, 50)); }
-
-/* Final */
-final { return textColor(yychar, yylength(), new Color(198, 40, 40)); }
-
-/* Errores */
-// Número erróneo
-0 {Numero}+ { /* Ignorar */ }
-// Identificador sin $
-{Identificador} { /* Ignorar */ }
-. { /* Ignorar */ }
+/**/
+. { return token(yytext(), "ERROR", yyline, yycolumn); }

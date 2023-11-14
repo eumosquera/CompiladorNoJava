@@ -1,13 +1,13 @@
-import compilerTools.Token; 
+import compilerTools.TextColor;
+import java.awt.Color;
 
 %%
-%class Lexer
-%type Token
-%line
-%column
+%class LexerColor
+%type TextColor
+%char
 %{
-    private Token token(String lexeme, String lexicalComp, int line, int column){
-        return new Token(lexeme, lexicalComp, line+1, column+1);
+    private TextColor textColor(long start, int size, Color color){
+        return new TextColor((int) start, size, color);
     }
 %}
 /* Variables básicas de comentarios y espacios */
@@ -22,6 +22,7 @@ ComentarioDeDocumentacion = "/**" {ContenidoComentario} "*"+ "/"
 /* Comentario */
 Comentario = {ComentarioTradicional} | {FinDeLineaComentario} | {ComentarioDeDocumentacion}
 
+
 /* Identificador */
 Letra = [A-Za-zÑñ_ÁÉÍÓÚáéíóúÜü]
 Digito = [0-9]
@@ -30,96 +31,64 @@ Identificador = {Letra}({Letra}|{Digito})*
 /* Número */
 Numero = 0 | [1-9][0-9]*
 %%
-/* Comentarios o espacios en blanco */
-{Comentario}|{EspacioEnBlanco} { /*Ignorar*/ }
 
-/* Identificador */
-\${Identificador} { return token(yytext(), "IDENTIFICADOR", yyline, yycolumn); }
+/* Comentarios o espacios en blanco */
+{Comentario} { return textColor(yychar, yylength(), new Color(146, 146, 146)); }
+{EspacioEnBlanco} {/*IGNORAR*/}
+
+/*Palabras reservadas*/
+"IMPORT" | "import" | "Import" { return textColor( yychar, yylength(), new Color(255, 140, 0)); }
+"DEF" | "def" | "Def" { return textColor( yychar, yylength(), new Color(19,141,50)); }
+"CLASS" | "class" | "Class" { return textColor(yychar, yylength(), new Color(30,148,195)); }
+
+/* condicion */
+"IF" | "if" | "If" { return textColor(yychar, yylength(), new Color(0, 0, 139)); }
+"ELSE" | "else" | "Else" { return textColor(yychar, yylength(), new Color(0, 0, 139));}
+
+/* ciclos */
+"FOR" | "for" | "For" { return textColor(yychar, yylength(), new Color(0, 0, 139)); }
+"IN" | "in" | "In" { return textColor(yychar, yylength(), new Color(0, 0, 139)); }
+"WHILE" | "while" | "While" { return textColor(yychar, yylength(), new Color(0, 0, 139)); }
+"RANGE" | "range" | "Range" { return textColor(yychar, yylength(), new Color(0, 0, 139));  }
+
+"SELF" | "self" | "Self" {return textColor(yychar, yylength(), new Color(0, 0, 139));  }
+"TRY" | "try" | "Try" { return textColor(yychar, yylength(), new Color(0, 0, 139)); }
+"EXCEPT" | "except" | "Except" { return textColor(yychar, yylength(), new Color(0, 0, 139)); }
+"RETURN" | "return" | "Return" { return textColor(yychar, yylength(), new Color(148, 58, 173)); }
+"BREAK" | "break" | "Break" { return textColor(yychar, yylength(), new Color(0, 0, 139)); }
+"NEXT" | "next" | "Next" { return textColor(yychar, yylength(), new Color(255, 140, 0));  }
+"INPUT" | "input" | "Input" | "PRINT" | "print" | "Print" { return textColor(yychar, yylength(), new Color(255, 140, 0));  }
 
 /* Tipos de dato */
-número |
-color { return token(yytext(), "TIPO_DATO", yyline, yycolumn); }
+"STRING" | "string" | "String" { return textColor(yychar, yylength(), new Color(148, 58, 173)); }
+"INT" | "int" | "Int" {return textColor(yychar, yylength(), new Color(148, 58, 173));}
+"FLOAT" | "float" | "Float" { return textColor(yychar, yylength(), new Color(148, 58, 173)); }
+"BOOLEAN" | "boolean" | "Boolean" { return textColor(yychar, yylength(), new Color(0, 0, 139)); }
 
-/* Número */
-{Numero} { return token(yytext(), "NUMERO", yyline, yycolumn); }
+"TRUE" | "true" | "True" { return textColor(yychar, yylength(), new Color(148, 58, 173)); }
+"FALSE" | "false" | "False" { return textColor(yychar, yylength(), new Color(148, 58, 173)); }
 
-/* Colores */
-#[{Letra}{Digito}]{6} { return token(yytext(), "COLOR", yyline, yycolumn); }
+"POWER" | "power" | "Power" { return textColor(yychar, yylength(), new Color(255, 140, 0)); }
+"SQRT" | "sqrt" | "Sqrt" { return textColor(yychar, yylength(), new Color(255, 140, 0)); }
+"AND" | "and" | "And" { return textColor(yychar, yylength(), new Color(178, 34, 34)); }
+"OR" | "or" | "Or" { return textColor(yychar, yylength(), new Color(178, 34, 34)); }
+"NOT" | "not" | "Not" { return textColor(yychar, yylength(), new Color(178, 34, 34)); }
+"BEGIN" | "begin" | "Begin" { return textColor(yychar, yylength(), new Color(255, 140, 0)); }
+"END" | "end" | "End" { return textColor(yychar, yylength(), new Color(255, 140, 0)); }
 
-/* Operadores de agrupación */
-"(" { return token(yytext(), "PARENTESIS_A", yyline, yycolumn); }
-")" { return token(yytext(), "PARENTESIS_C", yyline, yycolumn); }
-"{" { return token(yytext(), "LLAVE_A", yyline, yycolumn); }
-"}" { return token(yytext(), "LLAVE_C", yyline, yycolumn); }
 
-/* Signos de puntuación */
-"," { return token(yytext(), "COMA", yyline, yycolumn); }
-";" { return token(yytext(), "PUNTO_COMA", yyline, yycolumn); }
+\( { return textColor(yychar, yylength(), new Color(96, 96, 96)); }
+\) { return textColor(yychar, yylength(), new Color(96, 96, 96)); }
+\{ { return textColor(yychar, yylength(), new Color(96, 96, 96)); }
+\} { return textColor(yychar, yylength(), new Color(96, 96, 96)); }
+\[ { return textColor(yychar, yylength(), new Color(96, 96, 96)); }
+\] { return textColor(yychar, yylength(), new Color(96, 96, 96)); }
+"++" { return textColor(yychar, yylength(), new Color(96, 96, 96)); }
+"--" { return textColor(yychar, yylength(), new Color(96, 96, 96)); }
 
-/* Operador de asignación */
---> { return token (yytext(), "OP_ASIG", yyline, yycolumn); }
+\" [a-zA-Z0-9_.-]* \" {return textColor(yychar, yylength(), new Color(68, 196, 30));}
 
-/* Movimiento */
-adelante |
-atrás |
-izquierda |
-derecha |
-norte |
-sur |
-este |
-oeste { return token(yytext(), "MOVIMIENTO", yyline, yycolumn); }
+/* IDs */
+{Identificador} {return textColor(yychar, yylength(), new Color(0, 0, 0));}
 
-/* Pintar */
-pintar { return token(yytext(), "PINTAR", yyline, yycolumn); }
-
-/* Detener pintar */
-detenerPintar { return token(yytext(), "DETENER_PINTAR", yyline, yycolumn); }
-
-/* Tomar */
-tomar |
-poner { return token(yytext(), "TOMAR", yyline, yycolumn); }
-
-/* Lanzar Moneda */
-lanzarMoneda { return token(yytext(), "LANZAR_MONEDA", yyline, yycolumn); }
-
-/* Ver */
-izquierdaEsObstáculo |
-izquierdaEsClaro |
-izquierdaEsBaliza |
-izquierdaEsBlanco |
-izquierdaEsNegro |
-frenteEsObstáculo |
-frenteEsClaro |
-frenteEsBaliza |
-frenteEsBlanco |
-frenteEsNegro |
-derechaEsObstáculo |
-derechaEsClaro |
-derechaEsBaliza |
-derechaEsBlanco |
-derechaEsNegro { return token(yytext(), "VER", yyline, yycolumn); }
-
-/* Repetir */
-repetir |
-repetirMientras { return token(yytext(), "REPETIR", yyline, yycolumn); }
-
-/* Detener repetir */
-interrumpir { return token(yytext(), "DETENER_REPETIR", yyline, yycolumn); }
-
-/* Estructura si */
-si |
-sino { return token(yytext(), "ESTRUCTURA_SI", yyline, yycolumn); }
-
-/* Operadores lógicos */
-"&" |
-"|" { return token(yytext(), "OP_LOGICO", yyline, yycolumn); }
-
-/* Final */
-final { return token(yytext(), "FINAL", yyline, yycolumn); }
-
-/* Errores */
-// Número erróneo
-0 {Numero}+ { return token(yytext(), "ERROR_1", yyline, yycolumn); }
-// Identificador sin $
-{Identificador} { return token(yytext(), "ERROR_2", yyline, yycolumn); }
-. { return token(yytext(), "ERROR", yyline, yycolumn); }
+. { /* Ignorar */ }
