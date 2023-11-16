@@ -49,6 +49,7 @@ public class NoCompilador extends javax.swing.JFrame {
     /**
      * Creates new form Compilador
      */
+    //metodo constructor
     public NoCompilador() {
         initComponents(); //llamada al metodo de inicio de los componentes
         inicio(); //llamada al metodo principal
@@ -73,6 +74,7 @@ public class NoCompilador extends javax.swing.JFrame {
         Functions.setLineNumberOnJTextComponent(jtpCode);
         timerKey = new Timer((int) (1000 * 0.3), (ActionEvent e) -> {
             timerKey.stop();
+            
             colorAnalysis();
         });
         Functions.insertAsteriskInName(this, jtpCode, () -> {
@@ -85,9 +87,9 @@ public class NoCompilador extends javax.swing.JFrame {
         identProductions = new ArrayList<>();
         identificadores = new HashMap<>();
         //function para meter autocompletador de codigo se activa con ctrl + space
-        Functions.setAutocompleterJTextComponent(new String[]{"número", "color", "adelante", "atrás",
-            "izquierda", "derecha", "norte", "sur", "este", "oeste", "pintar", "detenerPintar",
-            "tomar", "poner", "lanzarMoneda"}, jtpCode, () -> {
+        Functions.setAutocompleterJTextComponent(new String[]{"numero", "color", "publico", "metodo",
+            "entero", "booleano", "para", "nuevo",
+            "texto", "cadena", "guardar"}, jtpCode, () -> {
             timerKey.restart();
         });
     } // fin metodo init()
@@ -309,6 +311,7 @@ public class NoCompilador extends javax.swing.JFrame {
     //metodo boton ejecturar action
     private void btnEjecutarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEjecutarActionPerformed
         btnCompilar.doClick();
+        clearFields();
         if (codeCompile) {
             if (errors.size() > 0) {
                 JOptionPane.showMessageDialog(null, "No se puede ejecutar el código ya que se encontró uno o más errores",
@@ -318,73 +321,23 @@ public class NoCompilador extends javax.swing.JFrame {
                 System.out.println(codeBlock);
                 ArrayList<String> blocksOfCode = codeBlock.getBlocksOfCodeInOrderOfExec();
                 System.out.println(blocksOfCode);
-                executeCode(blocksOfCode, 1);
-
             }
         }
     }//GEN-LAST:event_btnEjecutarActionPerformed
-
-    private void executeCode(ArrayList<String> blocksOfCode, int repeats) {
-        for (int j = 1; j <= repeats; j++) {
-            int repeatCode = -1;
-            for (int i = 0; i < blocksOfCode.size(); i++) {
-                String blockOfCode = blocksOfCode.get(i);
-                if (repeatCode != -1) {
-                    int[] posicionMarcador = CodeBlock.getPositionOfBothMarkers(blocksOfCode, blockOfCode);
-                    executeCode(new ArrayList<>(blocksOfCode.subList(posicionMarcador[0], posicionMarcador[1])), repeatCode);
-                    repeatCode = -1;
-                    i = posicionMarcador[1];
-                } else {
-                    String[] sentences = blockOfCode.split(";");
-                    for (String sentence : sentences) {
-                        sentence = sentence.trim();
-                        // Llamar código de ejecución (arduino, gráfico, etc)
-                        if (sentence.startsWith("pintar")) {
-                            String parametro;
-                            if (sentence.contains("$")) {
-                                parametro = identificadores.get(sentence.substring(9, sentence.length() - 2));
-                            } else {
-                                parametro = sentence.substring(9, sentence.length() - 2);
-                            }
-                            System.out.println("Pintando de color " + parametro + "...");
-                        } else if (sentence.startsWith("izquierda")) {
-                            System.out.println("Moviéndose a la izquierda...");
-                        } else if (sentence.startsWith("derecha")) {
-                            System.out.println("Moviéndose a la derecha...");
-                        } else if (sentence.startsWith("adelante")) {
-                            System.out.println("Moviéndose hacia adelante");
-                        } else if (sentence.contains("-->")) {
-                            String[] identComp = sentence.split(" ");
-                            System.out.println("Declarando identificador " + identComp[1] + " igual a " + identComp[3]);
-                        } else if (sentence.startsWith("atrás")) {
-                            System.out.println("Moviéndose hacia atrás");
-                        } else if (sentence.startsWith("repetir")) {
-                            String parametro;
-                            if (sentence.contains("$")) {
-                                parametro = identificadores.get(sentence.substring(10, sentence.length() - 2));
-                            } else {
-                                parametro = sentence.substring(10, sentence.length() - 2);
-                            }
-                            repeatCode = Integer.parseInt(parametro);
-                        }
-                    }
-                }
-            }
-        }
-    }
-    //metodo compilar
-
+    
+    //se borra el metodo execute
+   //metodo compilar
     private void compile() {
         clearFields();
         lexicalAnalysis();
-        fillTableTokens();
+        llenarTableTokens();
         syntacticAnalysis();
         semanticAnalysis();
         printConsole();
         codeCompile = true;
     }
+    
     //metodo analizador lexico
-
     private void lexicalAnalysis() {
         // Extraer tokens
         Lexer lexer;
@@ -411,6 +364,7 @@ public class NoCompilador extends javax.swing.JFrame {
     //metodo analizador sintactico
 
     private void syntacticAnalysis() {
+        //instancia la clase para la gramatica
         Grammar gramatica = new Grammar(tokens, errors);
 
         /* Deshabilitar mensajes y validaciones */
@@ -513,18 +467,18 @@ public class NoCompilador extends javax.swing.JFrame {
 
         /* Verificación de punto y coma al final de la sentencia */
         // Identificadores
-        gramatica.group("VARIABLE_PC", "VARIABLE PUNTO_COMA", true);
+        gramatica.group("VARIABLE_PC", "VARIABLE PUNTOCOMA", true);
         gramatica.group("VARIABLE_PC", "VARIABLE", true,
                 18, " × Error sintáctico {}: falta el punto y coma al final de la declaración de variable [#, %]");
         // Funciones
-        gramatica.group("FUNCION_COMP_PC", "FUNCION_COMP PUNTO_COMA", true);
+        gramatica.group("FUNCION_COMP_PC", "FUNCION_COMP PUNTOCOMA", true);
         gramatica.group("FUNCION_COMP_PC", "FUNCION_COMP", true,
                 19, " × Error sintáctico {}: falta el punto y coma al final de la declaración de función [#, %]");
 
         gramatica.initialLineColumn();
 
         /* Eliminación de punto y coma */
-        gramatica.delete("PUNTO_COMA",
+        gramatica.delete("PUNTOCOMA",
                 20, " × Error sintáctico {}: el punto y coma no está al final de una sentencia [#, %]");
 
         /* Agrupación de sentencias */
@@ -572,11 +526,13 @@ public class NoCompilador extends javax.swing.JFrame {
             identificadores.put(id.lexemeRank(1), id.lexemeRank(-1));
         }
     }
-
+    
+   
+    //metod para el color de las palabras que se indiquen
     private void colorAnalysis() {
-        /* Limpiar el arreglo de colores */
+        //Limpiar el arreglo de colores
         textsColor.clear();
-        /* Extraer rangos de colores */
+        //Extraer rangos de colores
         LexerColor lexer;
         try {
             File codigo = new File("color.encrypter");
@@ -598,15 +554,16 @@ public class NoCompilador extends javax.swing.JFrame {
             System.out.println("Error al escribir en el archivo... " + ex.getMessage());
         }
         Functions.colorTextPane(textsColor, jtpCode, new Color(40, 40, 40));
-    }
-
-    private void fillTableTokens() {
+    } // fin metodo de los colores de las palabras
+    
+    //metod llenar la tabla de tokens
+    private void llenarTableTokens() {
         tokens.forEach(token -> {
             Object[] data = new Object[]{token.getLexicalComp(), token.getLexeme(), "[" + token.getLine() + ", " + token.getColumn() + "]"};
             Functions.addRowDataInTable(tblTokens, data);
         });
     }
-
+    //metodo imprimir por consola el estado de la compilacion
     private void printConsole() {
         int sizeErrors = errors.size();
         if (sizeErrors > 0) {
@@ -622,7 +579,7 @@ public class NoCompilador extends javax.swing.JFrame {
         }
         jtaOutputConsole.setCaretPosition(0);
     }
-
+    //metod limpiar los datos del editor
     private void clearFields() {
         Functions.clearDataInTable(tblTokens);
         jtaOutputConsole.setText("");
@@ -637,11 +594,7 @@ public class NoCompilador extends javax.swing.JFrame {
      * @param args the command line arguments
      */
     public static void main(String args[]) {
-        /* Set the Nimbus look and feel */
-        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
-        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
-         */
+      
         try {
             for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
                 if ("Nimbus".equals(info.getName())) {
@@ -659,9 +612,7 @@ public class NoCompilador extends javax.swing.JFrame {
             java.util.logging.Logger.getLogger(NoCompilador.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
         //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
+
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(() -> {
