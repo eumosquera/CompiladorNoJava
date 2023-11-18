@@ -41,7 +41,7 @@ import javax.swing.Timer;
  */
 public class NoCompilador extends javax.swing.JFrame {
 
-    private String title,ensamblador;
+    private String title;
     private Directory directorio;
     private String codigoIntermedio;
     private String codigoOptimizado;
@@ -84,11 +84,11 @@ public class NoCompilador extends javax.swing.JFrame {
     }
 
     private void init() {
-        title = "Compiler";
+        title = "Compilador No Java :)";
         setLocationRelativeTo(null);
         setTitle(title);
         directorio = new Directory(this, jtpCode, title, ".piel");
-        addWindowListener(new WindowAdapter() {// Cuando presiona la "X" de la esquina superior derecha
+        addWindowListener(new WindowAdapter() {//cerrar ventana
             @Override
             public void windowClosing(WindowEvent e) {
                 directorio.Exit();
@@ -203,7 +203,7 @@ public class NoCompilador extends javax.swing.JFrame {
                 .addComponent(btnCompilar)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(btnCompilar1)
-                .addContainerGap(282, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         panelButtonCompilerExecuteLayout.setVerticalGroup(
             panelButtonCompilerExecuteLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -343,6 +343,7 @@ public class NoCompilador extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    //boton compilar
     private void btnCompilarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCompilarActionPerformed
         directorio.New();
         clearFields();
@@ -402,7 +403,6 @@ public class NoCompilador extends javax.swing.JFrame {
         printConsole();
         int resp = JOptionPane.showConfirmDialog(null, "¿Desea optimizar el código?", "", JOptionPane.YES_NO_OPTION);
         if (resp == JOptionPane.YES_OPTION) {
-            optimizacion();
         } else {
             codigoIntermedio();
 }
@@ -410,9 +410,9 @@ public class NoCompilador extends javax.swing.JFrame {
         //codigoIntermedio();
         codeHasBeenCompiled = true;
     }
-
+    //metodo analizador lexico
     private void lexicalAnalysis() {
-        // Extraer tokens
+        // Extraer tokens de la clase lexer
         Lexer lexer;
         try {
             File codigo = new File("code.encrypter");
@@ -433,9 +433,10 @@ public class NoCompilador extends javax.swing.JFrame {
         } catch (IOException ex) {
             System.out.println("Error al escribir en el archivo... " + ex.getMessage());
         }
-    }
-
+    } // fin metodo analizador lexico
+    //metodo analizador syntatico
     private void syntacticAnalysis() {
+        //instancia de la clase 
         Grammar gramatica = new Grammar(tokens, errors);
 
         /*ELIMINACION DE ERRORES*/
@@ -1102,287 +1103,6 @@ public class NoCompilador extends javax.swing.JFrame {
         return (tl+m);
     }//fin_codObjeto
     
-    private void optimizacion(){
-        ArrayList<Token> toks = new ArrayList<Token>();
-        codigoIntermedio = ("--Código intermedio--\n");
-        int temp;
-        int divisor;
-        float frac;
-    //revisa las declaraciones
-        for (Production id: identProd){
-            temp = 1;
-            System.out.println(id.lexemeRank(0, -1));
-            
-
-            if(id.lexicalCompRank(2).equals("ASIGNACION")&&id.getSizeTokens()>5){
-                toks = id.getTokens();
-                for (int i = 0;i<toks.size();i++){
-                    if(toks.get(i).getLexeme().equals("/")){
-                        if(toks.get(i+1).getLexicalComp().equals("NUMERO")){
-                            divisor = Integer.parseInt(toks.get(i+1).getLexeme());
-                            System.out.println("DIVISOR: "+divisor);
-                            frac = 1 / (float)divisor;
-                            System.out.println("DIVISOR: "+frac);
-                            toks.remove(i);
-                            toks.remove(i);
-                            toks.add(i, new Token("*", "MULTIPLICACION",i,i));
-                            toks.add(i+1, new Token(Float.toString(frac), "REAL",i,i));
-                        }
-                    }//if token = /
-                }//for elimina divisiones
-                for (int i = 0;i<toks.size();i++){
-                    if(toks.get(i).getLexeme().equals("*")){
-                        if(toks.get(i-1).getLexeme().equals("0")){
-                            toks.remove(i);
-                            toks.remove(i);
-                        }
-                        if(toks.get(i+1).getLexeme().equals("0")){
-                            i--;
-                            toks.remove(i);
-                            toks.remove(i);
-                        }
-                        
-                    }//if token = *
-                }//for multiplicaciones 
-
-                for (int i = 0;i<toks.size();i++){
-                    if(toks.get(i).getLexeme().equals("*")){
-                        if(toks.get(i+1).getLexeme().equals("2")){
-                            toks.remove(i);
-                            toks.remove(i);
-                            toks.add(i,new Token("+", "SUMA",i,i));
-                            toks.add(i+1,new Token(toks.get(i-1).getLexeme(), "NUMERO",i,i));            
-                    }//if token = 2
-                        
-                    else if(toks.get(i+1).getLexeme().equals("1")){
-                    toks.remove(i);
-                    toks.remove(i);
-                }// if token = 1
-                    }//if token multiplicacion
-                }//for multiplicaciones por dos
-                
-                for (int i = 0;i<toks.size();i++){
-                    if(toks.get(i).getLexicalComp().matches("SUMA|RESTA")){
-                        if(toks.get(i-1).getLexeme().equals("0")){
-                            i--;
-                            toks.remove(i);
-                            toks.remove(i);
-                    }else 
-                        if(toks.get(i+1).getLexeme().equals("0")){
-                            toks.remove(i);
-                            toks.remove(i);
-          
-                    }//if token = 0
-
-                    }//if token suma
-                }//for sumas cero
-                codigoIntermedio = codigoIntermedio + ("\n\n=============================\n"+id.lexemeRank(0, -1)+"\n=============================");
-                codObj.add("\n\n=============================\n"+id.lexemeRank(0, -1)+"\n=============================");
-
-                for (int i = 0;i<toks.size();i++){
-                    if(toks.get(i).getLexeme().equals("*")||toks.get(i).getLexeme().equals("/")){
-                        i--;
-                        codigoIntermedio = codigoIntermedio + ("\nT"+temp+" = "+toks.get(i).getLexeme()+toks.get(i+1).getLexeme()+toks.get(i+2).getLexeme());
-                        
-                        codObj.add("\nT"+temp+" = "+toks.get(i).getLexeme()+toks.get(i+1).getLexeme()+toks.get(i+2).getLexeme());
-                        
-                        toks.remove(i);
-                        toks.remove(i);
-                        toks.remove(i);
-                        toks.add(i,new Token("T"+temp, "ID",i,i));
-                        temp++;
-                    }//if token = * /
-                    
-                }//for cada 
-                for (int i = 0; i<toks.size();i++){
-                    if(toks.get(i).getLexeme().equals("+")||toks.get(i).getLexeme().equals("-")){
-                        i--;
-                        codigoIntermedio = codigoIntermedio + ("\nT"+temp+" = "+toks.get(i).getLexeme()+toks.get(i+1).getLexeme()+toks.get(i+2).getLexeme());
-                        
-                        codObj.add("\nT"+temp+" = "+toks.get(i).getLexeme()+toks.get(i+1).getLexeme()+toks.get(i+2).getLexeme());
-                        
-                        toks.remove(i);
-                        toks.remove(i);
-                        toks.remove(i);
-                        toks.add(i,new Token("T"+temp, "ID",i,i));
-                        temp++;
-                    }//if token = + -
-                }
-                if(temp==1){
-                    codigoIntermedio = codigoIntermedio + ("\n"+id.lexemeRank(1)+" = " + id.lexemeRank(3));
-                }else
-                codigoIntermedio = codigoIntermedio + ("\n"+id.lexemeRank(1)+" = "+"T"+(temp-1));
-                //para guardar las variables declaradas para posteriormente utilizarlo en el metodo ensamblador               
-                variables.add(id.lexemeRank(1));
-                //codigo Objeto
-                codObjComp.add(objectCode(codObj));
-                System.out.println(codObjComp.get(0));
-                codObj.clear();
-            }//if hay asignacion
-            
-        }//for producciones
-    //revisa asignaciones
-    
-        for (Production id: asigProd){ 
-            temp = 1;
-            if(id.lexicalCompRank(1).equals("ASIGNACION")&&id.getSizeTokens()>5){
-                toks = id.getTokens();
-                for (int i = 0;i<toks.size();i++){
-                    if(toks.get(i).getLexeme().equals("/")){
-                        if(toks.get(i+1).getLexicalComp().equals("NUMERO")){
-                            divisor = Integer.parseInt(toks.get(i+1).getLexeme());
-                            System.out.println("DIVISOR: "+divisor);
-                            frac = 1 / (float)divisor;
-                            System.out.println("DIVISOR: "+frac);
-                            toks.remove(i);
-                            toks.remove(i);
-                            toks.add(i, new Token("*", "MULTIPLICACION",i,i));
-                            toks.add(i+1, new Token(Float.toString(frac), "REAL",i,i));
-                        }
-                    }//if token = /
-                }//for elimina divisiones
-                for (int i = 0;i<toks.size();i++){
-                    if(toks.get(i).getLexeme().equals("*")){
-                        if(toks.get(i-1).getLexeme().equals("0")){
-                            toks.remove(i);
-                            toks.remove(i);
-                        }
-                        if(toks.get(i+1).getLexeme().equals("0")){
-                            i--;
-                            toks.remove(i);
-                            toks.remove(i);
-                        }
-                        
-                    }//if token = *
-                }//for multiplicaciones 
-
-                for (int i = 0;i<toks.size();i++){
-                    if(toks.get(i).getLexeme().equals("*")){
-                        if(toks.get(i+1).getLexeme().equals("2")){
-                            toks.remove(i);
-                            toks.remove(i);
-                            toks.add(i,new Token("+", "SUMA",i,i));
-                            toks.add(i+1,new Token(toks.get(i-1).getLexeme(), "NUMERO",i,i));            
-                    }//if token = 2
-                        
-                    else if(toks.get(i+1).getLexeme().equals("1")){
-                    toks.remove(i);
-                    toks.remove(i);
-                }// if token = 1
-                    }//if token multiplicacion
-                }//for multiplicaciones por dos
-                
-                for (int i = 0;i<toks.size();i++){
-                    if(toks.get(i).getLexicalComp().matches("SUMA|RESTA")){
-                        if(toks.get(i-1).getLexeme().equals("0")){
-                            i--;
-                            toks.remove(i);
-                            toks.remove(i);
-                    }else 
-                        if(toks.get(i+1).getLexeme().equals("0")){
-                            toks.remove(i);
-                            toks.remove(i);
-                    }//if token = 0
-
-                    }//if token suma
-                }//for sumas cero
-                
-                codigoIntermedio = codigoIntermedio + ("\n\n=============================\n"+id.lexemeRank(0, -1)+"\n=============================");
-                 codObj.add("\n\n=============================\n"+id.lexemeRank(0, -1)+"\n=============================");
-
-                
-                for (int i = 0;i<toks.size();i++){
-                    if(toks.get(i).getLexeme().equals("*")||toks.get(i).getLexeme().equals("/")){
-                        i--;
-                        codigoIntermedio = codigoIntermedio + ("\nT"+temp+" = "+toks.get(i).getLexeme()+toks.get(i+1).getLexeme()+toks.get(i+2).getLexeme());
-                        
-                        codObj.add("\nT"+temp+" = "+toks.get(i).getLexeme()+toks.get(i+1).getLexeme()+toks.get(i+2).getLexeme());
-                                                
-                        toks.remove(i);
-                        toks.remove(i);
-                        toks.remove(i);
-                        toks.add(i,new Token("T"+temp, "ID",i,i));
-                        temp++;
-                    }//if token = * /
-                    
-                }//for cada 
-                for (int i = 0; i<toks.size();i++){
-                    if(toks.get(i).getLexeme().equals("+")||toks.get(i).getLexeme().equals("-")){
-                        i--;
-                        codigoIntermedio = codigoIntermedio + ("\nT"+temp+" = "+toks.get(i).getLexeme()+toks.get(i+1).getLexeme()+toks.get(i+2).getLexeme());
-                        
-                        codObj.add("\nT"+temp+" = "+toks.get(i).getLexeme()+toks.get(i+1).getLexeme()+toks.get(i+2).getLexeme());                       
-                        
-                        toks.remove(i);
-                        toks.remove(i);
-                        toks.remove(i);
-                        toks.add(i,new Token("T"+temp, "ID",i,i));
-                        temp++;
-                    }//if token = + -
-                }
-                if (temp==1)
-                codigoIntermedio = codigoIntermedio + ("\n"+id.lexemeRank(0)+" = " + id.lexemeRank(2));
-                else
-               codigoIntermedio = codigoIntermedio + ("\n"+id.lexemeRank(0)+" = "+"T"+(temp-1));
-               //para guardar las variables declaradas para posteriormente utilizarlo en el metodo ensamblador
-               variables.add(id.lexemeRank(0));
-               //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////7
-               //codigo Objeto
-                codObjComp.add(objectCode(codObj));
-                System.out.println(codObjComp.get(0));
-                codObj.clear();
-                //System.out.println(objectCode(codObj));
-            }//if hay asignacion
-        
-            
-        }
-        //INPUT Y OUTPUT
-        for (Production id: funcProd){
-                codigoIntermedio = codigoIntermedio + ("\n\n=============================\n"+id.lexemeRank(0, -1)+"\n=============================");
-                codigoIntermedio = codigoIntermedio + ("\nparam "+id.lexemeRank(2)+"\ncall "+id.lexemeRank(0)+", 1");
-
-            }//FOR FUNCPROD
-        //IF
-        for (Production id: ifProd){
-                codigoIntermedio = codigoIntermedio + ("\n\n=============================\n"+id.lexemeRank(0, -1)+"\n=============================");
-                codigoIntermedio = codigoIntermedio + ("\nT1 = "+id.lexemeRank(2,-3)+"\nif_false T1 goto L1 "+"\n.\n.\n.\nlabel L1");
-
-            }//FOR IFPROD
-        //WHILE
-        for (Production id: whileProd){
-                codigoIntermedio = codigoIntermedio + ("\n\n=============================\n"+id.lexemeRank(0, -1)+"\n=============================");
-                if(id.lexicalCompRank(5).matches("MULTIPLICACION|DIVISION|SUMA|RESTA")){
-                    codigoIntermedio = codigoIntermedio + ("\nT1 = "+id.lexemeRank(4,-3) + "\nlabel L1\nif_false " + id.lexemeRank(2,3) + " T1 goto L2 "+"\n.\n.\n.\ngoto L1\nlabel L2");
-                }
-                else{
-                    codigoIntermedio = codigoIntermedio + ("\nlabel L1\nif_false " + id.lexemeRank(2,-3) +" goto L2 "+"\n.\n.\n.\ngoto L1\nlabel L2");
-                    
-                }
-            }//FOR WHILEPROD
-        //System.out.print(codigoIntermedio);
-    }
-    /*
-    private ArrayList<Token> multPorCero(ArrayList<Token> toks){
-        for (int i = 0;i<toks.size();i++){
-                    if(toks.get(i).getLexeme().equals("*")){
-                        if(toks.get(i-1).getLexeme().equals("0")){
-                            toks.remove(i);
-                            toks.remove(i);
-                            toks = multPorCero(toks);
-                        }
-                        if(toks.get(i+1).getLexeme().equals("0")){
-                            i--;
-                            toks.remove(i);
-                            toks.remove(i);
-                            toks = multPorCero(toks);
-                        }
-                        
-                    }//if token = *
-                }//for multiplicaciones 
-        imprimirToks(toks);
-        return toks;
-    }
-  */
     private void imprimirToks(ArrayList<Token> prod){
         int i = 0;
         String str = "";
@@ -1392,39 +1112,7 @@ public class NoCompilador extends javax.swing.JFrame {
         System.out.print(str);
     }
     
-    
-    
-    private String ensamblador(String objeto){
-       int i=0;
-       String vr = "";
-       String STRUC="";
-       Set<String> hashSet = new HashSet<String>(variables);
-        variables.clear();
-        variables.addAll(hashSet);
-        
-       objeto = objeto.replaceAll("=================", ";=================");//.replaceAll("FLOAT",";FLOAT").replaceAll("INT",";INT").replaceAll("int",";int").replaceAll("float",";float" );
-       for(String str: variables){vr+="     "+str+" dw 1,0\n";}
-       //JOptionPane.showMessageDialog(null, vr);
-       //creamos la estructura base de ensablador
-       STRUC+=".model small\n.stack\n.data \n"+vr+".code\nINICIO: MOV AX, @DATA\n        MOV DS, AX\n        MOV ES, AX\n\n";
-
-       while(i<4){objeto = objeto.replaceAll("MUL R"+i+",R"+i+",R"+(i+1), "MUL R"+(i+1)).replaceAll("DIV R"+i+",R"+i+",R"+(i+1), "DIV R"+(i+1));i++;}
-       //System.out.println(objeto);
-       objeto = objeto.replaceAll("LD", "MOV");
-       objeto = objeto.replaceAll("R0,R0", "AX");
-       objeto = objeto.replaceAll("R1,R1", "BX");
-       objeto = objeto.replaceAll("R2,R2", "CX");
-       objeto = objeto.replaceAll("R3,R3", "DX");
-       objeto = objeto.replaceAll("R0", "AX");
-       objeto = objeto.replaceAll("R1", "BX");
-       objeto = objeto.replaceAll("R2", "CX");
-       objeto = objeto.replaceAll("R3", "DX");
-       STRUC+=objeto;
-
-       STRUC+="\nFIN: MOV AX,4C00H\n     INT 21H\n     END\n"; 
-       return STRUC;
-   }
-    
+   //metodo para el color de las clases   
     private void colorAnalysis() {
         /* Limpiar el arreglo de colores */
         textsColor.clear();
