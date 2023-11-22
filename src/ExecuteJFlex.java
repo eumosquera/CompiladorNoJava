@@ -1,4 +1,3 @@
-
 import jflex.exceptions.SilentExit;
 
 /**
