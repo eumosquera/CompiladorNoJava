@@ -1,4 +1,5 @@
 //inicio import
+
 import com.formdev.flatlaf.FlatIntelliJLaf;
 import compilerTools.CodeBlock;
 import javax.swing.UIManager;
@@ -35,6 +36,7 @@ import javax.swing.JScrollPane;
 import javax.swing.JTextArea;
 import javax.swing.Timer;
 //fin de los import 
+
 /**
  *
  * @author Ender Mosquera
@@ -55,7 +57,7 @@ public class NoCompilador extends javax.swing.JFrame {
     private ArrayList<String> codObj;
     private ArrayList<String> codObjComp;
     private ArrayList<String> variables;
-    
+
     private ArrayList<Production> funcProd;
     private HashMap<String, String> identificadores;
     private boolean codeHasBeenCompiled = false;
@@ -67,13 +69,10 @@ public class NoCompilador extends javax.swing.JFrame {
     private ArrayList<Production> operProdIzq;
     private ArrayList<Production> operProdDer;
     private ArrayList<Production> operProdDoble;
-    
+
     private ArrayList<Production> identProdCopia;
     private ArrayList<Production> asigProdCopia;
     ArrayList<ArrayList<Token>> prods = new ArrayList<ArrayList<Token>>(); //para optimización, vienen de 
-
-    
-
 
     /**
      * Creates new form Compilador
@@ -246,23 +245,22 @@ public class NoCompilador extends javax.swing.JFrame {
         jPanel2.setBackground(new java.awt.Color(204, 204, 255));
 
         jLabel2.setFont(new java.awt.Font("Bauhaus 93", 1, 18)); // NOI18N
-        jLabel2.setText("Compilador No java✌");
+        jLabel2.setText("Compilador No java :) Karol - Ender - Javier ");
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
         jPanel2Layout.setHorizontalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
-                .addGap(81, 81, 81)
+                .addGap(16, 16, 16)
                 .addComponent(jLabel2)
-                .addContainerGap(83, Short.MAX_VALUE))
+                .addContainerGap(71, Short.MAX_VALUE))
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jLabel2)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 69, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 12, Short.MAX_VALUE))
         );
 
         LabelTecNM.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Multimedia/Logo TecNM.png"))); // NOI18N
@@ -313,7 +311,7 @@ public class NoCompilador extends javax.swing.JFrame {
                     .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 473, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, rootPanelLayout.createSequentialGroup()
-                .addContainerGap(574, Short.MAX_VALUE)
+                .addContainerGap(102, Short.MAX_VALUE)
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(94, 94, 94))
         );
@@ -356,61 +354,64 @@ public class NoCompilador extends javax.swing.JFrame {
     }//GEN-LAST:event_btnCompilar1ActionPerformed
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-          if (directorio.Save()) {           
+        if (directorio.Save()) {
             clearFields();
         }
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
-         if (directorio.Open()) {
+        if (directorio.Open()) {
             colorAnalysis();
             clearFields();
         }
     }//GEN-LAST:event_jButton2ActionPerformed
     public void archivoT(String ruta, String Objeto) {
-          try {
-              //String ruta = "D:\\Pollo\\Descargas\\COMPILADORES COMPAÑEROS\\MicroCompiler_09\\src\\MicroC\\codigoTres.txt";
-              String contenido = Objeto;
-              File file = new File(ruta);
-              // Si el archivo no existe es creado
-              if (!file.exists()) {
-                  file.createNewFile();
-              }
-              FileWriter fw = new FileWriter(file);
-              BufferedWriter bw = new BufferedWriter(fw);
-              bw.write(contenido);
-              bw.close();
-          } catch (Exception e) {
-              e.printStackTrace();
-          }
-      }//archivoT
+        try {
+            //String ruta = "D:\\Pollo\\Descargas\\COMPILADORES COMPAÑEROS\\MicroCompiler_09\\src\\MicroC\\codigoTres.txt";
+            String contenido = Objeto;
+            File file = new File(ruta);
+            // Si el archivo no existe es creado
+            if (!file.exists()) {
+                file.createNewFile();
+            }
+            FileWriter fw = new FileWriter(file);
+            BufferedWriter bw = new BufferedWriter(fw);
+            bw.write(contenido);
+            bw.close();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }//archivoT
 
-    public void abrirarchivo(String archivo){
-           try {
-                  File objetofile = new File (archivo);
-                  Desktop.getDesktop().open(objetofile);
-           }catch (IOException ex) {
-                  System.out.println(ex);
-           }
-       }//fin_AbrirArchivo
+    public void abrirarchivo(String archivo) {
+        try {
+            File objetofile = new File(archivo);
+            Desktop.getDesktop().open(objetofile);
+        } catch (IOException ex) {
+            System.out.println(ex);
+        }
+    }//fin_AbrirArchivo
+    //inicio metodo compilar
+
     private void compile() {
         clearFields();
         lexicalAnalysis();
         fillTableTokens();
         syntacticAnalysis();
         semanticAnalysis();
-        
+
         printConsole();
-        int resp = JOptionPane.showConfirmDialog(null, "¿Desea optimizar el código?", "", JOptionPane.YES_NO_OPTION);
+        int resp = JOptionPane.showConfirmDialog(null, "¿Presentó algún Error?", "", JOptionPane.YES_NO_OPTION);
         if (resp == JOptionPane.YES_OPTION) {
         } else {
             codigoIntermedio();
-}
-        
+        }
+
         //codigoIntermedio();
         codeHasBeenCompiled = true;
-    }
+    } // fin metodo compilar
     //metodo analizador lexico
+
     private void lexicalAnalysis() {
         // Extraer tokens de la clase lexer
         Lexer lexer;
@@ -434,36 +435,36 @@ public class NoCompilador extends javax.swing.JFrame {
             System.out.println("Error al escribir en el archivo... " + ex.getMessage());
         }
     } // fin metodo analizador lexico
+
     //metodo analizador syntatico
     private void syntacticAnalysis() {
-        //instancia de la clase 
+        //instancia de la clase  gramar para deficnir la gramatica recibe como parametro los teokens y los  errores
         Grammar gramatica = new Grammar(tokens, errors);
 
-        /*ELIMINACION DE ERRORES*/
+        /*error general*/
         gramatica.delete(new String[]{"ERROR"}, 1);
-        /* Mostrar gramáticas */        
+
+        /* DEFINIR GRAMATICA */
+        //gramatica de un decimal
         gramatica.group("REAL", "NUMERO PUNTO NUMERO");
-         
-                
-        //-------------OPERACION---------------
-        //FORMAS DE CREAR UNA FUNCION CORRECTAMENTE   
+
+        // forma correcta de crear una operacion basica   
         gramatica.group("OPERACION", "REAL (SUMA|RESTA|MULTIPLICACION|DIVISION) REAL");
         gramatica.group("OPERACION", "REAL (SUMA|RESTA|MULTIPLICACION|DIVISION) NUMERO");
         gramatica.group("OPERACION", "REAL (SUMA|RESTA|MULTIPLICACION|DIVISION) ID");
         gramatica.group("OPERACION", "NUMERO (SUMA|RESTA|MULTIPLICACION|DIVISION) REAL");
-        gramatica.group("OPERACION", "ID (SUMA|RESTA|MULTIPLICACION|DIVISION) NUMERO",operProdIzq);
+        gramatica.group("OPERACION", "ID (SUMA|RESTA|MULTIPLICACION|DIVISION) NUMERO", operProdIzq);
         gramatica.group("OPERACION", "ID (SUMA|RESTA|MULTIPLICACION|DIVISION) REAL");
         gramatica.group("OPERACION", "NUMERO (SUMA|RESTA|MULTIPLICACION|DIVISION) NUMERO");
-        gramatica.group("OPERACION", "NUMERO (SUMA|RESTA|MULTIPLICACION|DIVISION) ID",operProdDer);
-        gramatica.group("OPERACION", "ID (SUMA|RESTA|MULTIPLICACION|DIVISION) NUMERO",operProdIzq);
-        gramatica.group("OPERACION", "ID (SUMA|RESTA|MULTIPLICACION|DIVISION) ID",operProdDoble);
+        gramatica.group("OPERACION", "NUMERO (SUMA|RESTA|MULTIPLICACION|DIVISION) ID", operProdDer);
+        gramatica.group("OPERACION", "ID (SUMA|RESTA|MULTIPLICACION|DIVISION) NUMERO", operProdIzq);
+        gramatica.group("OPERACION", "ID (SUMA|RESTA|MULTIPLICACION|DIVISION) ID", operProdDoble);
         gramatica.group("OPERACION", "OPERACION (SUMA|RESTA|MULTIPLICACION|DIVISION) REAL");
         gramatica.group("OPERACION", "OPERACION (SUMA|RESTA|MULTIPLICACION|DIVISION) NUMERO");
-        gramatica.group("OPERACION", "OPERACION (SUMA|RESTA|MULTIPLICACION|DIVISION) ID",operProdDer);
+        gramatica.group("OPERACION", "OPERACION (SUMA|RESTA|MULTIPLICACION|DIVISION) ID", operProdDer);
         gramatica.group("OPERACION", "REAL (SUMA|RESTA|MULTIPLICACION|DIVISION) OPERACION");
         gramatica.group("OPERACION", "NUMERO (SUMA|RESTA|MULTIPLICACION|DIVISION) OPERACION");
-        gramatica.group("OPERACION", "ID (SUMA|RESTA|MULTIPLICACION|DIVISION) OPERACION",operProdIzq);
-        //probablemente haya una mejor forma de hacer esto, ni modo!
+        gramatica.group("OPERACION", "ID (SUMA|RESTA|MULTIPLICACION|DIVISION) OPERACION", operProdIzq);
         gramatica.group("OPERACION", "OPERACION (SUMA|RESTA|MULTIPLICACION|DIVISION) OPERACION");
         gramatica.group("OPERACION", "OPERACION (SUMA|RESTA|MULTIPLICACION|DIVISION) OPERACION");
         gramatica.group("OPERACION", "OPERACION (SUMA|RESTA|MULTIPLICACION|DIVISION) OPERACION");
@@ -485,96 +486,110 @@ public class NoCompilador extends javax.swing.JFrame {
         gramatica.group("OPERACION", "OPERACION (SUMA|RESTA|MULTIPLICACION|DIVISION) OPERACION");
         gramatica.group("OPERACION", "OPERACION (SUMA|RESTA|MULTIPLICACION|DIVISION) OPERACION");
         //ERRORES operacion
-        gramatica.group("OPERACION_ER", "NUMERO (SUMA|RESTA|MULTIPLICACION|DIVISION)",2,"ERROR_SINTACTICO: se necesita un minimo de 2 valores para ralizar la operacion [#, %]");
-        gramatica.group("OPERACION_ER", "(SUMA|RESTA|MULTIPLICACION|DIVISION) NUMERO",2,"ERROR SINTACTICO: se necesita un minimo de 2 valores para ralizar la operacion [#, %]");
-        gramatica.group("OPERACION_ER", "ID (SUMA|RESTA|MULTIPLICACION|DIVISION)",2,"ERROR SINTACTICO: se necesita un minimo de 2 valores para ralizar la operacion [#, %]");
-        gramatica.group("OPERACION_ER", "(SUMA|RESTA|MULTIPLICACION|DIVISION) ID",2,"ERROR SINTACTICO: se necesita un minimo de 2 valores para ralizar la operacion [#, %]");
-       
+        gramatica.group("OPERACION_ER", "NUMERO (SUMA|RESTA|MULTIPLICACION|DIVISION)", 2, "ERROR_SINTACTICO: se necesita un minimo de 2 valores para ralizar la operacion [#, %]");
+        gramatica.group("OPERACION_ER", "(SUMA|RESTA|MULTIPLICACION|DIVISION) NUMERO", 2, "ERROR SINTACTICO: se necesita un minimo de 2 valores para ralizar la operacion [#, %]");
+        gramatica.group("OPERACION_ER", "ID (SUMA|RESTA|MULTIPLICACION|DIVISION)", 2, "ERROR SINTACTICO: se necesita un minimo de 2 valores para ralizar la operacion [#, %]");
+        gramatica.group("OPERACION_ER", "(SUMA|RESTA|MULTIPLICACION|DIVISION) ID", 2, "ERROR SINTACTICO: se necesita un minimo de 2 valores para ralizar la operacion [#, %]");
+
         //FORMA CORRECTA DE DECLARAR UNA VARIABLE------------------------------------------------------------
-        gramatica.group("DECL_FLOAT", "FLOAT ID PUNTOCOMA",identProd);
-        gramatica.group("DECL_FLOAT", "FLOAT ID ASIGNACION ID PUNTOCOMA",identProd);
-        gramatica.group("DECL_FLOAT", "FLOAT ID ASIGNACION REAL PUNTOCOMA",identProd);
-        gramatica.group("DECL_FLOAT", "FLOAT ID ASIGNACION OPERACION PUNTOCOMA",identProd);
+        gramatica.group("DECL_FLOAT", "FLOAT ID PUNTOCOMA", identProd);
+        gramatica.group("DECL_FLOAT", "FLOAT ID ASIGNACION ID PUNTOCOMA", identProd);
+        gramatica.group("DECL_FLOAT", "FLOAT ID ASIGNACION REAL PUNTOCOMA", identProd);
+        gramatica.group("DECL_FLOAT", "FLOAT ID ASIGNACION OPERACION PUNTOCOMA", identProd);
+
+        gramatica.group("DECL_INT", "INT ID PUNTOCOMA", identProd);
+        gramatica.group("DECL_INT", "INT ID ASIGNACION ID PUNTOCOMA", identProd);
+        gramatica.group("DECL_INT", "INT ID ASIGNACION NUMERO PUNTOCOMA", identProd);
+        gramatica.group("DECL_INT", "INT ID ASIGNACION OPERACION PUNTOCOMA", identProd);
+        gramatica.group("DECL_INT", "ID PARENTESISABIERTO INT ID PARENTESISCERRADO", identProd);
         
-        gramatica.group("DECL_INT", "INT ID PUNTOCOMA",identProd);
-        gramatica.group("DECL_INT", "INT ID ASIGNACION ID PUNTOCOMA",identProd);
-        gramatica.group("DECL_INT", "INT ID ASIGNACION NUMERO PUNTOCOMA",identProd);
-        gramatica.group("DECL_INT", "INT ID ASIGNACION OPERACION PUNTOCOMA",identProd);
-        
-        gramatica.group("DECL_BOOL", "BOOLEAN ID PUNTOCOMA",identProd);
-        gramatica.group("DECL_BOOL", "BOOLEAN ID ASIGNACION ID PUNTOCOMA",identProd);
-        gramatica.group("DECL_BOOL", "BOOLEAN ID ASIGNACION (TRUE|FALSE) PUNTOCOMA",identProd);
-                
-        gramatica.group("DECL_STRING", "STRING ID PUNTOCOMA",identProd);
-        gramatica.group("DECL_STRING", "STRING ID ASIGNACION ID PUNTOCOMA",identProd);
-        gramatica.group("DECL_STRING", "STRING ID ASIGNACION CADENA PUNTOCOMA",identProd); 
+        //DEFINIR GRAMATICA DE LOS METODOS S
+        gramatica.group("DECL_METO", "PUBLIC|PRIVATE VOID ID PARENTESISABIERTO PARENTESISCERRADO LLAVEABIERTO",identProd);
+        // ERRORES EN EL LOS METODOS
+        gramatica.group("ERROR_METO", "PUBLIC|PRIVATE VOID PARENTESISABIERTO ID PARENTESISCERRADO", 2 ,"ERROR_SINTACTICO: ID NO SE ESPERA EN ESA POSICION: [#,%]");
+        // BOLEAN
+        gramatica.group("DECL_BOOL", "BOOLEAN ID PUNTOCOMA", identProd);
+        gramatica.group("DECL_BOOL", "BOOLEAN ID ASIGNACION ID PUNTOCOMA", identProd);
+        gramatica.group("DECL_BOOL", "BOOLEAN ID ASIGNACION (TRUE|FALSE) PUNTOCOMA", identProd);
+
+        gramatica.group("DECL_PRIVATE", "PRIVATE ID PUNTOCOMA", identProd);
+        gramatica.group("ERROR_PRIVATE", "PRIVATE PUNTOCOMA ", 2, "ERROR_SINTATICO NO SE HA DECLARADO EL ID [#,%]");
+        gramatica.group("ERROR_PRIVATE", "PRIVATE ID", 2, "ERROR_SINTATICO FALTA EL PUNTO Y COMA [#,%]");
+        gramatica.group("DECL_STRING", "STRING ID PUNTOCOMA", identProd);
+        gramatica.group("DECL_STRING", "STRING ID ASIGNACION ID PUNTOCOMA", identProd);
+        gramatica.group("DECL_STRING", "STRING ID ASIGNACION CADENA PUNTOCOMA", identProd);
+        gramatica.group("DECL_STRING", "STRING ID", identProd);
+        //FORMA CORRECTA DE DECLARAR UN METODO VACIO
+        gramatica.group("DECL_STRING", "STRING ID PARENTESISABIERTO PARENTESISCERRADO LLAVEABIERTO LLAVECERRADO", identProd);
+        //PARAMETRO DE LA CLASE
+        gramatica.group("DECL_CLASE", "PRIVATE|PUBLIC ID PUNTOCOMA", identProd);
+        //POSIBLE ERROR
+        gramatica.group("ERROR_CLASE", "PRIVATE|PUBLIC ID ", 2, "ERROR_SINTACTICO FALTA EL PUNTO Y COMA  [#, %]");
         //ERRORES SINTACTICOS---------------------------------------------------------------------------
         //POSIBLES ERRORES AL DECLARAR UNA VARIABLE INT O FLOAT  
-        gramatica.group("DECL_INT", "INT ID ASIGNACION PUNTOCOMA",2,"ERROR_SINTACTICO: FALTA ASIGNAR UN VALOR A LA VARIABLE [#, %]");
-        gramatica.group("DECL_INT", "INT ID NUMERO PUNTOCOMA",2,"ERROR_SINTACTICO: FALTA DEL TOKEN DE ASIGNACION EN LA DECLARACION [#, %]");
-        gramatica.group("DECL_INT", "INT ID ID PUNTOCOMA",2,"ERROR_SINTACTICO: FALTA DEL TOKEN DE ASIGNACION EN LA DECLARACION [#, %]");
-        gramatica.group("DECL_INT", "INT ID NUMERO",2,"ERROR_SINTACTICO: FALTA DEL TOKEN DE ASIGNACION EN LA DECLARACION [#, %]");
-        gramatica.group("DECL_INT", "INT ID ID",2,"ERROR_SINTACTICO: FALTA DEL TOKEN DE ASIGNACION EN LA DECLARACION [#, %]");
-        gramatica.group("DECL_INT", "INT ID OPERACION PUNTOCOMA",2,"ERROR_SINTACTICO: FALTA DEL TOKEN DE ASIGNACION EN LA DECLARACION [#, %]");
-        gramatica.group("DECL_INT", "INT ID OPERACION",2,"ERROR_SINTACTICO: FALTA DEL TOKEN DE ASIGNACION EN LA DECLARACION [#, %]");
-        gramatica.group("DECL_INT", "INT ID ASIGNACION ID",2,"ERROR_SINTACTICO: PUNTOCOMA(;) NO AGREGADO EN LA DECLARACION [#, %]");
-        gramatica.group("DECL_INT", "INT ID ASIGNACION REAL",2,"ERROR_SINTACTICO: VALOR NO ENTERO [#, %]");
+        gramatica.group("DECL_INT", "INT ID ASIGNACION PUNTOCOMA", 2, "ERROR_SINTACTICO: FALTA ASIGNAR UN VALOR A LA VARIABLE [#, %]");
+        gramatica.group("DECL_INT", "INT ID NUMERO PUNTOCOMA", 2, "ERROR_SINTACTICO: FALTA DEL TOKEN DE ASIGNACION EN LA DECLARACION [#, %]");
+        gramatica.group("DECL_INT", "INT ID ID PUNTOCOMA", 2, "ERROR_SINTACTICO: FALTA DEL TOKEN DE ASIGNACION EN LA DECLARACION [#, %]");
+        gramatica.group("DECL_INT", "INT ID NUMERO", 2, "ERROR_SINTACTICO: FALTA DEL TOKEN DE ASIGNACION EN LA DECLARACION [#, %]");
+        gramatica.group("DECL_INT", "INT ID ID", 2, "ERROR_SINTACTICO: FALTA DEL TOKEN DE ASIGNACION EN LA DECLARACION [#, %]");
+        gramatica.group("DECL_INT", "INT ID OPERACION PUNTOCOMA", 2, "ERROR_SINTACTICO: FALTA DEL TOKEN DE ASIGNACION EN LA DECLARACION [#, %]");
+        gramatica.group("DECL_INT", "INT ID OPERACION", 2, "ERROR_SINTACTICO: FALTA DEL TOKEN DE ASIGNACION EN LA DECLARACION [#, %]");
+        gramatica.group("DECL_INT", "INT ID ASIGNACION ID", 2, "ERROR_SINTACTICO: PUNTOCOMA(;) NO AGREGADO EN LA DECLARACION [#, %]");
+        gramatica.group("DECL_INT", "INT ID ASIGNACION REAL", 2, "ERROR_SINTACTICO: VALOR NO ENTERO [#, %]");
 
-//gramatica.group("DECL_INT", "INT ID ASIGNACION NUMERO",2,"ERROR_SINTACTICO: PUNTOCOMA(;) NO AGREGADO EN LA DECLARACION [#, %]");
-        gramatica.group("DECL_INT", "INT ID ASIGNACION OPERACION",2,"ERROR_SINTACTICO: PUNTOCOMA(;) NO AGREGADO EN LA DECLARACION [#, %]");
-        gramatica.group("DECL_INT", "INT  ASIGNACION NUMERO PUNTOCOMA",2,"ERROR_SINTACTICO: ID NO AGREGADO EN LA DECLARACION [#, %]");
-        gramatica.group("DECL_INT", "INT  ASIGNACION ID PUNTOCOMA",2,"ERROR_SINTACTICO: ID NO AGREGADO EN LA DECLARACION [#, %]");
-        gramatica.group("DECL_INT", "INT  ASIGNACION OPERACION PUNTOCOMA",2,"ERROR_SINTACTICO: ID NO AGREGADO EN LA DECLARACION [#, %]");
-        
-        //POSIBLES ERRORES AL DECLARAR UN FLOAT
-        gramatica.group("DECL_FLOAT", "FLOAT ID ASIGNACION PUNTOCOMA",2,"ERROR_SINTACTICO: FALTA ASIGNAR UN VALOR A LA VARIABLE [#, %]");
-        gramatica.group("DECL_FLOAT", "FLOAT ID REAL PUNTOCOMA",2,"ERROR_SINTACTICO: FALTA DEL TOKEN DE ASIGNACION EN LA DECLARACION [#, %]");        
-        gramatica.group("DECL_FLOAT", "FLOAT ID REAL",2,"ERROR_SINTACTICO: FALTA DEL TOKEN DE ASIGNACION EN LA DECLARACION [#, %]");
-        gramatica.group("DECL_FLOAT", "FLOAT ID ASIGNACION REAL",2,"ERROR_SINTACTICO: PUNTOCOMA(;) NO AGREGADO EN LA DECLARACION [#, %]");
-        gramatica.group("DECL_FLOAT", "FLOAT ASIGNACION REAL PUNTOCOMA",2,"ERROR_SINTACTICO: ID NO AGREGADO EN LA DECLARACION [#, %]");
-        gramatica.group("DECL_FLOAT", "FLOAT ID ASIGNACION NUMERO PUNTOCOMA",2,"Error sintáctico: Valor float sin punto decimal [#, %]");
+        //gramatica.group("DECL_INT", "INT ID ASIGNACION NUMERO",2,"ERROR_SINTACTICO: PUNTOCOMA(;) NO AGREGADO EN LA DECLARACION [#, %]");
+        gramatica.group("DECL_INT", "INT ID ASIGNACION OPERACION", 2, "ERROR_SINTACTICO: PUNTOCOMA(;) NO AGREGADO EN LA DECLARACION [#, %]");
+        gramatica.group("DECL_INT", "INT  ASIGNACION NUMERO PUNTOCOMA", 2, "ERROR_SINTACTICO: ID NO AGREGADO EN LA DECLARACION [#, %]");
+        gramatica.group("DECL_INT", "INT  ASIGNACION ID PUNTOCOMA", 2, "ERROR_SINTACTICO: ID NO AGREGADO EN LA DECLARACION [#, %]");
+        gramatica.group("DECL_INT", "INT  ASIGNACION OPERACION PUNTOCOMA", 2, "ERROR_SINTACTICO: ID NO AGREGADO EN LA DECLARACION [#, %]");
 
         //POSIBLES ERRORES AL DECLARAR UN FLOAT
-        gramatica.group("DECL_STRING", "STRING ID ASIGNACION PUNTOCOMA",2,"ERROR_SINTACTICO: FALTA ASIGNAR UN VALOR A LA VARIABLE [#, %]");
-        gramatica.group("DECL_STRING", "STRING ID CADENA PUNTOCOMA",2,"ERROR_SINTACTICO: FALTA DEL TOKEN DE ASIGNACION EN LA DECLARACION [#, %]");        
-        gramatica.group("DECL_STRING", "STRING ID CADENA",2,"ERROR_SINTACTICO: FALTA DEL TOKEN DE ASIGNACION EN LA DECLARACION [#, %]");
-        gramatica.group("DECL_STRING", "STRING ID ASIGNACION CADENA",2,"ERROR_SINTACTICO: PUNTOCOMA(;) NO AGREGADO EN LA DECLARACION [#, %]");
-        gramatica.group("DECL_STRING", "STRING ASIGNACION CADENA PUNTOCOMA",2,"ERROR_SINTACTICO: ID NO AGREGADO EN LA DECLARACION [#, %]");
-        
+        gramatica.group("DECL_FLOAT", "FLOAT ID ASIGNACION PUNTOCOMA", 2, "ERROR_SINTACTICO: FALTA ASIGNAR UN VALOR A LA VARIABLE [#, %]");
+        gramatica.group("DECL_FLOAT", "FLOAT ID REAL PUNTOCOMA", 2, "ERROR_SINTACTICO: FALTA DEL TOKEN DE ASIGNACION EN LA DECLARACION [#, %]");
+        gramatica.group("DECL_FLOAT", "FLOAT ID REAL", 2, "ERROR_SINTACTICO: FALTA DEL TOKEN DE ASIGNACION EN LA DECLARACION [#, %]");
+        gramatica.group("DECL_FLOAT", "FLOAT ID ASIGNACION REAL", 2, "ERROR_SINTACTICO: PUNTOCOMA(;) NO AGREGADO EN LA DECLARACION [#, %]");
+        gramatica.group("DECL_FLOAT", "FLOAT ASIGNACION REAL PUNTOCOMA", 2, "ERROR_SINTACTICO: ID NO AGREGADO EN LA DECLARACION [#, %]");
+        gramatica.group("DECL_FLOAT", "FLOAT ID ASIGNACION NUMERO PUNTOCOMA", 2, "Error sintáctico: Valor float sin punto decimal [#, %]");
+
+        //POSIBLES ERRORES AL DECLARAR UN STRING
+        gramatica.group("DECL_STRING", "STRING ID ASIGNACION PUNTOCOMA", 2, "ERROR_SINTACTICO: FALTA ASIGNAR UN VALOR A LA VARIABLE [#, %]");
+        gramatica.group("DECL_STRING", "STRING ID CADENA PUNTOCOMA", 2, "ERROR_SINTACTICO: FALTA DEL TOKEN DE ASIGNACION EN LA DECLARACION [#, %]");
+        gramatica.group("DECL_STRING", "STRING ID CADENA", 2, "ERROR_SINTACTICO: FALTA DEL TOKEN DE ASIGNACION EN LA DECLARACION [#, %]");
+        gramatica.group("DECL_STRING", "STRING ID ASIGNACION CADENA", 2, "ERROR_SINTACTICO: PUNTOCOMA(;) NO AGREGADO EN LA DECLARACION [#, %]");
+        gramatica.group("DECL_STRING", "STRING ASIGNACION CADENA PUNTOCOMA", 2, "ERROR_SINTACTICO: ID NO AGREGADO EN LA DECLARACION [#, %]");
+
         //ERRORES SEMANTICOS DE VARIABLES -------------------------------------------------------------
-        gramatica.group("RESERV_INDEB", "(STRING|INT|FLOAT|BOOLEAN) (IMPORT|DEF|CLASS|IF|ELSE|FOR|IN|WHILE|RETURN)",2, "ERROR SEMANTICO \\{}: USO INDEBIDO DE PALABRAS RESERVADAS [#,%]");
-       
-        gramatica.group("ERROR_OP_STRING", "(SUMA|RESTA|MULTIPLICACION|DIVISION) CADENA",2, "ERROR SEMANTICO \\{}: OPERACION NO PERMITIDA PARA CADENA [#,%]");
-        gramatica.group("ERROR_OP_STRING", "CADENA (SUMA|RESTA|MULTIPLICACION|DIVISION)",2, "ERROR SEMANTICO \\{}: OPERACION NO PERMITIDA PARA CADENA [#,%]");
-        gramatica.group("ERROR_OP_BOOLEAN", "(SUMA|RESTA|MULTIPLICACION|DIVISION) (TRUE|FALSE)",2, "ERROR SEMANTICO \\{}: OPERACION NO PERMITIDA PARA BOOLEANO [#,%]");
-        gramatica.group("ERROR_OP_BOOLEAN", "(TRUE|FALSE) (SUMA|RESTA|MULTIPLICACION|DIVISION)",2, "ERROR SEMANTICO \\{}: OPERACION NO PERMITIDA PARA BOOLEANO [#,%]");
+        gramatica.group("RESERV_INDEB", "(STRING|INT|FLOAT|BOOLEAN) (IMPORT|DEF|CLASS|IF|ELSE|FOR|IN|WHILE|RETURN)", 2, "ERROR SEMANTICO \\{}: USO INDEBIDO DE PALABRAS RESERVADAS [#,%]");
 
-        gramatica.group("DECL_INT", "(INT ID ASIGNACION REAL PUNTOCOMA)",2, "ERROR SEMANTICO \\{}: VALOR ASIGNADO NO ES ENTERO [#,%]");
-        gramatica.group("DECL_INT", "(INT ID ASIGNACION CADENA)",2, "ERROR SEMANTICO \\{}: VALOR ASIGNADO NO ES ENTERO [#,%]");
-        gramatica.group("DECL_INT", "(INT ID ASIGNACION (TRUE|FALSE))",2, "ERROR SEMANTICO \\{}: VALOR ASIGNADO NO ES ENTERO [#,%]");
-        gramatica.group("DECL_INT", "INT",2,"ERROR");
-        
-        gramatica.group("DECL_FLOAT", "(FLOAT ID ASIGNACION CADENA)",2, "ERROR SEMANTICO \\{}: VALOR ASIGNADO NO ES DECIMAL [#,%]");
-        gramatica.group("DECL_FLOAT", "(FLOAT ID ASIGNACION (TRUE|FALSE))",2, "ERROR SEMANTICO \\{}: VALOR ASIGNADO NO ES DECIMAL [#,%]");
-        gramatica.group("DECL_FLOAT", "(FLOAT ID ASIGNACION NUMERO PUNTOCOMA)",2, "ERROR SEMANTICO \\{}: VALOR ASIGNADO NO ES DECIMAL [#,%]");
-        gramatica.group("ERROR_FLOAT", "FLOAT",2,"ERROR");
-        
-        gramatica.group("DECL_STRING", "(STRING ID ASIGNACION NUMERO)",2, "ERROR SEMANTICO \\{}: VALOR ASIGNADO NO ES CADENA [#,%]");
-        gramatica.group("DECL_STRING", "(STRING ID ASIGNACION (TRUE|FALSE))",2, "ERROR SEMANTICO \\{}: VALOR ASIGNADO NO ES CADENA [#,%]");
-        gramatica.group("DECL_STRING", "STRING",2,"ERROR");
-        
-        gramatica.group("ERROR_ASIG_BOOL", "(BOOLEAN ID ASIGNACION NUMERO)",2, "ERROR SEMANTICO \\{}: VALOR ASIGNADO NO ES BOOLEANO [#,%]");
-        gramatica.group("ERROR_ASIG_BOOL", "(BOOLEAN ID ASIGNACION (TRUE|FALSE))",2, "ERROR SEMANTICO \\{}: VALOR ASIGNADO NO ES BOOLEANO [#,%]");
-        gramatica.group("ERROR_ASIG_BOOL", "(BOOLEAN ID ASIGNACION CADENA)",2, "ERROR SEMANTICO \\{}: VALOR ASIGNADO NO ES BOOLEANO [#,%]");
-        
-        
+        gramatica.group("ERROR_OP_STRING", "(SUMA|RESTA|MULTIPLICACION|DIVISION) CADENA", 2, "ERROR SEMANTICO \\{}: OPERACION NO PERMITIDA PARA CADENA [#,%]");
+        gramatica.group("ERROR_OP_STRING", "CADENA (SUMA|RESTA|MULTIPLICACION|DIVISION)", 2, "ERROR SEMANTICO \\{}: OPERACION NO PERMITIDA PARA CADENA [#,%]");
+        gramatica.group("ERROR_OP_BOOLEAN", "(SUMA|RESTA|MULTIPLICACION|DIVISION) (TRUE|FALSE)", 2, "ERROR SEMANTICO \\{}: OPERACION NO PERMITIDA PARA BOOLEANO [#,%]");
+        gramatica.group("ERROR_OP_BOOLEAN", "(TRUE|FALSE) (SUMA|RESTA|MULTIPLICACION|DIVISION)", 2, "ERROR SEMANTICO \\{}: OPERACION NO PERMITIDA PARA BOOLEANO [#,%]");
+
+        gramatica.group("DECL_INT", "(INT ID ASIGNACION REAL PUNTOCOMA)", 2, "ERROR SEMANTICO \\{}: VALOR ASIGNADO NO ES ENTERO [#,%]");
+        gramatica.group("DECL_INT", "(INT ID ASIGNACION CADENA)", 2, "ERROR SEMANTICO \\{}: VALOR ASIGNADO NO ES ENTERO [#,%]");
+        gramatica.group("DECL_INT", "(INT ID ASIGNACION (TRUE|FALSE))", 2, "ERROR SEMANTICO \\{}: VALOR ASIGNADO NO ES ENTERO [#,%]");
+        gramatica.group("DECL_INT", "INT", 2, "ERROR");
+
+        gramatica.group("DECL_FLOAT", "(FLOAT ID ASIGNACION CADENA)", 2, "ERROR SEMANTICO \\{}: VALOR ASIGNADO NO ES DECIMAL [#,%]");
+        gramatica.group("DECL_FLOAT", "(FLOAT ID ASIGNACION (TRUE|FALSE))", 2, "ERROR SEMANTICO \\{}: VALOR ASIGNADO NO ES DECIMAL [#,%]");
+        gramatica.group("DECL_FLOAT", "(FLOAT ID ASIGNACION NUMERO PUNTOCOMA)", 2, "ERROR SEMANTICO \\{}: VALOR ASIGNADO NO ES DECIMAL [#,%]");
+        gramatica.group("ERROR_FLOAT", "FLOAT", 2, "ERROR");
+
+        gramatica.group("DECL_STRING", "(STRING ID ASIGNACION NUMERO)", 2, "ERROR SEMANTICO \\{}: VALOR ASIGNADO NO ES CADENA [#,%]");
+        gramatica.group("DECL_STRING", "(STRING ID ASIGNACION (TRUE|FALSE))", 2, "ERROR SEMANTICO \\{}: VALOR ASIGNADO NO ES CADENA [#,%]");
+        gramatica.group("DECL_STRING", "STRING", 2, "ERROR SINTACTICO : FALTA ASIGNAR EL ID [#, %] ");
+
+        gramatica.group("ERROR_ASIG_BOOL", "(BOOLEAN ID ASIGNACION NUMERO)", 2, "ERROR SEMANTICO \\{}: VALOR ASIGNADO NO ES BOOLEANO [#,%]");
+        gramatica.group("ERROR_ASIG_BOOL", "(BOOLEAN ID ASIGNACION (TRUE|FALSE))", 2, "ERROR SEMANTICO \\{}: VALOR ASIGNADO NO ES BOOLEANO [#,%]");
+        gramatica.group("ERROR_ASIG_BOOL", "(BOOLEAN ID ASIGNACION CADENA)", 2, "ERROR SEMANTICO \\{}: VALOR ASIGNADO NO ES BOOLEANO [#,%]");
+
         //ASIGNACION DE UN ID
-        gramatica.group("PROD_ASIG", "ID ASIGNACION (CADENA|REAL|NUMERO|TRUE|FALSE) PUNTOCOMA",asigProd);
-        gramatica.group("PROD_ASIG", "ID ASIGNACION OPERACION PUNTOCOMA",asigProd);
-        gramatica.group("PROD_ASIG_ID", "ID ASIGNACION ID PUNTOCOMA",asigProdConID);
-        
+        gramatica.group("PROD_ASIG", "ID ASIGNACION (CADENA|REAL|NUMERO|TRUE|FALSE) PUNTOCOMA", asigProd);
+        gramatica.group("PROD_ASIG", "ID ASIGNACION OPERACION PUNTOCOMA", asigProd);
+        gramatica.group("PROD_ASIG_ID", "ID ASIGNACION ID PUNTOCOMA", asigProdConID);
+
         //--------------------------------------------------------------------------------------------
-        
         //-------------CONDICION--------------------------
         //FORMAS CORRECTAS DE CREAR UNA CONDICION
         gramatica.group("CONDICION", "NUMERO (IGUAL|DIFERENTE|MAYORQUE|MENORQUE|MAYORIGUALQUE|MENORIGUALQUE) NUMERO");
@@ -585,345 +600,266 @@ public class NoCompilador extends javax.swing.JFrame {
         gramatica.group("CONDICION", "NUMERO (IGUAL|DIFERENTE|MAYORQUE|MENORQUE|MAYORIGUALQUE|MENORIGUALQUE) REAL");
         gramatica.group("CONDICION", "REAL (IGUAL|DIFERENTE|MAYORQUE|MENORQUE|MAYORIGUALQUE|MENORIGUALQUE) REAL");
         gramatica.group("CONDICION", "(TRUE|FALSE) (IGUAL|DIFERENTE|MAYORQUE|MENORQUE|MAYORIGUALQUE|MENORIGUALQUE) (TRUE|FALSE)");
-        gramatica.group("CONDICION", "NUMERO (IGUAL|DIFERENTE|MAYORQUE|MENORQUE|MAYORIGUALQUE|MENORIGUALQUE) ID",compaProdDer);
-        gramatica.group("CONDICION", "REAL (IGUAL|DIFERENTE|MAYORQUE|MENORQUE|MAYORIGUALQUE|MENORIGUALQUE) ID",compaProdDer);
-        gramatica.group("CONDICION", "ID (IGUAL|DIFERENTE|MAYORQUE|MENORQUE|MAYORIGUALQUE|MENORIGUALQUE) NUMERO",compaProdIzq);
-        gramatica.group("CONDICION", "ID (IGUAL|DIFERENTE|MAYORQUE|MENORQUE|MAYORIGUALQUE|MENORIGUALQUE) OPERACION",compaProdIzq);
-        gramatica.group("CONDICION", "ID (IGUAL|DIFERENTE|MAYORQUE|MENORQUE|MAYORIGUALQUE|MENORIGUALQUE) REAL",compaProdIzq);
-        gramatica.group("CONDICION", "ID (IGUAL|DIFERENTE|MAYORQUE|MENORQUE|MAYORIGUALQUE|MENORIGUALQUE) ID",compaProdDoble);
-        gramatica.group("CONDICION", "(TRUE|FALSE) (IGUAL|DIFERENTE|MAYORQUE|MENORQUE|MAYORIGUALQUE|MENORIGUALQUE) ID",compaProdDer);
-        gramatica.group("CONDICION", "ID (IGUAL|DIFERENTE|MAYORQUE|MENORQUE|MAYORIGUALQUE|MENORIGUALQUE) (TRUE|FALSE)",compaProdIzq);
+        gramatica.group("CONDICION", "NUMERO (IGUAL|DIFERENTE|MAYORQUE|MENORQUE|MAYORIGUALQUE|MENORIGUALQUE) ID", compaProdDer);
+        gramatica.group("CONDICION", "REAL (IGUAL|DIFERENTE|MAYORQUE|MENORQUE|MAYORIGUALQUE|MENORIGUALQUE) ID", compaProdDer);
+        gramatica.group("CONDICION", "ID (IGUAL|DIFERENTE|MAYORQUE|MENORQUE|MAYORIGUALQUE|MENORIGUALQUE) NUMERO", compaProdIzq);
+        gramatica.group("CONDICION", "ID (IGUAL|DIFERENTE|MAYORQUE|MENORQUE|MAYORIGUALQUE|MENORIGUALQUE) OPERACION", compaProdIzq);
+        gramatica.group("CONDICION", "ID (IGUAL|DIFERENTE|MAYORQUE|MENORQUE|MAYORIGUALQUE|MENORIGUALQUE) REAL", compaProdIzq);
+        gramatica.group("CONDICION", "ID (IGUAL|DIFERENTE|MAYORQUE|MENORQUE|MAYORIGUALQUE|MENORIGUALQUE) ID", compaProdDoble);
+        gramatica.group("CONDICION", "(TRUE|FALSE) (IGUAL|DIFERENTE|MAYORQUE|MENORQUE|MAYORIGUALQUE|MENORIGUALQUE) ID", compaProdDer);
+        gramatica.group("CONDICION", "ID (IGUAL|DIFERENTE|MAYORQUE|MENORQUE|MAYORIGUALQUE|MENORIGUALQUE) (TRUE|FALSE)", compaProdIzq);
 
         gramatica.group("CONDICION", "CONDICION (AND|OR) CONDICION");
-        
+
         //ERRORES SEMANTICOS
-        gramatica.group("CONDICION", "NUMERO (IGUAL|DIFERENTE|MAYORQUE|MENORQUE|MAYORIGUALQUE|MENORIGUALQUE) CADENA",2,"ERROR_SEMANTICO \\{}: DATOS INCOMPATIBLES PARA SU COMPARACION [#, %]");
-        gramatica.group("CONDICION", "REAL (IGUAL|DIFERENTE|MAYORQUE|MENORQUE|MAYORIGUALQUE|MENORIGUALQUE) CADENA",2,"ERROR_SEMANTICO \\{}: DATOS INCOMPATIBLES PARA SU COMPARACION [#, %]");
-        gramatica.group("CONDICION", "CADENA (IGUAL|DIFERENTE|MAYORQUE|MENORQUE|MAYORIGUALQUE|MENORIGUALQUE) NUMERO",2,"ERROR_SEMANTICO \\{}: DATOS INCOMPATIBLES PARA SU COMPARACION [#, %]");
-        gramatica.group("CONDICION", "CADENA (IGUAL|DIFERENTE|MAYORQUE|MENORQUE|MAYORIGUALQUE|MENORIGUALQUE) REAL",2,"ERROR_SEMANTICO \\{}: DATOS INCOMPATIBLES PARA SU COMPARACION [#, %]");
-        gramatica.group("CONDICION", "NUMERO (IGUAL|DIFERENTE|MAYORQUE|MENORQUE|MAYORIGUALQUE|MENORIGUALQUE) (TRUE|FALSE)",2,"ERROR_SEMANTICO \\{}: DATOS INCOMPATIBLES PARA SU COMPARACION [#, %]");
-        gramatica.group("CONDICION", "REAL (IGUAL|DIFERENTE|MAYORQUE|MENORQUE|MAYORIGUALQUE|MENORIGUALQUE) (TRUE|FALSE)",2,"ERROR_SEMANTICO \\{}: DATOS INCOMPATIBLES PARA SU COMPARACION [#, %]");
-        
-        
-        
-           
+        gramatica.group("CONDICION", "NUMERO (IGUAL|DIFERENTE|MAYORQUE|MENORQUE|MAYORIGUALQUE|MENORIGUALQUE) CADENA", 2, "ERROR_SEMANTICO \\{}: DATOS INCOMPATIBLES PARA SU COMPARACION [#, %]");
+        gramatica.group("CONDICION", "REAL (IGUAL|DIFERENTE|MAYORQUE|MENORQUE|MAYORIGUALQUE|MENORIGUALQUE) CADENA", 2, "ERROR_SEMANTICO \\{}: DATOS INCOMPATIBLES PARA SU COMPARACION [#, %]");
+        gramatica.group("CONDICION", "CADENA (IGUAL|DIFERENTE|MAYORQUE|MENORQUE|MAYORIGUALQUE|MENORIGUALQUE) NUMERO", 2, "ERROR_SEMANTICO \\{}: DATOS INCOMPATIBLES PARA SU COMPARACION [#, %]");
+        gramatica.group("CONDICION", "CADENA (IGUAL|DIFERENTE|MAYORQUE|MENORQUE|MAYORIGUALQUE|MENORIGUALQUE) REAL", 2, "ERROR_SEMANTICO \\{}: DATOS INCOMPATIBLES PARA SU COMPARACION [#, %]");
+        gramatica.group("CONDICION", "NUMERO (IGUAL|DIFERENTE|MAYORQUE|MENORQUE|MAYORIGUALQUE|MENORIGUALQUE) (TRUE|FALSE)", 2, "ERROR_SEMANTICO \\{}: DATOS INCOMPATIBLES PARA SU COMPARACION [#, %]");
+        gramatica.group("CONDICION", "REAL (IGUAL|DIFERENTE|MAYORQUE|MENORQUE|MAYORIGUALQUE|MENORIGUALQUE) (TRUE|FALSE)", 2, "ERROR_SEMANTICO \\{}: DATOS INCOMPATIBLES PARA SU COMPARACION [#, %]");
+
         //----------------------------------------------------------------------------------------------
-        
         //----------------WHILE Y IF-----------------------
         //FORMAS CORRECTAS DE DECLARAR UN IF
-        gramatica.group("INSTR_IF", "IF PARENTESISABIERTO CONDICION PARENTESISCERRADO LLAVEABIERTO",true,ifProd);
+        gramatica.group("INSTR_IF", "IF PARENTESISABIERTO CONDICION PARENTESISCERRADO LLAVEABIERTO", true, ifProd);
         //FORMAS CORRECTAS DE DECLARAR UN WHILE
-        gramatica.group("INSTR_WHILE", "WHILE PARENTESISABIERTO CONDICION PARENTESISCERRADO LLAVEABIERTO",whileProd);
+        gramatica.group("INSTR_WHILE", "WHILE PARENTESISABIERTO CONDICION PARENTESISCERRADO LLAVEABIERTO", whileProd);
         //POSIBLES ERRORES AL DECLARAR UN IF
-        gramatica.group("INSTR_IF", "IF PARENTESISABIERTO PARENTESISCERRADO LLAVEABIERTO",true,4,"ERROR_SINTACTICO: FALTA LA CONDICION [#, %]");
-        gramatica.group("INSTR_IF", "IF CONDICION PARENTESISCERRADO LLAVEABIERTO",true,4,"ERROR_SINTACTICO: FALTA EL PARENTESIS ABIERTO EN LA CONDICION [#, %]");
-        gramatica.group("INSTR_IF", "IF PARENTESISABIERTO CONDICION PARENTESISCERRADO",true,4,"ERROR_SINTACTICO: FALTA DE LLAVE DE APERTURA [#, %]");
+        gramatica.group("INSTR_IF", "IF PARENTESISABIERTO PARENTESISCERRADO LLAVEABIERTO", true, 4, "ERROR_SINTACTICO: FALTA LA CONDICION [#, %]");
+        gramatica.group("INSTR_IF", "IF CONDICION PARENTESISCERRADO LLAVEABIERTO", true, 4, "ERROR_SINTACTICO: FALTA EL PARENTESIS ABIERTO EN LA CONDICION [#, %]");
+        gramatica.group("INSTR_IF", "IF PARENTESISABIERTO CONDICION PARENTESISCERRADO", true, 4, "ERROR_SINTACTICO: FALTA DE LLAVE DE APERTURA [#, %]");
         gramatica.finalLineColumn();
-        gramatica.group("INSTR_IF", "IF PARENTESISABIERTO CONDICION",true,4,"ERROR_SINTACTICO: ERROR EN LA CONDICION O FALTA DEL PARENTESIS [#, %]");
+        gramatica.group("INSTR_IF", "IF PARENTESISABIERTO CONDICION", true, 4, "ERROR_SINTACTICO: ERROR EN LA CONDICION O FALTA DEL PARENTESIS [#, %]");
         gramatica.initialLineColumn();
-        gramatica.group("INSTR_IF", "IF",2,"ERROR");
-        
+        gramatica.group("INSTR_IF", "IF", 2, "ERROR_SINTATICO : ERROR IF");
+
         //POSIBLES ERRORES DE WHILE
-        gramatica.group("INSTR_WHILE", "WHILE PARENTESISABIERTO PARENTESISCERRADO",true,4,"ERROR_SINTACTICO: FALTA LA CONDICION [#, %]");
-        gramatica.group("INSTR_WHILE", "WHILE CONDICION PARENTESISCERRADO",true,4,"ERROR_SINTACTICO: FALTA EL PARENTESIS ABIERTO EN LA CONDICION [#, %]");
-        gramatica.group("INSTR_WHILE", "WHILE PARENTESISABIERTO CONDICION PARENTESISCERRADO",true,4,"ERROR_SINTACTICO: FALTA DE LLAVE DE APERTURA [#, %]");        
+        gramatica.group("INSTR_WHILE", "WHILE PARENTESISABIERTO PARENTESISCERRADO", true, 4, "ERROR_SINTACTICO: FALTA LA CONDICION [#, %]");
+        gramatica.group("INSTR_WHILE", "WHILE CONDICION PARENTESISCERRADO", true, 4, "ERROR_SINTACTICO: FALTA EL PARENTESIS ABIERTO EN LA CONDICION [#, %]");
+        gramatica.group("INSTR_WHILE", "WHILE PARENTESISABIERTO CONDICION PARENTESISCERRADO", true, 4, "ERROR_SINTACTICO: FALTA DE LLAVE DE APERTURA [#, %]");
         gramatica.finalLineColumn();
-        gramatica.group("INSTR_WHILE", "WHILE PARENTESISABIERTO CONDICION",true,4,"ERROR_SINTACTICO: ERROR EN LA CONDICION O FALTA DEL PARENTESIS [#, %]");
+        gramatica.group("INSTR_WHILE", "WHILE PARENTESISABIERTO CONDICION", true, 4, "ERROR_SINTACTICO: ERROR EN LA CONDICION O FALTA DEL PARENTESIS [#, %]");
         gramatica.initialLineColumn();
-        gramatica.group("INSTR_WHILE", "WHILE",2,"ERROR WHILE");
+        gramatica.group("INSTR_WHILE", "WHILE", 2, "ERROR WHILE");
         //POSIBLES ERRORES EN LAS CODICIONES
-        gramatica.group("CONDICION", "NUMERO (IGUAL|DIFERENTE|MAYORQUE|MENORQUE|MAYORIGUALQUE|MENORIGUALQUE) ",2,"ERROR_SINTACTICO: ERROR EN LA CONDICION [#, %]");
-        gramatica.group("CONDICION", "ID (IGUAL|DIFERENTE|MAYORQUE|MENORQUE|MAYORIGUALQUE|MENORIGUALQUE) ",2,"ERROR_SINTACTICO: ERROR EN LA CONDICION [#, %]");
-        gramatica.group("CONDICION", " (IGUAL|DIFERENTE|MAYORQUE|MENORQUE|MAYORIGUALQUE|MENORIGUALQUE) NUMERO ",2,"ERROR_SINTACTICO: ERROR EN LA CONDICION [#, %]");
-        gramatica.group("CONDICION", " (IGUAL|DIFERENTE|MAYORQUE|MENORQUE|MAYORIGUALQUE|MENORIGUALQUE) ID ",2,"ERROR_SINTACTICO: ERROR EN LA CONDICION [#, %]");       
-        gramatica.group("CONDICION", "CONDICION (AND|OR)",2,"ERROR_SINTACTICO: ERROR EN LA CONDICION [#, %]");
-        //------------------------------------------------------------------------
-
-        //------------------------------------------------------------
-        //INPUT-------------------------------------------------------
-        //FORMA CORRECTA 
-        gramatica.group("INSTR_INPUT", "INPUT PARENTESISABIERTO CADENA PARENTESISCERRADO PUNTOCOMA ",funcProd);
-        gramatica.group("INSTR_INPUT", "INPUT PARENTESISABIERTO ID PARENTESISCERRADO PUNTOCOMA ",funcProd);
-        
-        gramatica.group("INSTR_OUTPUT", "OUTPUT PARENTESISABIERTO CADENA PARENTESISCERRADO PUNTOCOMA ",funcProd);
-        gramatica.group("INSTR_OUTPUT", "OUTPUT PARENTESISABIERTO ID PARENTESISCERRADO PUNTOCOMA ",funcProd);
-        
-        //ERRORES SINTACTICOS 
-        gramatica.group("INSTR_INPUT", "INPUT PARENTESISABIERTO CADENA PARENTESISCERRADO",2, "ERROR_SINTACTICO \\{}: FALTA DEL TOKEN (;) [#,%]");
-        gramatica.group("INSTR_INPUT", "INPUT CADENA PARENTESISCERRADO PUNTOCOMA",2, "ERROR_SINTACTICO \\{}: FALTA DEL PARENTESIS ABIERTO [#,%]");
-        
-        //ERROR SEMANTICO
-        gramatica.group("INSTR_INPUT", "INPUT PARENTESISABIERTO (NUMERO|REAL) PARENTESISCERRADO PUNTOCOMA ",2, "ERROR SEMANTICO \\{}: VALOR INVALIDO EN INPUT[#,%]");
-        gramatica.group("INSTR_INPUT", "INPUT",2,"ERROR INPUT");    
-        //ERRORES SINTACTICOS 
-        gramatica.group("INSTR_INPUT", "OUTPUT PARENTESISABIERTO CADENA PARENTESISCERRADO",2, "ERROR_SINTACTICO \\{}: FALTA DEL TOKEN (;) [#,%]");
-        gramatica.group("INSTR_INPUT", "OUTPUT CADENA PARENTESISCERRADO PUNTOCOMA",2, "ERROR_SINTACTICO \\{}: FALTA DEL PARENTESIS ABIERTO [#,%]");
-        
-        //ERROR SEMANTICO
-        gramatica.group("INSTR_INPUT", "OUTPUT PARENTESISABIERTO (NUMERO|REAL) PARENTESISCERRADO PUNTOCOMA ",2, "ERROR SEMANTICO \\{}: VALOR INVALIDO EN INPUT[#,%]");
-        gramatica.group("INSTR_INPUT", "OUTPUT",2,"ERROR INPUT"); 
-        
-        //------------------------------------------------------------
-        
-        //FORMAS DE CREAR UNA FUNCION CORRECTAMENTE
-        gramatica.group("PARAMETROS", "ID (COMA ID)+");
-        gramatica.group("PARAMETRO", "ID");        
-        gramatica.group("FUNCION", "DEF ID PARENTESISABIERTO (PARAMETRO | PARAMETROS)? PARENTESISCERRADO ", true);
-        
-        gramatica.group("LLAMAR_FUNCION", "ID PARENTESISABIERTO (PARAMETRO | PARAMETROS)? PARENTESISCERRADO ", true);
-
-         //posibles errores al declarar una funcion        
-        gramatica.group("FUNCION", "DEF ID (PARAMETRO | PARAMETROS)? PARENTESISCERRADO ", true,3,"ERROR_SINTACTICO: FALTA PARENTESIS ABIERTO [#, %]");
-        gramatica.group("FUNCION", "DEF ID PARENTESISABIERTO (PARAMETRO | PARAMETROS)? ", true,3,"ERROR_SINTACTICO: FALTA PARENTESIS CERRADO O UN PARAMETRO ESTA MAL DECLARADO [#, %]");
-        gramatica.group("FUNCION", "DEF PARENTESISABIERTO (PARAMETRO | PARAMETROS)? PARENTESISCERRADO", true,3,"ERROR_SINTACTICO: FALTA NOMBRAR LA FUNCION [#, %]");
-
-        
-       /*
-        
-        //ERRORES ESTRUCTURAS DE CONTROL
-        gramatica.loopForFunExecUntilChangeNotDetected(()->{
-            gramatica.initialLineColumn();
-            gramatica.group("ESTRUCTURAS_CONTROL", "(INSTR_IF|INSTR_WHILE|FUNCION) LLAVEABIERTO (ESTRUCTURAS_CONTROL|INT|FLOAT|STRING)", true,4,"ERROR_SINTACTICO: FALTA LLAVE DE CIERRE [#, %]");
-            gramatica.group("ESTRUCTURAS_CONTROL", "(INSTR_IF|INSTR_WHILE|FUNCION) (ESTRUCTURAS_CONTROL|INT|FLOAT|STRING) LLAVECERRADO", true,4,"ERROR_SINTACTICO: FALTA LLAVE DE APERTURA [#, %]");
-            //gramatica.group("ESTRUCTURAS_CONTROL", "(INSTR_IF|INSTR_WHILE|FUNCION) LLAVEABIERTO", true,4,"ERROR_SINTACTICO: FALTA LLAVE DE CIERRE [#, %]");
-            //gramatica.group("ESTRUCTURAS_CONTROL", "(INSTR_IF|INSTR_WHILE|FUNCION)  LLAVECERRADO", true,4,"ERROR_SINTACTICO: FALTA LLAVE DE ABERTURA [#, %]");
-            gramatica.finalLineColumn();
-        });
-        gramatica.delete(new String[]{"LLAVEABIERTO","LLAVECERRADO"},16,"ERROR_SINTACTICO: LA LLAVE [] NO ESTA CONTENIDA EN ALGUNA GRUPACION");
-        gramatica.show();
-        */
-        
-        //gramatica.group("ESTRUCTURAS_CONTROL", "(INSTR_IF|INSTR_WHILE|FUNCION) LLAVEABIERTO (INSTR_IF|INSTR_WHILE|FUNCION|VARIABLE) LLAVECERRADO", true,4,"ERROR_SINTACTICO: FALTA LLAVE DE CIERRE [#, %]");
-   
-        //--------------------------------------------------------SEMANTICO------------------------------------------------------------------------------
-  
-        //gramatica.group("RESERV_INDEB", "INT",2, "ERROR SEMANTICO \\{}: ERROR [#,%]");
-        //gramatica.group("RESERV_INDEB", "FLOAT",2, "ERROR SEMANTICO \\{}: ERROR [#,%]");
-        //gramatica.group("DIV_CERO", "DIVISION 0",2, "ERROR SEMANTICO \\{}: DIVISION ENTRE CERO[#,%]");
+        gramatica.group("CONDICION", "NUMERO (IGUAL|DIFERENTE|MAYORQUE|MENORQUE|MAYORIGUALQUE|MENORIGUALQUE) ", 2, "ERROR_SINTACTICO: ERROR EN LA CONDICION [#, %]");
+        gramatica.group("CONDICION", "ID (IGUAL|DIFERENTE|MAYORQUE|MENORQUE|MAYORIGUALQUE|MENORIGUALQUE) ", 2, "ERROR_SINTACTICO: ERROR EN LA CONDICION [#, %]");
+        gramatica.group("CONDICION", " (IGUAL|DIFERENTE|MAYORQUE|MENORQUE|MAYORIGUALQUE|MENORIGUALQUE) NUMERO ", 2, "ERROR_SINTACTICO: ERROR EN LA CONDICION [#, %]");
+        gramatica.group("CONDICION", " (IGUAL|DIFERENTE|MAYORQUE|MENORQUE|MAYORIGUALQUE|MENORIGUALQUE) ID ", 2, "ERROR_SINTACTICO: ERROR EN LA CONDICION [#, %]");
+        gramatica.group("CONDICION", "CONDICION (AND|OR)", 2, "ERROR_SINTACTICO: ERROR EN LA CONDICION [#, %]");
 
         gramatica.show();
-    }
+    } //fin metodo analizador syntactico
 
+    //inicio metodo analizador semantico
     private void semanticAnalysis() {
-        HashMap<String,String> tiposDatos = new HashMap<>();
+        HashMap<String, String> tiposDatos = new HashMap<>();
         tiposDatos.put("NUMERO", "INT");
         tiposDatos.put("REAL", "FLOAT");
         tiposDatos.put("CADENA", "STRING");
         tiposDatos.put("TRUE", "BOOLEAN");
         tiposDatos.put("FALSE", "BOOLEAN");
         int i = 0;
-        for(Production id: identProd){
-            //System.out.println(id.lexemeRank(0,-1)); //int x = 4 ;
-            //System.out.println(id.lexemeRank(1)); //x
-            //System.out.println(id.lexicalCompRank(0,-1)); //INT ID ASIGNACION NUMERO PUNTOCOMA
-            if (!identificadores.containsKey(id.lexemeRank(1))){
+        for (Production id : identProd) {
+
+            if (!identificadores.containsKey(id.lexemeRank(1))) {
                 identificadores.put(id.lexemeRank(1), id.lexicalCompRank(0));
                 i++;
-            }
-            else {
-                errors.add(new ErrorLSSL(1,"Error semántico: Ya existe un identificador llamado "+id.lexemeRank(1),id,true));
+            } else {
+                errors.add(new ErrorLSSL(1, "Error semántico: Ya existe un identificador llamado " + id.lexemeRank(1), id, true));
             }
 
         }
         System.out.println(Arrays.asList(identificadores)); // muestra identificadores
-        for (Production id: asigProd){
-            if (!identificadores.containsKey(id.lexemeRank(0))){
-                errors.add(new ErrorLSSL(1,"Error semántico: Variable \""+id.lexemeRank(0)+"\" no declarada. [#, %]",id,true));
-            }
-            else{
-                if (!identificadores.get(id.lexemeRank(0)).equals(tiposDatos.get(id.lexicalCompRank(2)))){
-                    errors.add(new ErrorLSSL(1,"Error semántico : Variable \""+id.lexemeRank(0)+"\" es de tipo "+identificadores.get(id.lexemeRank(0)) +  " [#, %]",id,true));
-                   
+        for (Production id : asigProd) {
+            if (!identificadores.containsKey(id.lexemeRank(0))) {
+                errors.add(new ErrorLSSL(1, "Error semántico: Variable \"" + id.lexemeRank(0) + "\" no declarada. [#, %]", id, true));
+            } else {
+                if (!identificadores.get(id.lexemeRank(0)).equals(tiposDatos.get(id.lexicalCompRank(2)))) {
+                    errors.add(new ErrorLSSL(1, "Error semántico : Variable \"" + id.lexemeRank(0) + "\" es de tipo " + identificadores.get(id.lexemeRank(0)) + " [#, %]", id, true));
+
                 }
             }
-            
+
         }
-        for (Production id: asigProdConID){
-            if (!identificadores.containsKey(id.lexemeRank(0))||!identificadores.containsKey(id.lexemeRank(2))){
-                errors.add(new ErrorLSSL(1,"Error semántico: Variable no declarada. [#, %]",id,true));
-            }
-            else{
-                if (!identificadores.get(id.lexemeRank(0)).equals(identificadores.get(id.lexemeRank(2)))){
-                    errors.add(new ErrorLSSL(1,"Error semántico : Variable \""+id.lexemeRank(0)+"\" es de tipo "+identificadores.get(id.lexemeRank(0)) +  " [#, %]",id,true));
-                   
+        for (Production id : asigProdConID) {
+            if (!identificadores.containsKey(id.lexemeRank(0)) || !identificadores.containsKey(id.lexemeRank(2))) {
+                errors.add(new ErrorLSSL(1, "Error semántico: Variable no declarada. [#, %]", id, true));
+            } else {
+                if (!identificadores.get(id.lexemeRank(0)).equals(identificadores.get(id.lexemeRank(2)))) {
+                    errors.add(new ErrorLSSL(1, "Error semántico : Variable \"" + id.lexemeRank(0) + "\" es de tipo " + identificadores.get(id.lexemeRank(0)) + " [#, %]", id, true));
+
                 }
             }
-            
+
         }
         //comparacion cuando ID está en la izquierda
-        for (Production id: compaProdIzq){
+        for (Production id : compaProdIzq) {
 
-            if (!identificadores.containsKey(id.lexemeRank(0))){
-                errors.add(new ErrorLSSL(1,"Error semántico: Variable "+id.lexemeRank(0)+" no declarada. [#, %]",id,true));
-            }
-            else{
-                if (identificadores.get(id.lexemeRank(0)).matches("STRING")){
-                    errors.add(new ErrorLSSL(1,"Error semántico : Variable \""+id.lexemeRank(0)+"\" es de tipo STRING, imposible comparar [#, %]",id,true));
+            if (!identificadores.containsKey(id.lexemeRank(0))) {
+                errors.add(new ErrorLSSL(1, "Error semántico: Variable " + id.lexemeRank(0) + " no declarada. [#, %]", id, true));
+            } else {
+                if (identificadores.get(id.lexemeRank(0)).matches("STRING")) {
+                    errors.add(new ErrorLSSL(1, "Error semántico : Variable \"" + id.lexemeRank(0) + "\" es de tipo STRING, imposible comparar [#, %]", id, true));
                 }
-                if (identificadores.get(id.lexemeRank(0)).matches("BOOLEAN")&&!id.lexicalCompRank(1).matches("IGUAL|DIFERENTE")){
-                    errors.add(new ErrorLSSL(1,"Error semántico : Variable \""+id.lexemeRank(0)+"\" es de tipo BOOLEAN, sólo posible comparar con operadores IGUAL y DIFERENTE [#, %]",id,true));
+                if (identificadores.get(id.lexemeRank(0)).matches("BOOLEAN") && !id.lexicalCompRank(1).matches("IGUAL|DIFERENTE")) {
+                    errors.add(new ErrorLSSL(1, "Error semántico : Variable \"" + id.lexemeRank(0) + "\" es de tipo BOOLEAN, sólo posible comparar con operadores IGUAL y DIFERENTE [#, %]", id, true));
                 }
-                if (identificadores.get(id.lexemeRank(0)).matches("BOOLEAN")&&!id.lexicalCompRank(2).matches("TRUE|FALSE")){
-                    errors.add(new ErrorLSSL(1,"Error semántico : Variable \""+id.lexemeRank(0)+"\" es de tipo BOOLEAN, sólo posible comparar con valores booleanos [#, %]",id,true));
+                if (identificadores.get(id.lexemeRank(0)).matches("BOOLEAN") && !id.lexicalCompRank(2).matches("TRUE|FALSE")) {
+                    errors.add(new ErrorLSSL(1, "Error semántico : Variable \"" + id.lexemeRank(0) + "\" es de tipo BOOLEAN, sólo posible comparar con valores booleanos [#, %]", id, true));
                 }
-                if (identificadores.get(id.lexemeRank(0)).matches("INT|FLOAT")){
-                    if(!id.lexicalCompRank(2).matches("NUMERO|REAL|ID")){
-                        errors.add(new ErrorLSSL(1,"Error semántico : Valor numérico de variable \""+id.lexemeRank(0)+"\" no se puede comparar con valor no numérico [#, %]",id,true));
+                if (identificadores.get(id.lexemeRank(0)).matches("INT|FLOAT")) {
+                    if (!id.lexicalCompRank(2).matches("NUMERO|REAL|ID")) {
+                        errors.add(new ErrorLSSL(1, "Error semántico : Valor numérico de variable \"" + id.lexemeRank(0) + "\" no se puede comparar con valor no numérico [#, %]", id, true));
                     }
                 }
-                
-            
+
             }
-            
+
         }// FOR  COMPAPRODIZQ
-        
-        for (Production id: compaProdDer){
 
-            if (!identificadores.containsKey(id.lexemeRank(2))){
-                errors.add(new ErrorLSSL(1,"Error semántico: Variable "+id.lexemeRank(2)+" no declarada. [#, %]",id,true));
-            }
-            else{
-                if (identificadores.get(id.lexemeRank(2)).matches("STRING")){
-                    errors.add(new ErrorLSSL(1,"Error semántico : Variable \""+id.lexemeRank(2)+"\" es de tipo STRING, imposible comparar [#, %]",id,true));
+        for (Production id : compaProdDer) {
+
+            if (!identificadores.containsKey(id.lexemeRank(2))) {
+                errors.add(new ErrorLSSL(1, "Error semántico: Variable " + id.lexemeRank(2) + " no declarada. [#, %]", id, true));
+            } else {
+                if (identificadores.get(id.lexemeRank(2)).matches("STRING")) {
+                    errors.add(new ErrorLSSL(1, "Error semántico : Variable \"" + id.lexemeRank(2) + "\" es de tipo STRING, imposible comparar [#, %]", id, true));
                 }
-                if (identificadores.get(id.lexemeRank(2)).matches("BOOLEAN")&&!id.lexicalCompRank(1).matches("IGUAL|DIFERENTE")){
-                    errors.add(new ErrorLSSL(1,"Error semántico : Variable \""+id.lexemeRank(2)+"\" es de tipo BOOLEAN, sólo posible comparar con operadores IGUAL y DIFERENTE [#, %]",id,true));
+                if (identificadores.get(id.lexemeRank(2)).matches("BOOLEAN") && !id.lexicalCompRank(1).matches("IGUAL|DIFERENTE")) {
+                    errors.add(new ErrorLSSL(1, "Error semántico : Variable \"" + id.lexemeRank(2) + "\" es de tipo BOOLEAN, sólo posible comparar con operadores IGUAL y DIFERENTE [#, %]", id, true));
                 }
-                if (identificadores.get(id.lexemeRank(2)).matches("BOOLEAN")&&!id.lexicalCompRank(0).matches("TRUE|FALSE")){
-                    errors.add(new ErrorLSSL(1,"Error semántico : Variable \""+id.lexemeRank(2)+"\" es de tipo BOOLEAN, sólo posible comparar con valores booleanos [#, %]",id,true));
+                if (identificadores.get(id.lexemeRank(2)).matches("BOOLEAN") && !id.lexicalCompRank(0).matches("TRUE|FALSE")) {
+                    errors.add(new ErrorLSSL(1, "Error semántico : Variable \"" + id.lexemeRank(2) + "\" es de tipo BOOLEAN, sólo posible comparar con valores booleanos [#, %]", id, true));
                 }
-                if (identificadores.get(id.lexemeRank(2)).matches("INT|FLOAT")){
-                    if(!id.lexicalCompRank(0).matches("NUMERO|REAL")){
-                        errors.add(new ErrorLSSL(1,"Error semántico : Valor numérico de variable \""+id.lexemeRank(2)+"\" no se puede comparar con valor no numérico [#, %]",id,true));
+                if (identificadores.get(id.lexemeRank(2)).matches("INT|FLOAT")) {
+                    if (!id.lexicalCompRank(0).matches("NUMERO|REAL")) {
+                        errors.add(new ErrorLSSL(1, "Error semántico : Valor numérico de variable \"" + id.lexemeRank(2) + "\" no se puede comparar con valor no numérico [#, %]", id, true));
                     }
                 }
-                
-            
+
             }
-            
+
         }// FOR  COMPAPRODDER
-        for (Production id: compaProdDoble){
+        for (Production id : compaProdDoble) {
 
-            if (!identificadores.containsKey(id.lexemeRank(0))||!identificadores.containsKey(id.lexemeRank(2))){
-                errors.add(new ErrorLSSL(1,"Error semántico: Variable "+id.lexemeRank(0)+" no declarada. [#, %]",id,true));
-            }
-            else{
-                if (identificadores.get(id.lexemeRank(0)).matches("STRING")||identificadores.get(id.lexemeRank(2)).matches("STRING")){
-                    errors.add(new ErrorLSSL(1,"Error semántico : Variable \""+id.lexemeRank(0)+"\" es de tipo STRING, imposible comparar [#, %]",id,true));
+            if (!identificadores.containsKey(id.lexemeRank(0)) || !identificadores.containsKey(id.lexemeRank(2))) {
+                errors.add(new ErrorLSSL(1, "Error semántico: Variable " + id.lexemeRank(0) + " no declarada. [#, %]", id, true));
+            } else {
+                if (identificadores.get(id.lexemeRank(0)).matches("STRING") || identificadores.get(id.lexemeRank(2)).matches("STRING")) {
+                    errors.add(new ErrorLSSL(1, "Error semántico : Variable \"" + id.lexemeRank(0) + "\" es de tipo STRING, imposible comparar [#, %]", id, true));
                 }
-                if (identificadores.get(id.lexemeRank(0)).matches("BOOLEAN")&&!id.lexicalCompRank(1).matches("IGUAL|DIFERENTE")){
-                    errors.add(new ErrorLSSL(1,"Error semántico : Variable \""+id.lexemeRank(0)+"\" es de tipo BOOLEAN, sólo posible comparar con operadores IGUAL y DIFERENTE [#, %]",id,true));
+                if (identificadores.get(id.lexemeRank(0)).matches("BOOLEAN") && !id.lexicalCompRank(1).matches("IGUAL|DIFERENTE")) {
+                    errors.add(new ErrorLSSL(1, "Error semántico : Variable \"" + id.lexemeRank(0) + "\" es de tipo BOOLEAN, sólo posible comparar con operadores IGUAL y DIFERENTE [#, %]", id, true));
                 }
-                if (identificadores.get(id.lexemeRank(2)).matches("BOOLEAN")&&!id.lexicalCompRank(1).matches("IGUAL|DIFERENTE")){
-                    errors.add(new ErrorLSSL(1,"Error semántico : Variable \""+id.lexemeRank(2)+"\" es de tipo BOOLEAN, sólo posible comparar con operadores IGUAL y DIFERENTE [#, %]",id,true));
+                if (identificadores.get(id.lexemeRank(2)).matches("BOOLEAN") && !id.lexicalCompRank(1).matches("IGUAL|DIFERENTE")) {
+                    errors.add(new ErrorLSSL(1, "Error semántico : Variable \"" + id.lexemeRank(2) + "\" es de tipo BOOLEAN, sólo posible comparar con operadores IGUAL y DIFERENTE [#, %]", id, true));
                 }
-                if (identificadores.get(id.lexemeRank(0)).matches("BOOLEAN")&&!identificadores.get(id.lexemeRank(2)).matches("BOOLEAN")){
-                    errors.add(new ErrorLSSL(1,"Error semántico : Variable \""+id.lexemeRank(0)+"\" es de tipo BOOLEAN, sólo posible comparar con valores booleanos [#, %]",id,true));
+                if (identificadores.get(id.lexemeRank(0)).matches("BOOLEAN") && !identificadores.get(id.lexemeRank(2)).matches("BOOLEAN")) {
+                    errors.add(new ErrorLSSL(1, "Error semántico : Variable \"" + id.lexemeRank(0) + "\" es de tipo BOOLEAN, sólo posible comparar con valores booleanos [#, %]", id, true));
                 }
-                if (identificadores.get(id.lexemeRank(2)).matches("BOOLEAN")&&!identificadores.get(id.lexemeRank(0)).matches("BOOLEAN")){
-                    errors.add(new ErrorLSSL(1,"Error semántico : Variable \""+id.lexemeRank(2)+"\" es de tipo BOOLEAN, sólo posible comparar con valores booleanos [#, %]",id,true));
+                if (identificadores.get(id.lexemeRank(2)).matches("BOOLEAN") && !identificadores.get(id.lexemeRank(0)).matches("BOOLEAN")) {
+                    errors.add(new ErrorLSSL(1, "Error semántico : Variable \"" + id.lexemeRank(2) + "\" es de tipo BOOLEAN, sólo posible comparar con valores booleanos [#, %]", id, true));
                 }
-                if (identificadores.get(id.lexemeRank(0)).matches("INT|FLOAT")){
-                    if(!identificadores.get(id.lexemeRank(2)).matches("INT|FLOAT")){
-                        errors.add(new ErrorLSSL(1,"Error semántico : Valor numérico de variable \""+id.lexemeRank(0)+"\" no se puede comparar con valor no numérico [#, %]",id,true));
+                if (identificadores.get(id.lexemeRank(0)).matches("INT|FLOAT")) {
+                    if (!identificadores.get(id.lexemeRank(2)).matches("INT|FLOAT")) {
+                        errors.add(new ErrorLSSL(1, "Error semántico : Valor numérico de variable \"" + id.lexemeRank(0) + "\" no se puede comparar con valor no numérico [#, %]", id, true));
                     }
                 }
-                if (identificadores.get(id.lexemeRank(2)).matches("INT|FLOAT")){
-                    if(!identificadores.get(id.lexemeRank(0)).matches("INT|FLOAT")){
-                        errors.add(new ErrorLSSL(1,"Error semántico : Valor numérico de variable \""+id.lexemeRank(0)+"\" no se puede comparar con valor no numérico [#, %]",id,true));
+                if (identificadores.get(id.lexemeRank(2)).matches("INT|FLOAT")) {
+                    if (!identificadores.get(id.lexemeRank(0)).matches("INT|FLOAT")) {
+                        errors.add(new ErrorLSSL(1, "Error semántico : Valor numérico de variable \"" + id.lexemeRank(0) + "\" no se puede comparar con valor no numérico [#, %]", id, true));
                     }
                 }
-                
-            
+
             }
-            
+
         }// FOR  COMPAPRODdoble
-        for (Production id: operProdIzq){
+        for (Production id : operProdIzq) {
 
-            if (!identificadores.containsKey(id.lexemeRank(0))){
-                errors.add(new ErrorLSSL(1,"Error semántico: Variable "+id.lexemeRank(0)+" no declarada. [#, %]",id,true));
-            }
-            else{
-                if (identificadores.get(id.lexemeRank(0)).matches("STRING|BOOLEAN")){
-                    errors.add(new ErrorLSSL(1,"Error semántico : Variable \""+id.lexemeRank(0)+"\" es de tipo "+identificadores.get(id.lexemeRank(0)) +", imposible hacer operaciones aritméticas [#, %]",id,true));
+            if (!identificadores.containsKey(id.lexemeRank(0))) {
+                errors.add(new ErrorLSSL(1, "Error semántico: Variable " + id.lexemeRank(0) + " no declarada. [#, %]", id, true));
+            } else {
+                if (identificadores.get(id.lexemeRank(0)).matches("STRING|BOOLEAN")) {
+                    errors.add(new ErrorLSSL(1, "Error semántico : Variable \"" + id.lexemeRank(0) + "\" es de tipo " + identificadores.get(id.lexemeRank(0)) + ", imposible hacer operaciones aritméticas [#, %]", id, true));
                 }
-      
+
             }
-            if (identificadores.get(id.lexemeRank(0)).matches("INT")&& id.lexicalCompRank(1).matches("DIVISION")){
-                    errors.add(new ErrorLSSL(1,"Error semántico : División en valor entero [#, %]",id,true));
-                }
+            if (identificadores.get(id.lexemeRank(0)).matches("INT") && id.lexicalCompRank(1).matches("DIVISION")) {
+                errors.add(new ErrorLSSL(1, "Error semántico : División en valor entero [#, %]", id, true));
+            }
         }// FOR  OPERPRODIZQ
-        for (Production id: operProdDer){
+        for (Production id : operProdDer) {
 
-            if (!identificadores.containsKey(id.lexemeRank(2))){
-                errors.add(new ErrorLSSL(1,"Error semántico: Variable "+id.lexemeRank(2)+" no declarada. [#, %]",id,true));
-            }
-            else{
-                if (identificadores.get(id.lexemeRank(2)).matches("STRING|BOOLEAN")){
-                    errors.add(new ErrorLSSL(1,"Error semántico : Variable \""+id.lexemeRank(2)+"\" es de tipo "+identificadores.get(id.lexemeRank(0)) +", imposible hacer operaciones aritméticas [#, %]",id,true));
+            if (!identificadores.containsKey(id.lexemeRank(2))) {
+                errors.add(new ErrorLSSL(1, "Error semántico: Variable " + id.lexemeRank(2) + " no declarada. [#, %]", id, true));
+            } else {
+                if (identificadores.get(id.lexemeRank(2)).matches("STRING|BOOLEAN")) {
+                    errors.add(new ErrorLSSL(1, "Error semántico : Variable \"" + id.lexemeRank(2) + "\" es de tipo " + identificadores.get(id.lexemeRank(0)) + ", imposible hacer operaciones aritméticas [#, %]", id, true));
                 }
-      
+
             }
-            
+
         }// FOR  OPERPRODDER
-        for (Production id: operProdDoble){
+        for (Production id : operProdDoble) {
 
-            if (!identificadores.containsKey(id.lexemeRank(0))||!identificadores.containsKey(id.lexemeRank(2))){
-                errors.add(new ErrorLSSL(1,"Error semántico: Variable "+id.lexemeRank(0)+" no declarada. [#, %]",id,true));
-            }
-            else{
-                if (identificadores.get(id.lexemeRank(0)).matches("STRING|BOOLEAN")||identificadores.get(id.lexemeRank(2)).matches("STRING|BOOLEAN")){
-                    errors.add(new ErrorLSSL(1,"Error semántico : Variable \""+id.lexemeRank(0)+"\" es de tipo "+identificadores.get(id.lexemeRank(0)) +", imposible hacer operaciones aritméticas [#, %]",id,true));
-                    errors.add(new ErrorLSSL(1,"Error semántico : Variable \""+id.lexemeRank(2)+"\" es de tipo "+identificadores.get(id.lexemeRank(2)) +", imposible hacer operaciones aritméticas [#, %]",id,true));
+            if (!identificadores.containsKey(id.lexemeRank(0)) || !identificadores.containsKey(id.lexemeRank(2))) {
+                errors.add(new ErrorLSSL(1, "Error semántico: Variable " + id.lexemeRank(0) + " no declarada. [#, %]", id, true));
+            } else {
+                if (identificadores.get(id.lexemeRank(0)).matches("STRING|BOOLEAN") || identificadores.get(id.lexemeRank(2)).matches("STRING|BOOLEAN")) {
+                    errors.add(new ErrorLSSL(1, "Error semántico : Variable \"" + id.lexemeRank(0) + "\" es de tipo " + identificadores.get(id.lexemeRank(0)) + ", imposible hacer operaciones aritméticas [#, %]", id, true));
+                    errors.add(new ErrorLSSL(1, "Error semántico : Variable \"" + id.lexemeRank(2) + "\" es de tipo " + identificadores.get(id.lexemeRank(2)) + ", imposible hacer operaciones aritméticas [#, %]", id, true));
 
                 }
-      
+
             }
-            
+
         }// FOR  OPERPRODDOBLE
-    }
-    private void codigoIntermedio(){
+    } // fin metodo analizador syntactico
+
+    private void codigoIntermedio() {
         ArrayList<Token> toks = new ArrayList<Token>();
         codigoIntermedio = ("--Código intermedio--\n");
         int temp;
-    //revisa las declaraciones
-        for (Production id: identProd){
+        //revisa las declaraciones
+        for (Production id : identProd) {
             temp = 1;
-            if(id.lexicalCompRank(2).equals("ASIGNACION")&&id.getSizeTokens()>5){
-                codigoIntermedio = codigoIntermedio + ("\n\n=============================\n"+id.lexemeRank(0, -1)+"\n=============================");
-                codObj.add("\n\n=============================\n;"+id.lexemeRank(0, -1)+"\n=============================");
-                
+            if (id.lexicalCompRank(2).equals("ASIGNACION") && id.getSizeTokens() > 5) {
+                codigoIntermedio = codigoIntermedio + ("\n\n=============================\n" + id.lexemeRank(0, -1) + "\n=============================");
+                codObj.add("\n\n=============================\n;" + id.lexemeRank(0, -1) + "\n=============================");
+
                 toks = id.getTokens();
-                for (int i = 0;i<toks.size();i++){
-                    if(toks.get(i).getLexeme().equals("*")||toks.get(i).getLexeme().equals("/")){
+                for (int i = 0; i < toks.size(); i++) {
+                    if (toks.get(i).getLexeme().equals("*") || toks.get(i).getLexeme().equals("/")) {
                         i--;
-                        codigoIntermedio = codigoIntermedio + ("\nT"+temp+" = "+toks.get(i).getLexeme()+toks.get(i+1).getLexeme()+toks.get(i+2).getLexeme());
-                        
-                        codObj.add("\nT"+temp+" = "+toks.get(i).getLexeme()+toks.get(i+1).getLexeme()+toks.get(i+2).getLexeme());
-                        
+                        codigoIntermedio = codigoIntermedio + ("\nT" + temp + " = " + toks.get(i).getLexeme() + toks.get(i + 1).getLexeme() + toks.get(i + 2).getLexeme());
+
+                        codObj.add("\nT" + temp + " = " + toks.get(i).getLexeme() + toks.get(i + 1).getLexeme() + toks.get(i + 2).getLexeme());
+
                         toks.remove(i);
                         toks.remove(i);
                         toks.remove(i);
-                        toks.add(i,new Token("T"+temp, "ID",i,i));
+                        toks.add(i, new Token("T" + temp, "ID", i, i));
                         temp++;
                     }//if token = * /
-                    
+
                 }//for cada 
-                for (int i = 0; i<toks.size();i++){
-                    if(toks.get(i).getLexeme().equals("+")||toks.get(i).getLexeme().equals("-")){
+                for (int i = 0; i < toks.size(); i++) {
+                    if (toks.get(i).getLexeme().equals("+") || toks.get(i).getLexeme().equals("-")) {
                         i--;
-                        codigoIntermedio = codigoIntermedio + ("\nT"+temp+" = "+toks.get(i).getLexeme()+toks.get(i+1).getLexeme()+toks.get(i+2).getLexeme());
-                        
-                        codObj.add("\nT"+temp+" = "+toks.get(i).getLexeme()+toks.get(i+1).getLexeme()+toks.get(i+2).getLexeme());
-                        
+                        codigoIntermedio = codigoIntermedio + ("\nT" + temp + " = " + toks.get(i).getLexeme() + toks.get(i + 1).getLexeme() + toks.get(i + 2).getLexeme());
+
+                        codObj.add("\nT" + temp + " = " + toks.get(i).getLexeme() + toks.get(i + 1).getLexeme() + toks.get(i + 2).getLexeme());
+
                         toks.remove(i);
                         toks.remove(i);
                         toks.remove(i);
-                        toks.add(i,new Token("T"+temp, "ID",i,i));
+                        toks.add(i, new Token("T" + temp, "ID", i, i));
                         temp++;
                     }//if token = + -
                 }
-                codigoIntermedio = codigoIntermedio + ("\n"+id.lexemeRank(1)+" = "+"T"+(temp-1));
+                codigoIntermedio = codigoIntermedio + ("\n" + id.lexemeRank(1) + " = " + "T" + (temp - 1));
                 //para guardar las variables declaradas para posteriormente utilizarlo en el metodo ensamblador               
                 variables.add(id.lexemeRank(1));
                 //codigo Objeto
@@ -931,96 +867,95 @@ public class NoCompilador extends javax.swing.JFrame {
                 System.out.println(codObjComp.get(0));
                 codObj.clear();
             }//if hay asignacion
-            
+
         }//for producciones
-    //revisa asignaciones
-        for (Production id: asigProd){ 
+        //revisa asignaciones
+        for (Production id : asigProd) {
             temp = 1;
-            if(id.lexicalCompRank(1).equals("ASIGNACION")&&id.getSizeTokens()>5){
-                codigoIntermedio = codigoIntermedio + ("\n\n=============================\n"+id.lexemeRank(0, -1)+"\n=============================");
-                codObj.add("\n\n=============================\n;"+id.lexemeRank(0, -1)+"\n=============================");
-                
+            if (id.lexicalCompRank(1).equals("ASIGNACION") && id.getSizeTokens() > 5) {
+                codigoIntermedio = codigoIntermedio + ("\n\n=============================\n" + id.lexemeRank(0, -1) + "\n=============================");
+                codObj.add("\n\n=============================\n;" + id.lexemeRank(0, -1) + "\n=============================");
+
                 toks = id.getTokens();
-                for (int i = 0;i<toks.size();i++){
-                    if(toks.get(i).getLexeme().equals("*")||toks.get(i).getLexeme().equals("/")){
+                for (int i = 0; i < toks.size(); i++) {
+                    if (toks.get(i).getLexeme().equals("*") || toks.get(i).getLexeme().equals("/")) {
                         i--;
-                        codigoIntermedio = codigoIntermedio + ("\nT"+temp+" = "+toks.get(i).getLexeme()+toks.get(i+1).getLexeme()+toks.get(i+2).getLexeme());
-                        
-                        codObj.add("\nT"+temp+" = "+toks.get(i).getLexeme()+toks.get(i+1).getLexeme()+toks.get(i+2).getLexeme());
-                                                
+                        codigoIntermedio = codigoIntermedio + ("\nT" + temp + " = " + toks.get(i).getLexeme() + toks.get(i + 1).getLexeme() + toks.get(i + 2).getLexeme());
+
+                        codObj.add("\nT" + temp + " = " + toks.get(i).getLexeme() + toks.get(i + 1).getLexeme() + toks.get(i + 2).getLexeme());
+
                         toks.remove(i);
                         toks.remove(i);
                         toks.remove(i);
-                        toks.add(i,new Token("T"+temp, "ID",i,i));
+                        toks.add(i, new Token("T" + temp, "ID", i, i));
                         temp++;
                     }//if token = * /
-                    
+
                 }//for cada 
-                for (int i = 0; i<toks.size();i++){
-                    if(toks.get(i).getLexeme().equals("+")||toks.get(i).getLexeme().equals("-")){
+                for (int i = 0; i < toks.size(); i++) {
+                    if (toks.get(i).getLexeme().equals("+") || toks.get(i).getLexeme().equals("-")) {
                         i--;
-                        codigoIntermedio = codigoIntermedio + ("\nT"+temp+" = "+toks.get(i).getLexeme()+toks.get(i+1).getLexeme()+toks.get(i+2).getLexeme());
-                        
-                        codObj.add("\nT"+temp+" = "+toks.get(i).getLexeme()+toks.get(i+1).getLexeme()+toks.get(i+2).getLexeme());                       
-                        
+                        codigoIntermedio = codigoIntermedio + ("\nT" + temp + " = " + toks.get(i).getLexeme() + toks.get(i + 1).getLexeme() + toks.get(i + 2).getLexeme());
+
+                        codObj.add("\nT" + temp + " = " + toks.get(i).getLexeme() + toks.get(i + 1).getLexeme() + toks.get(i + 2).getLexeme());
+
                         toks.remove(i);
                         toks.remove(i);
                         toks.remove(i);
-                        toks.add(i,new Token("T"+temp, "ID",i,i));
+                        toks.add(i, new Token("T" + temp, "ID", i, i));
                         temp++;
                     }//if token = + -
                 }
-               codigoIntermedio = codigoIntermedio + ("\n"+id.lexemeRank(0)+" = "+"T"+(temp-1));
-               //para guardar las variables declaradas para posteriormente utilizarlo en el metodo ensamblador
-               variables.add(id.lexemeRank(0));
-               //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////7
-               //codigo Objeto
+                codigoIntermedio = codigoIntermedio + ("\n" + id.lexemeRank(0) + " = " + "T" + (temp - 1));
+                //para guardar las variables declaradas para posteriormente utilizarlo en el metodo ensamblador
+                variables.add(id.lexemeRank(0));
+                //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////7
+                //codigo Objeto
                 codObjComp.add(objectCode(codObj));
                 System.out.println(codObjComp.get(0));
                 codObj.clear();
                 //System.out.println(objectCode(codObj));
             }//if hay asignacion
-        
-            
+
         }
         //INPUT Y OUTPUT
-        for (Production id: funcProd){
-                codigoIntermedio = codigoIntermedio + ("\n\n=============================\n"+id.lexemeRank(0, -1)+"\n=============================");
-                codigoIntermedio = codigoIntermedio + ("\nparam "+id.lexemeRank(2)+"\ncall "+id.lexemeRank(0)+", 1");
+        for (Production id : funcProd) {
+            codigoIntermedio = codigoIntermedio + ("\n\n=============================\n" + id.lexemeRank(0, -1) + "\n=============================");
+            codigoIntermedio = codigoIntermedio + ("\nparam " + id.lexemeRank(2) + "\ncall " + id.lexemeRank(0) + ", 1");
 
-            }//FOR FUNCPROD
+        }//FOR FUNCPROD
         //IF
-        for (Production id: ifProd){
-                codigoIntermedio = codigoIntermedio + ("\n\n=============================\n"+id.lexemeRank(0, -1)+"\n=============================");
-                codigoIntermedio = codigoIntermedio + ("\nT1 = "+id.lexemeRank(2,-3)+"\nif_false T1 goto L1 "+"\n.\n.\n.\nlabel L1");
+        for (Production id : ifProd) {
+            codigoIntermedio = codigoIntermedio + ("\n\n=============================\n" + id.lexemeRank(0, -1) + "\n=============================");
+            codigoIntermedio = codigoIntermedio + ("\nT1 = " + id.lexemeRank(2, -3) + "\nif_false T1 goto L1 " + "\n.\n.\n.\nlabel L1");
 
-            }//FOR IFPROD
+        }//FOR IFPROD
         //WHILE
-        for (Production id: whileProd){
-                codigoIntermedio = codigoIntermedio + ("\n\n=============================\n"+id.lexemeRank(0, -1)+"\n=============================");
-                codigoIntermedio = codigoIntermedio + ("\nlabel L1\nT1 = "+id.lexemeRank(2,-3)+"\nif_false T1 goto L2 "+"\n.\n.\n.\ngoto L1\nlabel L2");
+        for (Production id : whileProd) {
+            codigoIntermedio = codigoIntermedio + ("\n\n=============================\n" + id.lexemeRank(0, -1) + "\n=============================");
+            codigoIntermedio = codigoIntermedio + ("\nlabel L1\nT1 = " + id.lexemeRank(2, -3) + "\nif_false T1 goto L2 " + "\n.\n.\n.\ngoto L1\nlabel L2");
 
-            }//FOR WHILEPROD
+        }//FOR WHILEPROD
         //System.out.print(codigoIntermedio);
     }//codigoIntermedio
 
-    
     //////////////////GENERACION DE CODIGO OBJETO///////////////////
     private String objectCode(ArrayList<String> tripletas1) {
         ArrayList<String> tripletas = new ArrayList<String>();
-        tripletas = tripletas1; 
-        String tl=tripletas.get(0)+"\n";tripletas.remove(0);
-        
+        tripletas = tripletas1;
+        String tl = tripletas.get(0) + "\n";
+        tripletas.remove(0);
+
         String inst, R0, R1, R2, R3, op, m;
         int caso = 0;
-        inst = R1 = R0 = R2 = R3 = op = m =  "";
+        inst = R1 = R0 = R2 = R3 = op = m = "";
         int index = 0;
         //oCode
 
         for (String tripleta : tripletas) {
-            
+
             tripleta = tripleta.replaceAll("T[1-9] = ", "").replaceAll("\\n", "");
-            
+
             //JOptionPane.showMessageDialog(null,tripleta);
             // Definimos que operacion es
             if (tripleta.contains("*")) {
@@ -1039,80 +974,80 @@ public class NoCompilador extends javax.swing.JFrame {
                 op = "+";
             }
             // Definimos que operacion es
-            
+
             //Condicionales para ver el orden de la operacion
             if (R0.isEmpty() && R1.isEmpty()) {
                 //JOptionPane.showMessageDialog(null,"caso 0");
                 R0 = (tripleta.substring(0, tripleta.indexOf(op))).replaceAll(" ", "");
                 R1 = (tripleta.substring(tripleta.indexOf(op) + 1)).replaceAll(" ", "");
 
-            }else if ((tripleta.substring(0, tripleta.indexOf(op))).contains("T") && (tripleta.substring(tripleta.indexOf(op) + 1)).contains("T") ) {//2 TEMPORALES
+            } else if ((tripleta.substring(0, tripleta.indexOf(op))).contains("T") && (tripleta.substring(tripleta.indexOf(op) + 1)).contains("T")) {//2 TEMPORALES
                 R0 = "R0";
-                R1="R1";
-                caso =4 ;
+                R1 = "R1";
+                caso = 4;
                 //JOptionPane.showMessageDialog(null,"caso 4");
             } else if ((tripleta.substring(0, tripleta.indexOf(op))).contains("T")) {//temporal izquierdo
                 R1 = (tripleta.substring(tripleta.indexOf(op) + 1)).replaceAll(" ", "");
-                caso =1 ;
+                caso = 1;
                 //JOptionPane.showMessageDialog(null,"caso 1");
             } else if ((tripleta.substring(tripleta.indexOf(op) + 1)).contains("T")) {//temporal derecho
                 R1 = (tripleta.substring(0, tripleta.indexOf(op))).replaceAll(" ", "");
-                caso =2;                
+                caso = 2;
                 //JOptionPane.showMessageDialog(null,"caso 2");
-            }else{
+            } else {
                 R1 = (tripleta.substring(0, tripleta.indexOf(op))).replaceAll(" ", "");
                 R2 = (tripleta.substring(tripleta.indexOf(op) + 1)).replaceAll(" ", "");
-                caso=5;
+                caso = 5;
                 //JOptionPane.showMessageDialog(null,"caso 5");
             }
 
             //Condicionales para ver el orden de la operacion
             switch (caso) {
                 case 1:
-                    m+="LD R1," + R1+"\n";
-                    m+=inst + " R0,R0,R1"+"\n";
+                    m += "LD R1," + R1 + "\n";
+                    m += inst + " R0,R0,R1" + "\n";
                     break;
                 case 2:
-                    m+="LD R1," + R1+"\n";
-                    m+=inst + " R0,R1,R0"+"\n";
+                    m += "LD R1," + R1 + "\n";
+                    m += inst + " R0,R1,R0" + "\n";
                     break;
                 case 3:
-                    m+="LD R1," + R2+"\n";
-                    m+="LD R2," + R2+"\n";
-                    m+=inst + " R1,R1,R2"+"\n";
+                    m += "LD R1," + R2 + "\n";
+                    m += "LD R2," + R2 + "\n";
+                    m += inst + " R1,R1,R2" + "\n";
                     break;
                 case 4:
-                    m+=inst+" "+R0+","+R0+","+R1;
+                    m += inst + " " + R0 + "," + R0 + "," + R1;
                     break;
                 case 5:
-                    m+="LD R1," + R1+"\n";
-                    m+="LD R2," + R2+"\n";
-                    m+=inst + " R1,R1,R2"+"\n";
-                    caso =0;
+                    m += "LD R1," + R1 + "\n";
+                    m += "LD R2," + R2 + "\n";
+                    m += inst + " R1,R1,R2" + "\n";
+                    caso = 0;
                     break;
                 default:
-                    m+="LD R0," + R0+"\n";
-                    m+="LD R1," + R1+"\n";
-                    m+=inst + " R0,R0,R1"+"\n";
-                    caso =0;
+                    m += "LD R0," + R0 + "\n";
+                    m += "LD R1," + R1 + "\n";
+                    m += inst + " R0,R0,R1" + "\n";
+                    caso = 0;
             }
-            
+
             // caso = true;
         }//Recorrer tripletas
         //System.out.println(tl+m);
-        return (tl+m);
+        return (tl + m);
     }//fin_codObjeto
-    
-    private void imprimirToks(ArrayList<Token> prod){
+
+    private void imprimirToks(ArrayList<Token> prod) {
         int i = 0;
         String str = "";
-        for(Token tok:prod){
-            str+=tok.getLexeme()+"\n";
+        for (Token tok : prod) {
+            str += tok.getLexeme() + "\n";
         }
         System.out.print(str);
     }
-    
-   //metodo para el color de las clases   
+
+    //metodo para el color de las clases   
     private void colorAnalysis() {
         /* Limpiar el arreglo de colores */
         textsColor.clear();
@@ -1158,7 +1093,7 @@ public class NoCompilador extends javax.swing.JFrame {
             }
             jtaOutputConsole.setText("Compilación terminada...\n" + strErrors + "\nLa compilación terminó con errores...");
         } else {
-            jtaOutputConsole.setText("Compilación terminada...");
+            jtaOutputConsole.setText("Compilación terminada... Sin Errores!");
         }
         jtaOutputConsole.setCaretPosition(0);
     }
@@ -1168,32 +1103,45 @@ public class NoCompilador extends javax.swing.JFrame {
         jtaOutputConsole.setText("");
         tokens.clear();
         errors.clear();
-        if(identProdCopia !=null)
+        if (identProdCopia != null) {
             identProdCopia.clear();
-        if(identProd !=null)
+        }
+        if (identProd != null) {
             identProd.clear();
-        if(asigProd !=null)
+        }
+        if (asigProd != null) {
             asigProd.clear();
-        if(asigProdConID !=null)
+        }
+        if (asigProdConID != null) {
             asigProdConID.clear();
-        if(compaProdIzq !=null)
+        }
+        if (compaProdIzq != null) {
             compaProdIzq.clear();
-        if(compaProdDer !=null)
+        }
+        if (compaProdDer != null) {
             compaProdDer.clear();
-        if(compaProdDoble !=null)
+        }
+        if (compaProdDoble != null) {
             compaProdDoble.clear();
-        if(operProdIzq !=null)
+        }
+        if (operProdIzq != null) {
             operProdIzq.clear();
-        if(operProdDer !=null)
+        }
+        if (operProdDer != null) {
             operProdDer.clear();
-        if(operProdDoble !=null)
+        }
+        if (operProdDoble != null) {
             operProdDoble.clear();
-        if(funcProd !=null)
+        }
+        if (funcProd != null) {
             funcProd.clear();
-        if(ifProd !=null)
+        }
+        if (ifProd != null) {
             ifProd.clear();
-        if(whileProd !=null)
+        }
+        if (whileProd != null) {
             whileProd.clear();
+        }
         identificadores.clear();
         codeHasBeenCompiled = false;
     }
@@ -1258,4 +1206,3 @@ public class NoCompilador extends javax.swing.JFrame {
     private javax.swing.JTable tblTokens;
     // End of variables declaration//GEN-END:variables
 }
-
