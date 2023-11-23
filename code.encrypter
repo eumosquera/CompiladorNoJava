@@ -1,3 +1,79 @@
-   public void setProfesion(String profesion ) {
-        this.profesion = profesion
+public class SeleccionFutbol {
+
+    private String id;
+
+    private String nombre;
+
+    private String apellido;
+
+    private int age;
+
+    private String profesion;
+    
+    
+    //PARAMETROS SUPER CLASE CONTRUCTOR
+    public SeleccionFutbol(String id, String nombre, String apellido, int age, String profesion){
+            
+            this.id = id;
+            this.nombre = nombre;
+            this.apellido = apellido;
+            this.age = age;
+            this.profesion = profesion;
+
+}
+
+    public void Consentracion(){
+        
     }
+    
+    public void Viajar({
+        
+    }
+    
+    public void UsarUniforme(){
+        
+    }
+    
+    
+    //GETTER AND SETTER
+    public String getId() {
+        return id;
+    }
+
+    public void setId(String id) {
+        this.id = id;
+    }
+
+    public String getNombre() {
+        return nombre;
+    }
+
+    public void setNombre(String nombre) {
+        this.nombre = nombre;
+    }
+
+    public String getApellido() {
+        return apellido;
+    }
+
+    public void setApellido(String apellido) {
+        this.apellido = apellido;
+    }
+
+    public int getAge() {
+        return age;
+    }
+
+    public void setAge(int age) {
+        this.age = age;
+    }
+
+    public String getProfesion() {
+        return profesion;
+    }
+
+    public void setProfesion(String profesion) {
+        this.profesion = profesion;
+    }
+    
+}

@@ -1,0 +1,60 @@
+options {
+    STATIC = false;
+}
+
+PARSER_BEGIN(MyParser)
+import java.io.*;
+
+public class MyParser {
+    public static void main(String[] args) throws ParseException {
+        MyParser parser = new MyParser(System.in);
+        parser.Start();
+    }
+}
+PARSER_END(MyParser)
+
+TOKEN : {
+    <ID: (["a"-"z", "A"-"Z"])+ >
+    | <INT: "int" >
+    | <FLOAT: "float" >
+    | <VOID: "void" >
+    | <LPAREN: "(" >
+    | <RPAREN: ")" >
+    | <LBRACE: "{" >
+    | <RBRACE: "}" >
+    | <COMMA: "," >
+    | <SEMICOLON: ";" >
+}
+
+void Start() : {}
+{
+    ClassDeclaration()
+}
+
+void ClassDeclaration() : {}
+{
+    <ID> "class" <ID> <LBRACE> MethodDeclaration() <RBRACE>
+}
+
+void MethodDeclaration() : {}
+{
+    ReturnType() <ID> <LPAREN> Parameters() <RPAREN> <LBRACE> <RBRACE>
+}
+
+void ReturnType() : {}
+{
+    <INT>
+    | <FLOAT>
+    | <VOID>
+}
+
+void Parameters() : {}
+{
+    // Optional: Parameters can be empty
+    (Parameter() (<COMMA> Parameter())*)?
+}
+
+void Parameter() : {}
+{
+    ReturnType() <ID>
+}

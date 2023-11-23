@@ -502,9 +502,21 @@ public class NoCompilador extends javax.swing.JFrame {
         gramatica.group("DECL_INT", "INT ID ASIGNACION NUMERO PUNTOCOMA", identProd);
         gramatica.group("DECL_INT", "INT ID ASIGNACION OPERACION PUNTOCOMA", identProd);
         gramatica.group("DECL_INT", "ID PARENTESISABIERTO INT ID PARENTESISCERRADO", identProd);
-        
-        //DEFINIR GRAMATICA DE LOS METODOS S
-        gramatica.group("DECL_METO", "PUBLIC|PRIVATE VOID ID PARENTESISABIERTO PARENTESISCERRADO LLAVEABIERTO",identProd);
+        gramatica.group("DECL_ID", "PARENTESISABIERTO ID PARENTESISCERRADO", 2, "ERROR SINTACTICO: NO SE HA DEFINIDO EL TIPO [#, %]");
+        gramatica.group("DECL_ID", "ID PARENTESISCERRADO", 2, "ERROR_SINTACTICO: FALTA PARENTESIS ABIERTO [#, %]");
+        //DEFINIR GRAMATICA DE LOS METODOS y CLASES
+        gramatica.group("CLASE", "CLASS ID LLAVEABIERTO METODO LLAVECERRADO");
+
+        gramatica.group("METODO", "TIPO ID PARENTESISABIERTO PARENTESISCERRADO LLAVEABIERTO LLAVECERRADO");
+        gramatica.group("METODO", "TIPO ID PARENTESISABIERTO PARAMETROS PARENTESISCERRADO LLAVEABIERTO LLAVECERRADO");
+
+        gramatica.group("PARAMETROS", "TIPO ID");
+        gramatica.group("PARAMETROS", "TIPO ID COMA PARAMETROS");
+
+        gramatica.group("TIPO", "INT");
+        gramatica.group("TIPO", "FLOAT");
+        gramatica.group("TIPO", "VOID");
+
         // ERRORES EN EL LOS METODOS
         gramatica.group("ERROR_METO", "PUBLIC|PRIVATE VOID PARENTESISABIERTO ID PARENTESISCERRADO", 2 ,"ERROR_SINTACTICO: ID NO SE ESPERA EN ESA POSICION: [#,%]");
         gramatica.group("ERROR_METO", "PUBLIC|PRIVATE VOID PARENTESISABIERTO PARENTESISCERRADO", 2 ,"ERROR_SINTACTICO: NO HAY ID: [#,%]");
@@ -523,7 +535,7 @@ public class NoCompilador extends javax.swing.JFrame {
         gramatica.group("TIPO", "FLOAT");
         gramatica.group("TIPO", "VOID");
 
-        // ERRORES EN EL LOS METODOS
+        // ERRORES EN EL LOS METODO
         gramatica.group("CLASE", "ID LLAVEABIERTO METODO LLAVECERRADO", 1, "ERROR_SINTACTICO: Se espera la palabra clave 'class' [#, %]");
         gramatica.group("METODO", "ID PARENTESISABIERTO PARENTESISCERRADO LLAVEABIERTO LLAVECERRADO", 2, "ERROR_SINTACTICO: Falta el tipo de retorno del método [#, %]");
         gramatica.group("METODO", "TIPO PARENTESISABIERTO PARENTESISCERRADO LLAVEABIERTO LLAVECERRADO", 2, "ERROR_SINTACTICO: Falta el identificador del método [#, %]");
