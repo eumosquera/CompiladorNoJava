@@ -510,6 +510,30 @@ public class NoCompilador extends javax.swing.JFrame {
         gramatica.group("ERROR_METO", "PUBLIC|PRIVATE VOID PARENTESISABIERTO PARENTESISCERRADO", 2 ,"ERROR_SINTACTICO: NO HAY ID: [#,%]");
         gramatica.group("ERROR_METO", "PUBLIC|LLAVEABIERTO PRIVATE VOID PARENTESISABIERTO PARENTESISCERRADO LLAVECERRADA", 2 ,"ERROR_SINTACTICO: LLAVE MAL ABIERTA [#,%]");
         gramatica.group("ERROR_METO", "PUBLIC|VOID PARENTESISABIERTO PARENTESISCERRADO", 2 ,"ERROR_SINTACTICO: FALTA IDENTIFICADOR: [#,%]");
+        //DEFINIR GRAMATICA DE LOS METODOS y CLASES
+        gramatica.group("CLASE", "CLASS ID LLAVEABIERTO METODO LLAVECERRADO");
+
+        gramatica.group("METODO", "TIPO ID PARENTESISABIERTO PARENTESISCERRADO LLAVEABIERTO LLAVECERRADO");
+        gramatica.group("METODO", "TIPO ID PARENTESISABIERTO PARAMETROS PARENTESISCERRADO LLAVEABIERTO LLAVECERRADO");
+
+        gramatica.group("PARAMETROS", "TIPO ID");
+        gramatica.group("PARAMETROS", "TIPO ID COMA PARAMETROS");
+
+        gramatica.group("TIPO", "INT");
+        gramatica.group("TIPO", "FLOAT");
+        gramatica.group("TIPO", "VOID");
+
+        // ERRORES EN EL LOS METODOS
+        gramatica.group("CLASE", "ID LLAVEABIERTO METODO LLAVECERRADO", 1, "ERROR_SINTACTICO: Se espera la palabra clave 'class' [#, %]");
+        gramatica.group("METODO", "ID PARENTESISABIERTO PARENTESISCERRADO LLAVEABIERTO LLAVECERRADO", 2, "ERROR_SINTACTICO: Falta el tipo de retorno del método [#, %]");
+        gramatica.group("METODO", "TIPO PARENTESISABIERTO PARENTESISCERRADO LLAVEABIERTO LLAVECERRADO", 2, "ERROR_SINTACTICO: Falta el identificador del método [#, %]");
+        gramatica.group("METODO", "TIPO ID LLAVEABIERTO LLAVECERRADO", 2, "ERROR_SINTACTICO: Falta el bloque de paréntesis en la declaración del método [#, %]");
+        gramatica.group("METODO", "TIPO ID PARENTESISABIERTO LLAVEABIERTO LLAVECERRADO", 2, "ERROR_SINTACTICO: Falta la lista de parámetros del método [#, %]");
+
+        gramatica.group("PARAMETROS", "ID COMA PARAMETROS", 2, "ERROR_SINTACTICO: Falta el tipo de un parámetro [#, %]");
+        gramatica.group("PARAMETROS", "TIPO COMA PARAMETROS", 2, "ERROR_SINTACTICO: Falta el identificador de un parámetro [#, %]");
+
+        gramatica.group("TIPO", "ID", 1, "ERROR_SINTACTICO: Tipo no reconocido [#, %]");
 
         // BOLEAN
         gramatica.group("DECL_BOOL", "BOOLEAN ID PUNTOCOMA", identProd);
