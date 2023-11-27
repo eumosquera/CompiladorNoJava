@@ -37,44 +37,45 @@ Numero = 0 | [1-9][0-9]*
 {EspacioEnBlanco} {/*IGNORAR*/}
 
 /*Palabras reservadas*/
-"IMPORT" | "import" | "Import" { return textColor( yychar, yylength(), new Color(255, 140, 0)); }
-"DEF" | "def" | "Def" { return textColor( yychar, yylength(), new Color(19,141,50)); }
-"CLASS" | "class" | "Class" { return textColor(yychar, yylength(), new Color(30,148,195)); }
+"IMPORTAR" | "importar" | "Importar" { return textColor( yychar, yylength(), new Color(255, 140, 0)); }
+"CLASE" | "clase" | "Clase" { return textColor(yychar, yylength(), new Color(30,148,195)); }
+"PUBLICO" | "publico" | "Publico" { return textColor(yychar, yylength(), new Color(30,148,195)); }
+"PRIVADO" | "privado" | "Privado" { return textColor(yychar, yylength(), new Color(30,148,195)); }
 
 /* condicion */
-"IF" | "if" | "If" { return textColor(yychar, yylength(), new Color(0, 0, 139)); }
-"ELSE" | "else" | "Else" { return textColor(yychar, yylength(), new Color(0, 0, 139));}
+"SI" | "si" | "Si" { return textColor(yychar, yylength(), new Color(0, 0, 139)); }
+"SINO" | "sino" | "Sino" { return textColor(yychar, yylength(), new Color(0, 0, 139));}
 
 /* ciclos */
-"FOR" | "for" | "For" { return textColor(yychar, yylength(), new Color(0, 0, 139)); }
-"IN" | "in" | "In" { return textColor(yychar, yylength(), new Color(0, 0, 139)); }
-"WHILE" | "while" | "While" { return textColor(yychar, yylength(), new Color(0, 0, 139)); }
-"RANGE" | "range" | "Range" { return textColor(yychar, yylength(), new Color(0, 0, 139));  }
+"PARA" | "para" | "Para" { return textColor(yychar, yylength(), new Color(0, 0, 139)); }
+"EN" | "en" | "En" { return textColor(yychar, yylength(), new Color(0, 0, 139)); }
+"MIENTRAS" | "mientras" | "Mientras" { return textColor(yychar, yylength(), new Color(0, 0, 139)); }
+"RANGO" | "rango" | "Rango" { return textColor(yychar, yylength(), new Color(0, 0, 139));  }
 
-"SELF" | "self" | "Self" {return textColor(yychar, yylength(), new Color(0, 0, 139));  }
-"TRY" | "try" | "Try" { return textColor(yychar, yylength(), new Color(0, 0, 139)); }
-"EXCEPT" | "except" | "Except" { return textColor(yychar, yylength(), new Color(0, 0, 139)); }
-"RETURN" | "return" | "Return" { return textColor(yychar, yylength(), new Color(148, 58, 173)); }
-"BREAK" | "break" | "Break" { return textColor(yychar, yylength(), new Color(0, 0, 139)); }
-"NEXT" | "next" | "Next" { return textColor(yychar, yylength(), new Color(255, 140, 0));  }
-"INPUT" | "input" | "Input" | "PRINT" | "print" | "Print" { return textColor(yychar, yylength(), new Color(255, 140, 0));  }
+"INTENTAR" | "intentar" | "Intentar" { return textColor(yychar, yylength(), new Color(0, 0, 139)); }
+"EXCEPTO" | "excepto" | "Excepto" { return textColor(yychar, yylength(), new Color(0, 0, 139)); }
+"RETORNAR" | "retornar" | "Retornar" { return textColor(yychar, yylength(), new Color(148, 58, 173)); }
+"ROMPER" | "romper" | "Romper" { return textColor(yychar, yylength(), new Color(0, 0, 139)); }
+"CASO" | "caso" | "caso" { return textColor(yychar, yylength(), new Color(255, 140, 0));  }
+"EVALUAR" | "evaluar" | "evaluar" { return textColor(yychar, yylength(), new Color(0, 0,139));  }
+"ENTRADA" | "entrada" | "Entrada" | "IMPRIMIR" | "imprimir" | "Imprimir" { return textColor(yychar, yylength(), new Color(255, 140, 0));  }
 
 /* Tipos de dato */
-"STRING" | "string" | "String" { return textColor(yychar, yylength(), new Color(148, 58, 173)); }
-"INT" | "int" | "Int" {return textColor(yychar, yylength(), new Color(148, 58, 173));}
-"FLOAT" | "float" | "Float" { return textColor(yychar, yylength(), new Color(148, 58, 173)); }
-"BOOLEAN" | "boolean" | "Boolean" { return textColor(yychar, yylength(), new Color(0, 0, 139)); }
+"TEXTO" | "texto" | "Texto" { return textColor(yychar, yylength(), new Color(148, 58, 173)); }
+"ENTERO" | "entero" | "Entero" {return textColor(yychar, yylength(), new Color(148, 58, 173));}
+"FLOTANTE" | "fotante" | "Fotantet" { return textColor(yychar, yylength(), new Color(148, 58, 173)); }
+"DECIMAL" | "decimal" | "Decimal" { return textColor(yychar, yylength(), new Color(148, 58, 173)); }
+"BOLEANO" | "booleano" | "Booleano" { return textColor(yychar, yylength(), new Color(0, 0, 139)); }
 
-"TRUE" | "true" | "True" { return textColor(yychar, yylength(), new Color(148, 58, 173)); }
-"FALSE" | "false" | "False" { return textColor(yychar, yylength(), new Color(148, 58, 173)); }
+"VERDADERO" | "verdadero" | "Verdadero" { return textColor(yychar, yylength(), new Color(148, 58, 173)); }
+"FALSO" | "falso" | "Falso" { return textColor(yychar, yylength(), new Color(148, 58, 173)); }
 
-"POWER" | "power" | "Power" { return textColor(yychar, yylength(), new Color(255, 140, 0)); }
-"SQRT" | "sqrt" | "Sqrt" { return textColor(yychar, yylength(), new Color(255, 140, 0)); }
-"AND" | "and" | "And" { return textColor(yychar, yylength(), new Color(178, 34, 34)); }
-"OR" | "or" | "Or" { return textColor(yychar, yylength(), new Color(178, 34, 34)); }
-"NOT" | "not" | "Not" { return textColor(yychar, yylength(), new Color(178, 34, 34)); }
-"BEGIN" | "begin" | "Begin" { return textColor(yychar, yylength(), new Color(255, 140, 0)); }
-"END" | "end" | "End" { return textColor(yychar, yylength(), new Color(255, 140, 0)); }
+"RAIZ" | "raiz" | "Raiz" { return textColor(yychar, yylength(), new Color(255, 140, 0)); }
+"Y" | "y"  { return textColor(yychar, yylength(), new Color(178, 34, 34)); }
+"O" | "o" { return textColor(yychar, yylength(), new Color(178, 34, 34)); }
+"NO" | "no" | "No" { return textColor(yychar, yylength(), new Color(178, 34, 34)); }
+"INICIO" | "inicio" | "Inicio" { return textColor(yychar, yylength(), new Color(255, 140, 0)); }
+"FINAL" | "final" | "FINAL" { return textColor(yychar, yylength(), new Color(255, 140, 0)); }
 
 
 \( { return textColor(yychar, yylength(), new Color(96, 96, 96)); }

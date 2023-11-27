@@ -1,3 +1,4 @@
+
 import jflex.exceptions.SilentExit;
 
 /**
@@ -12,7 +13,7 @@ public class ExecuteJFlex {
         String lexerFile = System.getProperty("user.dir") + "/src/Lexer.flex",
                 lexerColor = System.getProperty("user.dir") + "/src/LexerColor.flex";
         //String lexerFile = System.getProperty("user.dir") + "/src/main/java/com/mycompany/compiladornojava/Lexer.flex",
-                //lexerColor = System.getProperty("user.dir") + "/src/main/java/com/mycompany/compiladornojava//LexerColor.flex";
+        //lexerColor = System.getProperty("user.dir") + "/src/main/java/com/mycompany/compiladornojava//LexerColor.flex";
         try {
             jflex.Main.generate(new String[]{lexerFile, lexerColor});
         } catch (SilentExit ex) {

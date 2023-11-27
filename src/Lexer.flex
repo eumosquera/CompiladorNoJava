@@ -76,48 +76,48 @@ Numero = 0 | [1-9][0-9]*
 "--" { return token(yytext(), "DECREMENTO", yyline, yycolumn); }
 
 /*Palabras reservadas*/
-"IMPORT" | "import" | "Import" { return token(yytext(), "IMPORT", yyline, yycolumn); }
-"PUBLIC" | "public" | "Public" { return token(yytext(), "PUBLIC", yyline, yycolumn); }
-"VOID" | "void" | "Void" { return token(yytext(), "VOID", yyline, yycolumn); }
-"PRIVATE" | "private" | "Private" { return token(yytext(), "PRIVATE", yyline, yycolumn); }
-"CLASS" | "class" | "Class" { return token(yytext(), "CLASS", yyline, yycolumn); }
-"IF" | "if" | "If" { return token(yytext(), "IF", yyline, yycolumn); }
-"ELSE" | "else" | "Else" { return token(yytext(), "ELSE", yyline, yycolumn); }
-"FOR" | "for" | "For" { return token(yytext(), "FOR", yyline, yycolumn); }
-"IN" | "in" | "In" { return token(yytext(), "IN", yyline, yycolumn); }
-"RANGE" | "range" | "Range" { return token(yytext(), "RANGE", yyline, yycolumn); }
-"SELF" | "self" | "Self" { return token(yytext(), "SELF", yyline, yycolumn); }
-"WHILE" | "while" | "While" { return token(yytext(), "WHILE", yyline, yycolumn); }
-"TRY" | "try" | "Try" { return token(yytext(), "TRY", yyline, yycolumn); }
-"EXCEPT" | "except" | "Except" { return token(yytext(), "EXCEPT", yyline, yycolumn); }
-"RETURN" | "return" | "Return" { return token(yytext(), "RETURN", yyline, yycolumn); }
-"BREAK" | "break" | "Break" { return token(yytext(), "BREAK", yyline, yycolumn); }
-"NEXT" | "next" | "Next" { return token(yytext(), "NEXT", yyline, yycolumn); }
-"INPUT" | "input" | "Input" { return token(yytext(), "INPUT", yyline, yycolumn); }
-"OUTPUT" | "output" | "Output" { return token(yytext(), "OUTPUT", yyline, yycolumn); }
-"PRINT" | "print" | "Print" { return token(yytext(), "PRINT", yyline, yycolumn); }
+"IMPORTAR" | "importar" | "Importar" { return token(yytext(), "IMPORTAR", yyline, yycolumn); }
+"PUBLICO" | "publico" | "Publico" { return token(yytext(), "PUBLICO", yyline, yycolumn); }
+"VACIO" | "vacio" | "Vacio" { return token(yytext(), "VACIO", yyline, yycolumn); }
+"PRIVADO" | "privado" | "Privado" { return token(yytext(), "PRIVADO", yyline, yycolumn); }
+"CLASE" | "clase" | "Clase" { return token(yytext(), "CLASE", yyline, yycolumn); }
+"SI" | "si" | "Si" { return token(yytext(), "SI", yyline, yycolumn); }
+"SINO" | "sino" | "Sino" { return token(yytext(), "SINO", yyline, yycolumn); }
+"PARA" | "para" | "Para" { return token(yytext(), "PARA", yyline, yycolumn); }
+"EN" | "en" | "en" { return token(yytext(), "EN", yyline, yycolumn); }
+"RANGO" | "rango" | "Rango" { return token(yytext(), "RANGO", yyline, yycolumn); }
+"MISMO" | "mismo" | "Mismo" { return token(yytext(), "MISMO", yyline, yycolumn); }
+"MIENTRAS" | "mientras" | "Mientras" { return token(yytext(), "MIENTRAS", yyline, yycolumn); }
+"INTENTAR" | "intentar" | "Intentar" { return token(yytext(), "INTENTAR", yyline, yycolumn); }
+"EXCEPTO" | "excepto" | "Excepto" { return token(yytext(), "EXCEPTO", yyline, yycolumn); }
+"RETORNAR" | "retornar" | "Retornar" { return token(yytext(), "RETORNAR", yyline, yycolumn); }
+"ROMPER" | "romper" | "Romper" { return token(yytext(), "ROMPER", yyline, yycolumn); }
+"SIGUIENTE" | "siguiente" | "Siguiente" { return token(yytext(), "SIGUIENTE", yyline, yycolumn); }
+"ENTRADA" | "entrada" | "Entrada" { return token(yytext(), "ENTRADA", yyline, yycolumn); }
+"SALIDA" | "salida" | "Salida" { return token(yytext(), "SALIDA", yyline, yycolumn); }
+"IMPRIMIR" | "imprimir" | "Imprimir" { return token(yytext(), "IMPRIMIR", yyline, yycolumn); }
+"CASO" | "caso" | "Caso" { return token(yytext(), "CASO", yyline, yycolumn); }
+"EVALUAR" | "evaluar" | "Evaluar" { return token(yytext(), "CASO", yyline, yycolumn); }
 /*Tipo de dato*/
-"INT" | "int" | "Int" { return token(yytext(), "INT", yyline, yycolumn); }
-"FLOAT" | "float" | "Float" { return token(yytext(), "FLOAT", yyline, yycolumn); }
-"BOOLEAN" | "boolean" | "Boolean" { return token(yytext(), "BOOLEAN", yyline, yycolumn); }
-"STRING" | "string" | "String" { return token(yytext(), "STRING", yyline, yycolumn); }
+"ENTERO" | "entero" | "Entero" { return token(yytext(), "ENTERO", yyline, yycolumn); }
+"FLOTANTE" | "fotante" | "Fotantet" { return token(yytext(), "FLOTANTE", yyline, yycolumn); }
+"DECIMAL" | "decimal" | "Decimal" { return token(yytext(), "DECIMAL", yyline, yycolumn); }
+"BOLEANO" | "booleano" | "Booleano" { return token(yytext(), "BOOLEANO", yyline, yycolumn); }
+"TEXTO" | "texto" | "Texto" { return token(yytext(), "TEXTO", yyline, yycolumn); }
 /*booleano*/
-"TRUE" | "true" | "True" { return token(yytext(), "TRUE", yyline, yycolumn); }
-"FALSE" | "false" | "False" { return token(yytext(), "FALSE", yyline, yycolumn); }
+"VERDADERO" | "verdadero" | "Verdadero" { return token(yytext(), "VERDADERO", yyline, yycolumn); }
+"FALSO" | "falso" | "Falso" { return token(yytext(), "FALSO", yyline, yycolumn); }
 /*Matematicos*/
-"POWER" | "power" | "Power" { return token(yytext(), "POWER", yyline, yycolumn); }
-"SQRT" | "sqrt" | "Sqrt" { return token(yytext(), "SQRT", yyline, yycolumn); }
+"RAIZ" | "raiz" | "Raiz" { return token(yytext(), "RAIZ", yyline, yycolumn); }
 /*logicos*/
-"AND" | "and" | "And" { return token(yytext(), "AND", yyline, yycolumn); }
-"OR" | "or" | "Or" { return token(yytext(), "OR", yyline, yycolumn); }
-"NOT" | "not" | "Not" { return token(yytext(), "NOT", yyline, yycolumn); }
+"Y" | "y" { return token(yytext(), "Y", yyline, yycolumn); }
+"O" | "o" { return token(yytext(), "O", yyline, yycolumn); }
+"NO" | "no" | "No" { return token(yytext(), "NO", yyline, yycolumn); }
 /*data base*/
-"BEGIN" | "begin" | "Begin" { return token(yytext(), "BEGIN", yyline, yycolumn); }
-"END" | "end" | "End" { return token(yytext(), "END", yyline, yycolumn); }
-/*identificadores*/
-/* IDs */
+"INICIO" | "inicio" | "Inicio" { return token(yytext(), "INICIO", yyline, yycolumn); }
+"FINAL" | "final" | "FINAL" { return token(yytext(), "FINAL", yyline, yycolumn); }
+/*identificadores o IDs*/
 {Identificador} { return token(yytext(), "ID", yyline, yycolumn); }
-
 
 /**/
 . { return token(yytext(), "ERROR", yyline, yycolumn); }

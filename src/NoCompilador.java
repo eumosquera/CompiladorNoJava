@@ -440,7 +440,7 @@ public class NoCompilador extends javax.swing.JFrame {
     private void syntacticAnalysis() {
         //instancia de la clase  gramar para deficnir la gramatica recibe como parametro los teokens y los  errores
         Grammar gramatica = new Grammar(tokens, errors);
-
+     
         /*error general*/
         gramatica.delete(new String[]{"ERROR"}, 1);
 
