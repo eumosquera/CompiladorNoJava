@@ -492,20 +492,20 @@ public class NoCompilador extends javax.swing.JFrame {
         gramatica.group("OPERACION_ER", "(SUMA|RESTA|MULTIPLICACION|DIVISION) ID", 2, "ERROR SINTACTICO: se necesita un minimo de 2 valores para ralizar la operacion [#, %]");
 
         //FORMA CORRECTA DE DECLARAR UNA VARIABLE------------------------------------------------------------
-        gramatica.group("DECL_FLOAT", "FLOAT ID PUNTOCOMA", identProd);
-        gramatica.group("DECL_FLOAT", "FLOAT ID ASIGNACION ID PUNTOCOMA", identProd);
-        gramatica.group("DECL_FLOAT", "FLOAT ID ASIGNACION REAL PUNTOCOMA", identProd);
-        gramatica.group("DECL_FLOAT", "FLOAT ID ASIGNACION OPERACION PUNTOCOMA", identProd);
+        gramatica.group("DECL_FLOTANTE", "FLOTANTE ID PUNTOCOMA", identProd);
+        gramatica.group("DECL_FLOTANTE", "FLOTANTE ID ASIGNACION ID PUNTOCOMA", identProd);
+        gramatica.group("DECL_FLOTANTE", "FLOTANTE ID ASIGNACION REAL PUNTOCOMA", identProd);
+        gramatica.group("DECL_FLOTANTE", "FLOTANTE ID ASIGNACION OPERACION PUNTOCOMA", identProd);
 
-        gramatica.group("DECL_INT", "INT ID PUNTOCOMA", identProd);
-        gramatica.group("DECL_INT", "INT ID ASIGNACION ID PUNTOCOMA", identProd);
-        gramatica.group("DECL_INT", "INT ID ASIGNACION NUMERO PUNTOCOMA", identProd);
-        gramatica.group("DECL_INT", "INT ID ASIGNACION OPERACION PUNTOCOMA", identProd);
-        gramatica.group("DECL_INT", "ID PARENTESISABIERTO INT ID PARENTESISCERRADO", identProd);
+        gramatica.group("DECL_ENTERO", "ENTERO ID PUNTOCOMA", identProd);
+        gramatica.group("DECL_ENTERO", "ENTERO ID ASIGNACION ID PUNTOCOMA", identProd);
+        gramatica.group("DECL_ENTERO", "ENTERO ID ASIGNACION NUMERO PUNTOCOMA", identProd);
+        gramatica.group("DECL_ENTERO", "ENTERO ID ASIGNACION OPERACION PUNTOCOMA", identProd);
+        gramatica.group("DECL_ENTERO", "ID PARENTESISABIERTO ENTERO ID PARENTESISCERRADO", identProd);
         gramatica.group("DECL_ID", "PARENTESISABIERTO ID PARENTESISCERRADO", 2, "ERROR SINTACTICO: NO SE HA DEFINIDO EL TIPO [#, %]");
         //gramatica.group("DECL_ID", "ID PARENTESISCERRADO", 2, "ERROR_SINTACTICO: FALTA PARENTESIS ABIERTO [#, %]"); volver a colocar
         //DEFINIR GRAMATICA DE LOS METODOS y CLASES
-        gramatica.group("CLASE", "CLASS ID LLAVEABIERTO METODO LLAVECERRADO");
+        gramatica.group("CLASE", "CLASE ID LLAVEABIERTO METODO LLAVECERRADO");
 
         gramatica.group("METODO", "TIPO ID PARENTESISABIERTO PARENTESISCERRADO LLAVEABIERTO LLAVECERRADO");
         gramatica.group("METODO", "TIPO ID PARENTESISABIERTO PARAMETROS PARENTESISCERRADO LLAVEABIERTO LLAVECERRADO");
@@ -513,10 +513,10 @@ public class NoCompilador extends javax.swing.JFrame {
         gramatica.group("PARAMETROS", "TIPO ID");
         gramatica.group("PARAMETROS", "TIPO ID COMA PARAMETROS");
 
-        gramatica.group("TIPO", "INT");
-        gramatica.group("TIPO", "FLOAT");
+        gramatica.group("TIPO", "ENTERO");
+        gramatica.group("TIPO", "FLOTANTE");
         gramatica.group("TIPO", "VOID");
-        gramatica.group("TIPO", "CLASS");
+        gramatica.group("TIPO", "CLASE");
         gramatica.group("TIPO", "PUBLIC");
 
         // ERRORES EN EL LOS METODOS
@@ -525,18 +525,18 @@ public class NoCompilador extends javax.swing.JFrame {
         //gramatica.group("ERROR_METO", "PUBLIC|LLAVEABIERTO PRIVATE VOID PARENTESISABIERTO PARENTESISCERRADO LLAVECERRADA", 2 ,"ERROR_SINTACTICO: LLAVE MAL ABIERTA [#,%]");
         // gramatica.group("ERROR_METO", "PUBLIC|VOID PARENTESISABIERTO PARENTESISCERRADO", 2 ,"ERROR_SINTACTICO: FALTA IDENTIFICADOR: [#,%]");
         //DEFINIR GRAMATICA DE LOS METODOS y CLASES
-        gramatica.group("CLASE", "CLASS ID LLAVEABIERTO METODO LLAVECERRADO");
-        gramatica.group("CLASE", "PUBLIC CLASS ID LLAVEABIERTO METODO LLAVECERRADO");
+        gramatica.group("CLASE", "CLASE ID LLAVEABIERTO METODO LLAVECERRADO");
+        gramatica.group("CLASE", "PUBLIC CLASE ID LLAVEABIERTO METODO LLAVECERRADO");
         gramatica.group("METODO", "TIPO ID PARENTESISABIERTO PARENTESISCERRADO LLAVEABIERTO LLAVECERRADO");
         gramatica.group("METODO", "TIPO ID PARENTESISABIERTO PARAMETROS PARENTESISCERRADO LLAVEABIERTO LLAVECERRADO");
 
         gramatica.group("PARAMETROS", "TIPO ID");
         gramatica.group("PARAMETROS", "TIPO ID COMA PARAMETROS");
 
-        gramatica.group("TIPO", "INT");
-        gramatica.group("TIPO", "FLOAT");
+        gramatica.group("TIPO", "ENTERO");
+        gramatica.group("TIPO", "FLOTANTE");
         gramatica.group("TIPO", "VOID");
-        gramatica.group("TIPO", "CLASS");
+        gramatica.group("TIPO", "CLASE");
         gramatica.group("TIPO", "PRIVATE");
 
         // ERRORES EN EL LOS METODO
@@ -551,83 +551,83 @@ public class NoCompilador extends javax.swing.JFrame {
 
         //gramatica.group("TIPO", "ID ", 2, "ERROR_SINTACTICO: Tipo no reconocido [#, %]"); volver a aplicar
         // BOLEAN
-        gramatica.group("DECL_BOOL", "BOOLEAN ID PUNTOCOMA", identProd);
-        gramatica.group("DECL_BOOL", "BOOLEAN ID ASIGNACION ID PUNTOCOMA", identProd);
-        gramatica.group("DECL_BOOL", "BOOLEAN ID ASIGNACION (TRUE|FALSE) PUNTOCOMA", identProd);
+        gramatica.group("DECL_BOOL", "BOOLEANO ID PUNTOCOMA", identProd);
+        gramatica.group("DECL_BOOL", "BOOLEANO ID ASIGNACION ID PUNTOCOMA", identProd);
+        gramatica.group("DECL_BOOL", "BOOLEANO ID ASIGNACION (TRUE|FALSE) PUNTOCOMA", identProd);
 
         gramatica.group("DECL_PRIVATE", "PRIVATE ID PUNTOCOMA", identProd);
-        gramatica.group("ERROR_PRIVATE", "PRIVATE PUNTOCOMA ", 2, "ERROR_SINTATICO NO SE HA DECLARADO EL ID [#,%]");
-        gramatica.group("ERROR_PRIVATE", "PRIVATE ID", 2, "ERROR_SINTATICO FALTA EL PUNTO Y COMA [#,%]");
-        gramatica.group("DECL_STRING", "STRING ID PUNTOCOMA", identProd);
-        gramatica.group("DECL_STRING", "STRING ID ASIGNACION ID PUNTOCOMA", identProd);
-        gramatica.group("DECL_STRING", "STRING ID ASIGNACION CADENA PUNTOCOMA", identProd);
-        gramatica.group("DECL_STRING", "STRING ID PUNTOCOMA", identProd);
-        gramatica.group("DECL_STRING", "PRIVATE STRING ID PUNTOCOMA", identProd);
+        gramatica.group("ERROR_PRIVATE", "PRIVATE PUNTOCOMA ", 2, "ERROR_SENTEROATICO NO SE HA DECLARADO EL ID [#,%]");
+        gramatica.group("ERROR_PRIVATE", "PRIVATE ID", 2, "ERROR_SENTEROATICO FALTA EL PUNTO Y COMA [#,%]");
+        gramatica.group("DECL_TEXTO", "TEXTO ID PUNTOCOMA", identProd);
+        gramatica.group("DECL_TEXTO", "TEXTO ID ASIGNACION ID PUNTOCOMA", identProd);
+        gramatica.group("DECL_TEXTO", "TEXTO ID ASIGNACION CADENA PUNTOCOMA", identProd);
+        gramatica.group("DECL_TEXTO", "TEXTO ID PUNTOCOMA", identProd);
+        gramatica.group("DECL_TEXTO", "PRIVATE TEXTO ID PUNTOCOMA", identProd);
         //FORMA CORRECTA DE DECLARAR UN METODO VACIO
-        gramatica.group("DECL_STRING", "STRING ID PARENTESISABIERTO PARENTESISCERRADO LLAVEABIERTO LLAVECERRADO", identProd);
+        gramatica.group("DECL_TEXTO", "TEXTO ID PARENTESISABIERTO PARENTESISCERRADO LLAVEABIERTO LLAVECERRADO", identProd);
         //PARAMETRO DE LA CLASE
         gramatica.group("DECL_CLASE", "PRIVATE|PUBLIC ID PUNTOCOMA", identProd);
         //POSIBLE ERROR
         gramatica.group("ERROR_CLASE", "PRIVATE|PUBLIC ID ", 3, "ERROR_SINTACTICO FALTA EL PUNTO Y COMA  [#, %]");
         //ERRORES SINTACTICOS---------------------------------------------------------------------------
-        //POSIBLES ERRORES AL DECLARAR UNA VARIABLE INT O FLOAT  
-        gramatica.group("DECL_INT", "INT ID ASIGNACION PUNTOCOMA", 2, "ERROR_SINTACTICO: FALTA ASIGNAR UN VALOR A LA VARIABLE [#, %]");
-        gramatica.group("DECL_INT", "INT ID NUMERO PUNTOCOMA", 2, "ERROR_SINTACTICO: FALTA DEL TOKEN DE ASIGNACION EN LA DECLARACION [#, %]");
-        gramatica.group("DECL_INT", "INT ID ID PUNTOCOMA", 2, "ERROR_SINTACTICO: FALTA DEL TOKEN DE ASIGNACION EN LA DECLARACION [#, %]");
-        gramatica.group("DECL_INT", "INT ID NUMERO", 2, "ERROR_SINTACTICO: FALTA DEL TOKEN DE ASIGNACION EN LA DECLARACION [#, %]");
-        gramatica.group("DECL_INT", "INT ID ID", 2, "ERROR_SINTACTICO: FALTA DEL TOKEN DE ASIGNACION EN LA DECLARACION [#, %]");
-        gramatica.group("DECL_INT", "INT ID OPERACION PUNTOCOMA", 2, "ERROR_SINTACTICO: FALTA DEL TOKEN DE ASIGNACION EN LA DECLARACION [#, %]");
-        gramatica.group("DECL_INT", "INT ID OPERACION", 2, "ERROR_SINTACTICO: FALTA DEL TOKEN DE ASIGNACION EN LA DECLARACION [#, %]");
-        gramatica.group("DECL_INT", "INT ID ASIGNACION ID", 2, "ERROR_SINTACTICO: PUNTOCOMA(;) NO AGREGADO EN LA DECLARACION [#, %]");
-        gramatica.group("DECL_INT", "INT ID ASIGNACION REAL", 2, "ERROR_SINTACTICO: VALOR NO ENTERO [#, %]");
+        //POSIBLES ERRORES AL DECLARAR UNA VARIABLE ENTERO O FLOTANTE  
+        gramatica.group("DECL_ENTERO", "ENTERO ID ASIGNACION PUNTOCOMA", 2, "ERROR_SINTACTICO: FALTA ASIGNAR UN VALOR A LA VARIABLE [#, %]");
+        gramatica.group("DECL_ENTERO", "ENTERO ID NUMERO PUNTOCOMA", 2, "ERROR_SINTACTICO: FALTA DEL TOKEN DE ASIGNACION EN LA DECLARACION [#, %]");
+        gramatica.group("DECL_ENTERO", "ENTERO ID ID PUNTOCOMA", 2, "ERROR_SINTACTICO: FALTA DEL TOKEN DE ASIGNACION EN LA DECLARACION [#, %]");
+        gramatica.group("DECL_ENTERO", "ENTERO ID NUMERO", 2, "ERROR_SINTACTICO: FALTA DEL TOKEN DE ASIGNACION EN LA DECLARACION [#, %]");
+        gramatica.group("DECL_ENTERO", "ENTERO ID ID", 2, "ERROR_SINTACTICO: FALTA DEL TOKEN DE ASIGNACION EN LA DECLARACION [#, %]");
+        gramatica.group("DECL_ENTERO", "ENTERO ID OPERACION PUNTOCOMA", 2, "ERROR_SINTACTICO: FALTA DEL TOKEN DE ASIGNACION EN LA DECLARACION [#, %]");
+        gramatica.group("DECL_ENTERO", "ENTERO ID OPERACION", 2, "ERROR_SINTACTICO: FALTA DEL TOKEN DE ASIGNACION EN LA DECLARACION [#, %]");
+        gramatica.group("DECL_ENTERO", "ENTERO ID ASIGNACION ID", 2, "ERROR_SINTACTICO: PUNTOCOMA(;) NO AGREGADO EN LA DECLARACION [#, %]");
+        gramatica.group("DECL_ENTERO", "ENTERO ID ASIGNACION REAL", 2, "ERROR_SINTACTICO: VALOR NO ENTERO [#, %]");
 
-        //gramatica.group("DECL_INT", "INT ID ASIGNACION NUMERO",2,"ERROR_SINTACTICO: PUNTOCOMA(;) NO AGREGADO EN LA DECLARACION [#, %]");
-        gramatica.group("DECL_INT", "INT ID ASIGNACION OPERACION", 2, "ERROR_SINTACTICO: PUNTOCOMA(;) NO AGREGADO EN LA DECLARACION [#, %]");
-        gramatica.group("DECL_INT", "INT  ASIGNACION NUMERO PUNTOCOMA", 2, "ERROR_SINTACTICO: ID NO AGREGADO EN LA DECLARACION [#, %]");
-        gramatica.group("DECL_INT", "INT  ASIGNACION ID PUNTOCOMA", 2, "ERROR_SINTACTICO: ID NO AGREGADO EN LA DECLARACION [#, %]");
-        gramatica.group("DECL_INT", "INT  ASIGNACION OPERACION PUNTOCOMA", 2, "ERROR_SINTACTICO: ID NO AGREGADO EN LA DECLARACION [#, %]");
+        //gramatica.group("DECL_ENTERO", "ENTERO ID ASIGNACION NUMERO",2,"ERROR_SINTACTICO: PUNTOCOMA(;) NO AGREGADO EN LA DECLARACION [#, %]");
+        gramatica.group("DECL_ENTERO", "ENTERO ID ASIGNACION OPERACION", 2, "ERROR_SINTACTICO: PUNTOCOMA(;) NO AGREGADO EN LA DECLARACION [#, %]");
+        gramatica.group("DECL_ENTERO", "ENTERO  ASIGNACION NUMERO PUNTOCOMA", 2, "ERROR_SINTACTICO: ID NO AGREGADO EN LA DECLARACION [#, %]");
+        gramatica.group("DECL_ENTERO", "ENTERO  ASIGNACION ID PUNTOCOMA", 2, "ERROR_SINTACTICO: ID NO AGREGADO EN LA DECLARACION [#, %]");
+        gramatica.group("DECL_ENTERO", "ENTERO  ASIGNACION OPERACION PUNTOCOMA", 2, "ERROR_SINTACTICO: ID NO AGREGADO EN LA DECLARACION [#, %]");
 
-        //POSIBLES ERRORES AL DECLARAR UN FLOAT
-        gramatica.group("DECL_FLOAT", "FLOAT ID ASIGNACION PUNTOCOMA", 2, "ERROR_SINTACTICO: FALTA ASIGNAR UN VALOR A LA VARIABLE [#, %]");
-        gramatica.group("DECL_FLOAT", "FLOAT ID REAL PUNTOCOMA", 2, "ERROR_SINTACTICO: FALTA DEL TOKEN DE ASIGNACION EN LA DECLARACION [#, %]");
-        gramatica.group("DECL_FLOAT", "FLOAT ID REAL", 2, "ERROR_SINTACTICO: FALTA DEL TOKEN DE ASIGNACION EN LA DECLARACION [#, %]");
-        gramatica.group("DECL_FLOAT", "FLOAT ID ASIGNACION REAL", 2, "ERROR_SINTACTICO: PUNTOCOMA(;) NO AGREGADO EN LA DECLARACION [#, %]");
-        gramatica.group("DECL_FLOAT", "FLOAT ASIGNACION REAL PUNTOCOMA", 2, "ERROR_SINTACTICO: ID NO AGREGADO EN LA DECLARACION [#, %]");
-        gramatica.group("DECL_FLOAT", "FLOAT ID ASIGNACION NUMERO PUNTOCOMA", 2, "Error sintáctico: Valor float sin punto decimal [#, %]");
+        //POSIBLES ERRORES AL DECLARAR UN FLOTANTE
+        gramatica.group("DECL_FLOTANTE", "FLOTANTE ID ASIGNACION PUNTOCOMA", 2, "ERROR_SINTACTICO: FALTA ASIGNAR UN VALOR A LA VARIABLE [#, %]");
+        gramatica.group("DECL_FLOTANTE", "FLOTANTE ID REAL PUNTOCOMA", 2, "ERROR_SINTACTICO: FALTA DEL TOKEN DE ASIGNACION EN LA DECLARACION [#, %]");
+        gramatica.group("DECL_FLOTANTE", "FLOTANTE ID REAL", 2, "ERROR_SINTACTICO: FALTA DEL TOKEN DE ASIGNACION EN LA DECLARACION [#, %]");
+        gramatica.group("DECL_FLOTANTE", "FLOTANTE ID ASIGNACION REAL", 2, "ERROR_SINTACTICO: PUNTOCOMA(;) NO AGREGADO EN LA DECLARACION [#, %]");
+        gramatica.group("DECL_FLOTANTE", "FLOTANTE ASIGNACION REAL PUNTOCOMA", 2, "ERROR_SINTACTICO: ID NO AGREGADO EN LA DECLARACION [#, %]");
+        gramatica.group("DECL_FLOTANTE", "FLOTANTE ID ASIGNACION NUMERO PUNTOCOMA", 2, "Error sintáctico: Valor float sin punto decimal [#, %]");
 
-        //POSIBLES ERRORES AL DECLARAR UN STRING
-        gramatica.group("DECL_STRING", "STRING ID ASIGNACION PUNTOCOMA", 2, "ERROR_SINTACTICO: FALTA ASIGNAR UN VALOR A LA VARIABLE [#, %]");
-        gramatica.group("DECL_STRING", "STRING ID CADENA PUNTOCOMA", 2, "ERROR_SINTACTICO: FALTA DEL TOKEN DE ASIGNACION EN LA DECLARACION [#, %]");
-        gramatica.group("DECL_STRING", "STRING ID CADENA", 2, "ERROR_SINTACTICO: FALTA DEL TOKEN DE ASIGNACION EN LA DECLARACION [#, %]");
-        gramatica.group("DECL_STRING", "STRING ID ASIGNACION CADENA", 2, "ERROR_SINTACTICO: PUNTOCOMA(;) NO AGREGADO EN LA DECLARACION [#, %]");
-        gramatica.group("DECL_STRING", "STRING ASIGNACION CADENA PUNTOCOMA", 2, "ERROR_SINTACTICO: ID NO AGREGADO EN LA DECLARACION [#, %]");
-        gramatica.group("DECL_STRING", "STRING  PUNTOCOMA", 2, "ERROR_SINTACTICO: FALTA EL ID [#, %]");
-        gramatica.group("DECL_STRING", "STRING  ID", 2, "ERROR_SINTACTICO: FALTA EL PUNTO Y COMA [#, %]");
+        //POSIBLES ERRORES AL DECLARAR UN TEXTO
+        gramatica.group("DECL_TEXTO", "TEXTO ID ASIGNACION PUNTOCOMA", 2, "ERROR_SINTACTICO: FALTA ASIGNAR UN VALOR A LA VARIABLE [#, %]");
+        gramatica.group("DECL_TEXTO", "TEXTO ID CADENA PUNTOCOMA", 2, "ERROR_SINTACTICO: FALTA DEL TOKEN DE ASIGNACION EN LA DECLARACION [#, %]");
+        gramatica.group("DECL_TEXTO", "TEXTO ID CADENA", 2, "ERROR_SINTACTICO: FALTA DEL TOKEN DE ASIGNACION EN LA DECLARACION [#, %]");
+        gramatica.group("DECL_TEXTO", "TEXTO ID ASIGNACION CADENA", 2, "ERROR_SINTACTICO: PUNTOCOMA(;) NO AGREGADO EN LA DECLARACION [#, %]");
+        gramatica.group("DECL_TEXTO", "TEXTO ASIGNACION CADENA PUNTOCOMA", 2, "ERROR_SINTACTICO: ID NO AGREGADO EN LA DECLARACION [#, %]");
+        gramatica.group("DECL_TEXTO", "TEXTO  PUNTOCOMA", 2, "ERROR_SINTACTICO: FALTA EL ID [#, %]");
+        gramatica.group("DECL_TEXTO", "TEXTO  ID", 2, "ERROR_SINTACTICO: FALTA EL PUNTO Y COMA [#, %]");
         //ERRORES SEMANTICOS DE VARIABLES -------------------------------------------------------------
-        gramatica.group("RESERV_INDEB", "(STRING|INT|FLOAT|BOOLEAN) (IMPORT|DEF|CLASS|IF|ELSE|FOR|IN|WHILE|RETURN)", 2, "ERROR SEMANTICO \\{}: USO INDEBIDO DE PALABRAS RESERVADAS [#,%]");
+        gramatica.group("RESERV_INDEB", "(TEXTO|ENTERO|FLOTANTE|BOOLEANO) (IMPORT|DEF|CLASE|IF|ELSE|FOR|IN|WHILE|RETURN)", 2, "ERROR SEMANTICO \\{}: USO INDEBIDO DE PALABRAS RESERVADAS [#,%]");
 
-        gramatica.group("ERROR_OP_STRING", "(SUMA|RESTA|MULTIPLICACION|DIVISION) CADENA", 2, "ERROR SEMANTICO \\{}: OPERACION NO PERMITIDA PARA CADENA [#,%]");
-        gramatica.group("ERROR_OP_STRING", "CADENA (SUMA|RESTA|MULTIPLICACION|DIVISION)", 2, "ERROR SEMANTICO \\{}: OPERACION NO PERMITIDA PARA CADENA [#,%]");
-        gramatica.group("ERROR_OP_BOOLEAN", "(SUMA|RESTA|MULTIPLICACION|DIVISION) (TRUE|FALSE)", 2, "ERROR SEMANTICO \\{}: OPERACION NO PERMITIDA PARA BOOLEANO [#,%]");
-        gramatica.group("ERROR_OP_BOOLEAN", "(TRUE|FALSE) (SUMA|RESTA|MULTIPLICACION|DIVISION)", 2, "ERROR SEMANTICO \\{}: OPERACION NO PERMITIDA PARA BOOLEANO [#,%]");
+        gramatica.group("ERROR_OP_TEXTO", "(SUMA|RESTA|MULTIPLICACION|DIVISION) CADENA", 2, "ERROR SEMANTICO \\{}: OPERACION NO PERMITIDA PARA CADENA [#,%]");
+        gramatica.group("ERROR_OP_TEXTO", "CADENA (SUMA|RESTA|MULTIPLICACION|DIVISION)", 2, "ERROR SEMANTICO \\{}: OPERACION NO PERMITIDA PARA CADENA [#,%]");
+        gramatica.group("ERROR_OP_BOOLEANO", "(SUMA|RESTA|MULTIPLICACION|DIVISION) (TRUE|FALSE)", 2, "ERROR SEMANTICO \\{}: OPERACION NO PERMITIDA PARA BOOLEANOO [#,%]");
+        gramatica.group("ERROR_OP_BOOLEANO", "(TRUE|FALSE) (SUMA|RESTA|MULTIPLICACION|DIVISION)", 2, "ERROR SEMANTICO \\{}: OPERACION NO PERMITIDA PARA BOOLEANOO [#,%]");
 
-        gramatica.group("DECL_INT", "(INT ID ASIGNACION REAL PUNTOCOMA)", 2, "ERROR SEMANTICO \\{}: VALOR ASIGNADO NO ES ENTERO [#,%]");
-        gramatica.group("DECL_INT", "(INT ID ASIGNACION CADENA)", 2, "ERROR SEMANTICO \\{}: VALOR ASIGNADO NO ES ENTERO [#,%]");
-        gramatica.group("DECL_INT", "(INT ID ASIGNACION (TRUE|FALSE))", 2, "ERROR SEMANTICO \\{}: VALOR ASIGNADO NO ES ENTERO [#,%]");
-        gramatica.group("DECL_INT", "INT", 2, "ERROR");
+        gramatica.group("DECL_ENTERO", "(ENTERO ID ASIGNACION REAL PUNTOCOMA)", 2, "ERROR SEMANTICO \\{}: VALOR ASIGNADO NO ES ENTERO [#,%]");
+        gramatica.group("DECL_ENTERO", "(ENTERO ID ASIGNACION CADENA)", 2, "ERROR SEMANTICO \\{}: VALOR ASIGNADO NO ES ENTERO [#,%]");
+        gramatica.group("DECL_ENTERO", "(ENTERO ID ASIGNACION (TRUE|FALSE))", 2, "ERROR SEMANTICO \\{}: VALOR ASIGNADO NO ES ENTERO [#,%]");
+        gramatica.group("DECL_ENTERO", "ENTERO", 2, "ERROR");
 
-        gramatica.group("DECL_FLOAT", "(FLOAT ID ASIGNACION CADENA)", 2, "ERROR SEMANTICO \\{}: VALOR ASIGNADO NO ES DECIMAL [#,%]");
-        gramatica.group("DECL_FLOAT", "(FLOAT ID ASIGNACION (TRUE|FALSE))", 2, "ERROR SEMANTICO \\{}: VALOR ASIGNADO NO ES DECIMAL [#,%]");
-        gramatica.group("DECL_FLOAT", "(FLOAT ID ASIGNACION NUMERO PUNTOCOMA)", 2, "ERROR SEMANTICO \\{}: VALOR ASIGNADO NO ES DECIMAL [#,%]");
-        gramatica.group("ERROR_FLOAT", "FLOAT", 2, "ERROR");
+        gramatica.group("DECL_FLOTANTE", "(FLOTANTE ID ASIGNACION CADENA)", 2, "ERROR SEMANTICO \\{}: VALOR ASIGNADO NO ES DECIMAL [#,%]");
+        gramatica.group("DECL_FLOTANTE", "(FLOTANTE ID ASIGNACION (TRUE|FALSE))", 2, "ERROR SEMANTICO \\{}: VALOR ASIGNADO NO ES DECIMAL [#,%]");
+        gramatica.group("DECL_FLOTANTE", "(FLOTANTE ID ASIGNACION NUMERO PUNTOCOMA)", 2, "ERROR SEMANTICO \\{}: VALOR ASIGNADO NO ES DECIMAL [#,%]");
+        gramatica.group("ERROR_FLOTANTE", "FLOTANTE", 2, "ERROR");
 
-        gramatica.group("DECL_STRING", "(STRING ID ASIGNACION NUMERO)", 2, "ERROR SEMANTICO \\{}: VALOR ASIGNADO NO ES CADENA [#,%]");
-        gramatica.group("DECL_STRING", "(STRING ID ASIGNACION (TRUE|FALSE))", 2, "ERROR SEMANTICO \\{}: VALOR ASIGNADO NO ES CADENA [#,%]");
-        gramatica.group("DECL_STRING", "STRING ID", 2, "ERROR SINTACTICO : FALTA ASIGNAR EL ID [#, %] ");
+        gramatica.group("DECL_TEXTO", "(TEXTO ID ASIGNACION NUMERO)", 2, "ERROR SEMANTICO \\{}: VALOR ASIGNADO NO ES CADENA [#,%]");
+        gramatica.group("DECL_TEXTO", "(TEXTO ID ASIGNACION (TRUE|FALSE))", 2, "ERROR SEMANTICO \\{}: VALOR ASIGNADO NO ES CADENA [#,%]");
+        gramatica.group("DECL_TEXTO", "TEXTO ID", 2, "ERROR SINTACTICO : FALTA ASIGNAR EL ID [#, %] ");
 
-        gramatica.group("ERROR_ASIG_BOOL", "(BOOLEAN ID ASIGNACION NUMERO)", 2, "ERROR SEMANTICO \\{}: VALOR ASIGNADO NO ES BOOLEANO [#,%]");
-        gramatica.group("ERROR_ASIG_BOOL", "(BOOLEAN ID ASIGNACION (TRUE|FALSE))", 2, "ERROR SEMANTICO \\{}: VALOR ASIGNADO NO ES BOOLEANO [#,%]");
-        gramatica.group("ERROR_ASIG_BOOL", "(BOOLEAN ID ASIGNACION CADENA)", 2, "ERROR SEMANTICO \\{}: VALOR ASIGNADO NO ES BOOLEANO [#,%]");
+        gramatica.group("ERROR_ASIG_BOOL", "(BOOLEANO ID ASIGNACION NUMERO)", 2, "ERROR SEMANTICO \\{}: VALOR ASIGNADO NO ES BOOLEANOO [#,%]");
+        gramatica.group("ERROR_ASIG_BOOL", "(BOOLEANO ID ASIGNACION (TRUE|FALSE))", 2, "ERROR SEMANTICO \\{}: VALOR ASIGNADO NO ES BOOLEANOO [#,%]");
+        gramatica.group("ERROR_ASIG_BOOL", "(BOOLEANO ID ASIGNACION CADENA)", 2, "ERROR SEMANTICO \\{}: VALOR ASIGNADO NO ES BOOLEANOO [#,%]");
 
         //ASIGNACION DE UN ID
         gramatica.group("PROD_ASIG", "ID ASIGNACION (CADENA|REAL|NUMERO|TRUE|FALSE) PUNTOCOMA", asigProd);
@@ -667,17 +667,17 @@ public class NoCompilador extends javax.swing.JFrame {
         //----------------------------------------------------------------------------------------------
         //----------------WHILE Y IF-----------------------
         //FORMAS CORRECTAS DE DECLARAR UN IF
-        gramatica.group("INSTR_IF", "IF PARENTESISABIERTO CONDICION PARENTESISCERRADO LLAVEABIERTO", true, ifProd);
+        gramatica.group("INSTR_IF", "SI PARENTESISABIERTO CONDICION PARENTESISCERRADO LLAVEABIERTO", true, ifProd);
         //FORMAS CORRECTAS DE DECLARAR UN WHILE
         gramatica.group("INSTR_WHILE", "WHILE PARENTESISABIERTO CONDICION PARENTESISCERRADO LLAVEABIERTO", whileProd);
         //POSIBLES ERRORES AL DECLARAR UN IF
-        gramatica.group("INSTR_IF", "IF PARENTESISABIERTO PARENTESISCERRADO LLAVEABIERTO", true, 4, "ERROR_SINTACTICO: FALTA LA CONDICION [#, %]");
-        gramatica.group("INSTR_IF", "IF CONDICION PARENTESISCERRADO LLAVEABIERTO", true, 4, "ERROR_SINTACTICO: FALTA EL PARENTESIS ABIERTO EN LA CONDICION [#, %]");
-        gramatica.group("INSTR_IF", "IF PARENTESISABIERTO CONDICION PARENTESISCERRADO", true, 4, "ERROR_SINTACTICO: FALTA DE LLAVE DE APERTURA [#, %]");
+        gramatica.group("INSTR_IF", "SI PARENTESISABIERTO PARENTESISCERRADO LLAVEABIERTO", true, 4, "ERROR_SINTACTICO: FALTA LA CONDICION [#, %]");
+        gramatica.group("INSTR_IF", "SI CONDICION PARENTESISCERRADO LLAVEABIERTO", true, 4, "ERROR_SINTACTICO: FALTA EL PARENTESIS ABIERTO EN LA CONDICION [#, %]");
+        gramatica.group("INSTR_IF", "SI PARENTESISABIERTO CONDICION PARENTESISCERRADO", true, 4, "ERROR_SINTACTICO: FALTA DE LLAVE DE APERTURA [#, %]");
         gramatica.finalLineColumn();
-        gramatica.group("INSTR_IF", "IF PARENTESISABIERTO CONDICION", true, 4, "ERROR_SINTACTICO: ERROR EN LA CONDICION O FALTA DEL PARENTESIS [#, %]");
+        gramatica.group("INSTR_IF", "SI PARENTESISABIERTO CONDICION", true, 4, "ERROR_SINTACTICO: ERROR EN LA CONDICION O FALTA DEL PARENTESIS [#, %]");
         gramatica.initialLineColumn();
-        gramatica.group("INSTR_IF", "IF", 2, "ERROR_SINTATICO : ERROR IF");
+        gramatica.group("INSTR_IF", "SI", 2, "ERROR_SENTEROATICO : ERROR SI");
 
         //POSIBLES ERRORES DE WHILE
         gramatica.group("INSTR_WHILE", "WHILE PARENTESISABIERTO PARENTESISCERRADO", true, 4, "ERROR_SINTACTICO: FALTA LA CONDICION [#, %]");
@@ -700,11 +700,11 @@ public class NoCompilador extends javax.swing.JFrame {
     //inicio metodo analizador semantico
     private void semanticAnalysis() {
         HashMap<String, String> tiposDatos = new HashMap<>();
-        tiposDatos.put("NUMERO", "INT");
-        tiposDatos.put("REAL", "FLOAT");
-        tiposDatos.put("CADENA", "STRING");
-        tiposDatos.put("TRUE", "BOOLEAN");
-        tiposDatos.put("FALSE", "BOOLEAN");
+        tiposDatos.put("NUMERO", "ENTERO");
+        tiposDatos.put("REAL", "FLOTANTE");
+        tiposDatos.put("CADENA", "TEXTO");
+        tiposDatos.put("TRUE", "BOOLEANO");
+        tiposDatos.put("FALSE", "BOOLEANO");
         int i = 0;
         for (Production id : identProd) {
 
@@ -745,16 +745,16 @@ public class NoCompilador extends javax.swing.JFrame {
             if (!identificadores.containsKey(id.lexemeRank(0))) {
                 errors.add(new ErrorLSSL(1, "Error semántico: Variable " + id.lexemeRank(0) + " no declarada. [#, %]", id, true));
             } else {
-                if (identificadores.get(id.lexemeRank(0)).matches("STRING")) {
-                    errors.add(new ErrorLSSL(1, "Error semántico : Variable \"" + id.lexemeRank(0) + "\" es de tipo STRING, imposible comparar [#, %]", id, true));
+                if (identificadores.get(id.lexemeRank(0)).matches("TEXTO")) {
+                    errors.add(new ErrorLSSL(1, "Error semántico : Variable \"" + id.lexemeRank(0) + "\" es de tipo TEXTO, imposible comparar [#, %]", id, true));
                 }
-                if (identificadores.get(id.lexemeRank(0)).matches("BOOLEAN") && !id.lexicalCompRank(1).matches("IGUAL|DIFERENTE")) {
-                    errors.add(new ErrorLSSL(1, "Error semántico : Variable \"" + id.lexemeRank(0) + "\" es de tipo BOOLEAN, sólo posible comparar con operadores IGUAL y DIFERENTE [#, %]", id, true));
+                if (identificadores.get(id.lexemeRank(0)).matches("BOOLEANO") && !id.lexicalCompRank(1).matches("IGUAL|DIFERENTE")) {
+                    errors.add(new ErrorLSSL(1, "Error semántico : Variable \"" + id.lexemeRank(0) + "\" es de tipo BOOLEANO, sólo posible comparar con operadores IGUAL y DIFERENTE [#, %]", id, true));
                 }
-                if (identificadores.get(id.lexemeRank(0)).matches("BOOLEAN") && !id.lexicalCompRank(2).matches("TRUE|FALSE")) {
-                    errors.add(new ErrorLSSL(1, "Error semántico : Variable \"" + id.lexemeRank(0) + "\" es de tipo BOOLEAN, sólo posible comparar con valores booleanos [#, %]", id, true));
+                if (identificadores.get(id.lexemeRank(0)).matches("BOOLEANO") && !id.lexicalCompRank(2).matches("TRUE|FALSE")) {
+                    errors.add(new ErrorLSSL(1, "Error semántico : Variable \"" + id.lexemeRank(0) + "\" es de tipo BOOLEANO, sólo posible comparar con valores booleanos [#, %]", id, true));
                 }
-                if (identificadores.get(id.lexemeRank(0)).matches("INT|FLOAT")) {
+                if (identificadores.get(id.lexemeRank(0)).matches("ENTERO|FLOTANTE")) {
                     if (!id.lexicalCompRank(2).matches("NUMERO|REAL|ID")) {
                         errors.add(new ErrorLSSL(1, "Error semántico : Valor numérico de variable \"" + id.lexemeRank(0) + "\" no se puede comparar con valor no numérico [#, %]", id, true));
                     }
@@ -769,16 +769,16 @@ public class NoCompilador extends javax.swing.JFrame {
             if (!identificadores.containsKey(id.lexemeRank(2))) {
                 errors.add(new ErrorLSSL(1, "Error semántico: Variable " + id.lexemeRank(2) + " no declarada. [#, %]", id, true));
             } else {
-                if (identificadores.get(id.lexemeRank(2)).matches("STRING")) {
-                    errors.add(new ErrorLSSL(1, "Error semántico : Variable \"" + id.lexemeRank(2) + "\" es de tipo STRING, imposible comparar [#, %]", id, true));
+                if (identificadores.get(id.lexemeRank(2)).matches("TEXTO")) {
+                    errors.add(new ErrorLSSL(1, "Error semántico : Variable \"" + id.lexemeRank(2) + "\" es de tipo TEXTO, imposible comparar [#, %]", id, true));
                 }
-                if (identificadores.get(id.lexemeRank(2)).matches("BOOLEAN") && !id.lexicalCompRank(1).matches("IGUAL|DIFERENTE")) {
-                    errors.add(new ErrorLSSL(1, "Error semántico : Variable \"" + id.lexemeRank(2) + "\" es de tipo BOOLEAN, sólo posible comparar con operadores IGUAL y DIFERENTE [#, %]", id, true));
+                if (identificadores.get(id.lexemeRank(2)).matches("BOOLEANO") && !id.lexicalCompRank(1).matches("IGUAL|DIFERENTE")) {
+                    errors.add(new ErrorLSSL(1, "Error semántico : Variable \"" + id.lexemeRank(2) + "\" es de tipo BOOLEANO, sólo posible comparar con operadores IGUAL y DIFERENTE [#, %]", id, true));
                 }
-                if (identificadores.get(id.lexemeRank(2)).matches("BOOLEAN") && !id.lexicalCompRank(0).matches("TRUE|FALSE")) {
-                    errors.add(new ErrorLSSL(1, "Error semántico : Variable \"" + id.lexemeRank(2) + "\" es de tipo BOOLEAN, sólo posible comparar con valores booleanos [#, %]", id, true));
+                if (identificadores.get(id.lexemeRank(2)).matches("BOOLEANO") && !id.lexicalCompRank(0).matches("TRUE|FALSE")) {
+                    errors.add(new ErrorLSSL(1, "Error semántico : Variable \"" + id.lexemeRank(2) + "\" es de tipo BOOLEANO, sólo posible comparar con valores booleanos [#, %]", id, true));
                 }
-                if (identificadores.get(id.lexemeRank(2)).matches("INT|FLOAT")) {
+                if (identificadores.get(id.lexemeRank(2)).matches("ENTERO|FLOTANTE")) {
                     if (!id.lexicalCompRank(0).matches("NUMERO|REAL")) {
                         errors.add(new ErrorLSSL(1, "Error semántico : Valor numérico de variable \"" + id.lexemeRank(2) + "\" no se puede comparar con valor no numérico [#, %]", id, true));
                     }
@@ -792,28 +792,28 @@ public class NoCompilador extends javax.swing.JFrame {
             if (!identificadores.containsKey(id.lexemeRank(0)) || !identificadores.containsKey(id.lexemeRank(2))) {
                 errors.add(new ErrorLSSL(1, "Error semántico: Variable " + id.lexemeRank(0) + " no declarada. [#, %]", id, true));
             } else {
-                if (identificadores.get(id.lexemeRank(0)).matches("STRING") || identificadores.get(id.lexemeRank(2)).matches("STRING")) {
-                    errors.add(new ErrorLSSL(1, "Error semántico : Variable \"" + id.lexemeRank(0) + "\" es de tipo STRING, imposible comparar [#, %]", id, true));
+                if (identificadores.get(id.lexemeRank(0)).matches("TEXTO") || identificadores.get(id.lexemeRank(2)).matches("TEXTO")) {
+                    errors.add(new ErrorLSSL(1, "Error semántico : Variable \"" + id.lexemeRank(0) + "\" es de tipo TEXTO, imposible comparar [#, %]", id, true));
                 }
-                if (identificadores.get(id.lexemeRank(0)).matches("BOOLEAN") && !id.lexicalCompRank(1).matches("IGUAL|DIFERENTE")) {
-                    errors.add(new ErrorLSSL(1, "Error semántico : Variable \"" + id.lexemeRank(0) + "\" es de tipo BOOLEAN, sólo posible comparar con operadores IGUAL y DIFERENTE [#, %]", id, true));
+                if (identificadores.get(id.lexemeRank(0)).matches("BOOLEANO") && !id.lexicalCompRank(1).matches("IGUAL|DIFERENTE")) {
+                    errors.add(new ErrorLSSL(1, "Error semántico : Variable \"" + id.lexemeRank(0) + "\" es de tipo BOOLEANO, sólo posible comparar con operadores IGUAL y DIFERENTE [#, %]", id, true));
                 }
-                if (identificadores.get(id.lexemeRank(2)).matches("BOOLEAN") && !id.lexicalCompRank(1).matches("IGUAL|DIFERENTE")) {
-                    errors.add(new ErrorLSSL(1, "Error semántico : Variable \"" + id.lexemeRank(2) + "\" es de tipo BOOLEAN, sólo posible comparar con operadores IGUAL y DIFERENTE [#, %]", id, true));
+                if (identificadores.get(id.lexemeRank(2)).matches("BOOLEANO") && !id.lexicalCompRank(1).matches("IGUAL|DIFERENTE")) {
+                    errors.add(new ErrorLSSL(1, "Error semántico : Variable \"" + id.lexemeRank(2) + "\" es de tipo BOOLEANO, sólo posible comparar con operadores IGUAL y DIFERENTE [#, %]", id, true));
                 }
-                if (identificadores.get(id.lexemeRank(0)).matches("BOOLEAN") && !identificadores.get(id.lexemeRank(2)).matches("BOOLEAN")) {
-                    errors.add(new ErrorLSSL(1, "Error semántico : Variable \"" + id.lexemeRank(0) + "\" es de tipo BOOLEAN, sólo posible comparar con valores booleanos [#, %]", id, true));
+                if (identificadores.get(id.lexemeRank(0)).matches("BOOLEANO") && !identificadores.get(id.lexemeRank(2)).matches("BOOLEANO")) {
+                    errors.add(new ErrorLSSL(1, "Error semántico : Variable \"" + id.lexemeRank(0) + "\" es de tipo BOOLEANO, sólo posible comparar con valores booleanos [#, %]", id, true));
                 }
-                if (identificadores.get(id.lexemeRank(2)).matches("BOOLEAN") && !identificadores.get(id.lexemeRank(0)).matches("BOOLEAN")) {
-                    errors.add(new ErrorLSSL(1, "Error semántico : Variable \"" + id.lexemeRank(2) + "\" es de tipo BOOLEAN, sólo posible comparar con valores booleanos [#, %]", id, true));
+                if (identificadores.get(id.lexemeRank(2)).matches("BOOLEANO") && !identificadores.get(id.lexemeRank(0)).matches("BOOLEANO")) {
+                    errors.add(new ErrorLSSL(1, "Error semántico : Variable \"" + id.lexemeRank(2) + "\" es de tipo BOOLEANO, sólo posible comparar con valores booleanos [#, %]", id, true));
                 }
-                if (identificadores.get(id.lexemeRank(0)).matches("INT|FLOAT")) {
-                    if (!identificadores.get(id.lexemeRank(2)).matches("INT|FLOAT")) {
+                if (identificadores.get(id.lexemeRank(0)).matches("ENTERO|FLOTANTE")) {
+                    if (!identificadores.get(id.lexemeRank(2)).matches("ENTERO|FLOTANTE")) {
                         errors.add(new ErrorLSSL(1, "Error semántico : Valor numérico de variable \"" + id.lexemeRank(0) + "\" no se puede comparar con valor no numérico [#, %]", id, true));
                     }
                 }
-                if (identificadores.get(id.lexemeRank(2)).matches("INT|FLOAT")) {
-                    if (!identificadores.get(id.lexemeRank(0)).matches("INT|FLOAT")) {
+                if (identificadores.get(id.lexemeRank(2)).matches("ENTERO|FLOTANTE")) {
+                    if (!identificadores.get(id.lexemeRank(0)).matches("ENTERO|FLOTANTE")) {
                         errors.add(new ErrorLSSL(1, "Error semántico : Valor numérico de variable \"" + id.lexemeRank(0) + "\" no se puede comparar con valor no numérico [#, %]", id, true));
                     }
                 }
@@ -826,12 +826,12 @@ public class NoCompilador extends javax.swing.JFrame {
             if (!identificadores.containsKey(id.lexemeRank(0))) {
                 errors.add(new ErrorLSSL(1, "Error semántico: Variable " + id.lexemeRank(0) + " no declarada. [#, %]", id, true));
             } else {
-                if (identificadores.get(id.lexemeRank(0)).matches("STRING|BOOLEAN")) {
+                if (identificadores.get(id.lexemeRank(0)).matches("TEXTO|BOOLEANO")) {
                     errors.add(new ErrorLSSL(1, "Error semántico : Variable \"" + id.lexemeRank(0) + "\" es de tipo " + identificadores.get(id.lexemeRank(0)) + ", imposible hacer operaciones aritméticas [#, %]", id, true));
                 }
 
             }
-            if (identificadores.get(id.lexemeRank(0)).matches("INT") && id.lexicalCompRank(1).matches("DIVISION")) {
+            if (identificadores.get(id.lexemeRank(0)).matches("ENTERO") && id.lexicalCompRank(1).matches("DIVISION")) {
                 errors.add(new ErrorLSSL(1, "Error semántico : División en valor entero [#, %]", id, true));
             }
         }// FOR  OPERPRODIZQ
@@ -840,7 +840,7 @@ public class NoCompilador extends javax.swing.JFrame {
             if (!identificadores.containsKey(id.lexemeRank(2))) {
                 errors.add(new ErrorLSSL(1, "Error semántico: Variable " + id.lexemeRank(2) + " no declarada. [#, %]", id, true));
             } else {
-                if (identificadores.get(id.lexemeRank(2)).matches("STRING|BOOLEAN")) {
+                if (identificadores.get(id.lexemeRank(2)).matches("TEXTO|BOOLEANO")) {
                     errors.add(new ErrorLSSL(1, "Error semántico : Variable \"" + id.lexemeRank(2) + "\" es de tipo " + identificadores.get(id.lexemeRank(0)) + ", imposible hacer operaciones aritméticas [#, %]", id, true));
                 }
 
@@ -852,7 +852,7 @@ public class NoCompilador extends javax.swing.JFrame {
             if (!identificadores.containsKey(id.lexemeRank(0)) || !identificadores.containsKey(id.lexemeRank(2))) {
                 errors.add(new ErrorLSSL(1, "Error semántico: Variable " + id.lexemeRank(0) + " no declarada. [#, %]", id, true));
             } else {
-                if (identificadores.get(id.lexemeRank(0)).matches("STRING|BOOLEAN") || identificadores.get(id.lexemeRank(2)).matches("STRING|BOOLEAN")) {
+                if (identificadores.get(id.lexemeRank(0)).matches("TEXTO|BOOLEANO") || identificadores.get(id.lexemeRank(2)).matches("TEXTO|BOOLEANO")) {
                     errors.add(new ErrorLSSL(1, "Error semántico : Variable \"" + id.lexemeRank(0) + "\" es de tipo " + identificadores.get(id.lexemeRank(0)) + ", imposible hacer operaciones aritméticas [#, %]", id, true));
                     errors.add(new ErrorLSSL(1, "Error semántico : Variable \"" + id.lexemeRank(2) + "\" es de tipo " + identificadores.get(id.lexemeRank(2)) + ", imposible hacer operaciones aritméticas [#, %]", id, true));
 
