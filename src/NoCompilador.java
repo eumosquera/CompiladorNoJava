@@ -495,7 +495,7 @@ public class NoCompilador extends javax.swing.JFrame {
         //gramatica.group("DECL_ID", "ID PARENTESISCERRADO", 2, "ERROR_SINTACTICO: FALTA PARENTESIS ABIERTO [#, %]"); volver a colocar
         //DEFINIR GRAMATICA DE LOS METODOS y CLASES
         gramatica.group("CLASE", "CLASE ID LLAVEABIERTO METODO LLAVECERRADO");
-
+        gramatica.group("DECL_PARAMETRO", "TEXTO|FLOTANTE1DECIMAL|REAL ID PARENTESISCERRADO");
         gramatica.group("METODO", "TIPO ID PARENTESISABIERTO PARENTESISCERRADO LLAVEABIERTO LLAVECERRADO");
         gramatica.group("METODO", "TIPO ID PARENTESISABIERTO PARAMETROS PARENTESISCERRADO LLAVEABIERTO LLAVECERRADO");
 
@@ -552,12 +552,15 @@ public class NoCompilador extends javax.swing.JFrame {
         gramatica.group("DECL_TEXTO", "TEXTO ID ASIGNACION CADENA PUNTOCOMA", identProd);
         gramatica.group("DECL_TEXTO", "TEXTO ID PUNTOCOMA", identProd);
         gramatica.group("DECL_TEXTO", "PRIVATE TEXTO ID PUNTOCOMA", identProd);
+        gramatica.group("DECL_LINEA", "ID|PARENTESISCERRADO PUNTOCOMA", identProd);
         //FORMA CORRECTA DE DECLARAR UN METODO VACIO
         gramatica.group("DECL_TEXTO", "TEXTO ID PARENTESISABIERTO PARENTESISCERRADO LLAVEABIERTO LLAVECERRADO", identProd);
+        gramatica.group("DECL_TEXTO", "COMA TEXTO|REAL|ENTERO ID PARENTESISCERRADO LLAVEABIERTO", identProd);
         //PARAMETRO DE LA CLASE
         gramatica.group("DECL_CLASE", "PRIVATE|PUBLIC ID PUNTOCOMA", identProd);
         //POSIBLE ERROR
-        gramatica.group("ERROR_CLASE", "PRIVATE|PUBLIC ID ", 3, "ERROR_SINTACTICO FALTA EL PUNTO Y COMA  [#, %]");
+        gramatica.group("ERROR_CLASE", "PRIVATE|PUBLIC ID ", 2, "ERROR_SINTACTICO FALTA EL PUNTO Y COMA  [#, %]");
+        gramatica.group("ERROR_LINEA", "PUBLIC|ID|REAL|TEXTO|ENTERO|DECIMAL|PARENTESISABIERTO|PARENTESISCERRADO", 2, "ERROR_SINTACTICO FALTA EL PUNTO Y COMA  [#, %]");
         //ERRORES SINTACTICOS---------------------------------------------------------------------------
         //POSIBLES ERRORES AL DECLARAR UNA VARIABLE ENTERO O FLOTANTE  
         gramatica.group("DECL_ENTERO", "ENTERO ID ASIGNACION PUNTOCOMA", 2, "ERROR_SINTACTICO: FALTA ASIGNAR UN VALOR A LA VARIABLE [#, %]");
@@ -686,7 +689,7 @@ public class NoCompilador extends javax.swing.JFrame {
         gramatica.show();
     } //fin metodo analizador syntactico
 
-    //inicio metodo analizador semantico
+    //inicio metodo analizador semanticoz
     private void semanticAnalysis() {
         HashMap<String, String> tiposDatos = new HashMap<>();
         tiposDatos.put("NUMERO", "ENTERO");

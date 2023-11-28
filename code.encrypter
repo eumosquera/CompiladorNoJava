@@ -2,7 +2,7 @@ publico clase Equipo {
     privado texto nombreEquipo;
     privado entero partidosGanados;
 
-    publico Equipo(texto nombreEquipo texto partidosGanados) {
+    publico Equipo(texto nombreEquip, texto partidosGanados) {
         en.nombreEquipo = nombreEquipo;
         en.partidosGanados = partidosGanados;
 
@@ -15,8 +15,8 @@ publico vacio registrarPartidoGanado() {
     publico vacio registrarPartidoPerdido() {
         en.partidosPerdidos++;
     }
-texto continuar = "SI";
-mientras (continuar != "SI") {
+entero continuar = 3;
+mientras (continuar  ==0) {
 
             evaluar (resultado.toLowerCase()) {
                 caso "ganado":
@@ -32,7 +32,7 @@ mientras (continuar != "SI") {
                     romper;
             }
 
-para (entero i = 1; i <= cantidadPartidos; i++) {
+para (entero i = 1; i <= cantidadPartidos; i++) { //declarar incremento
             
             texto resultado;
 
