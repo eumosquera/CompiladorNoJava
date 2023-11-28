@@ -1,24 +1,53 @@
-public class SeleccionFutbol {
+publico clase Equipo {
+    privado texto nombreEquipo;
+    privado entero partidosGanados;
 
-    private String id;
+    publico Equipo(texto nombreEquipo texto partidosGanados) {
+        en.nombreEquipo = nombreEquipo;
+        en.partidosGanados = partidosGanados;
 
-    private String nombre;
-
-public void Consentracion(){
-        
     }
-public void JugarPartido(String estadio){
-        
+
+publico vacio registrarPartidoGanado() {
+        en.partidosGanados++;
     }
-}
 
-class Futbolista extends SeleccionFutbol{
- private String dorsal;
+    publico vacio registrarPartidoPerdido() {
+        en.partidosPerdidos++;
+    }
+texto continuar = "SI";
+mientras (continuar != "SI") {
 
-public Futbolista(String id1, String nombre1){
-super(id, nombre, apellido, age, profesion);
-this.dorsal = dorsal;
-}
-if (4 ==3)
-print("hola");
-}
+            evaluar (resultado.toLowerCase()) {
+                caso "ganado":
+                    equipo.registrarPartidoGanado();
+                    romper;
+                caso "perdido":
+                    equipo.registrarPartidoPerdido();
+                    romper;
+                caso "empatado":
+                    equipo.registrarPartidoEmpatado();
+                    romper;
+                defecto:
+                    romper;
+            }
+
+para (entero i = 1; i <= cantidadPartidos; i++) {
+            
+            texto resultado;
+
+            evaluar (resultado.toLowerCase()) {
+                caso "ganado":
+                    equipo.registrarPartidoGanado();
+                    romper;
+                caso "perdido":
+                    equipo.registrarPartidoPerdido();
+                    romper;
+                caso "empatado":
+                    equipo.registrarPartidoEmpatado();
+                    romper;
+                comun:
+
+                    romper;
+            }
+        }

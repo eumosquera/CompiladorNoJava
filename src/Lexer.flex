@@ -84,7 +84,7 @@ Numero = 0 | [1-9][0-9]*
 "SI" | "si" | "Si" { return token(yytext(), "SI", yyline, yycolumn); }
 "SINO" | "sino" | "Sino" { return token(yytext(), "SINO", yyline, yycolumn); }
 "PARA" | "para" | "Para" { return token(yytext(), "PARA", yyline, yycolumn); }
-"EN" | "en" | "en" { return token(yytext(), "EN", yyline, yycolumn); }
+"EN" | "en" | "En" { return token(yytext(), "EN", yyline, yycolumn); }
 "RANGO" | "rango" | "Rango" { return token(yytext(), "RANGO", yyline, yycolumn); }
 "MISMO" | "mismo" | "Mismo" { return token(yytext(), "MISMO", yyline, yycolumn); }
 "MIENTRAS" | "mientras" | "Mientras" { return token(yytext(), "MIENTRAS", yyline, yycolumn); }
@@ -99,6 +99,7 @@ Numero = 0 | [1-9][0-9]*
 "CASO" | "caso" | "Caso" { return token(yytext(), "CASO", yyline, yycolumn); }
 "EVALUAR" | "evaluar" | "Evaluar" { return token(yytext(), "CASO", yyline, yycolumn); }
 "REAL" | "real" | "Real" { return token(yytext(), "REAL", yyline, yycolumn); }
+"COMUN" | "comun" | "Comun" { return token(yytext(), "COMUN", yyline, yycolumn); }
 /*Tipo de dato*/
 "ENTERO" | "entero" | "Entero" { return token(yytext(), "ENTERO", yyline, yycolumn); }
 "FLOTANTE" | "fotante" | "Fotantet" { return token(yytext(), "FLOTANTE", yyline, yycolumn); }

@@ -45,8 +45,6 @@ public class NoCompilador extends javax.swing.JFrame {
 
     private String title;
     private Directory directorio;
-    private String codigoIntermedio;
-    private String codigoOptimizado;
     private ArrayList<Token> tokens;
     private ArrayList<ErrorLSSL> errors;
     private ArrayList<TextColor> textsColor;
@@ -54,10 +52,8 @@ public class NoCompilador extends javax.swing.JFrame {
     private ArrayList<Production> identProd;
     private ArrayList<Production> ifProd;
     private ArrayList<Production> whileProd;
-    private ArrayList<String> codObj;
     private ArrayList<String> codObjComp;
     private ArrayList<String> variables;
-
     private ArrayList<Production> funcProd;
     private HashMap<String, String> identificadores;
     private boolean codeHasBeenCompiled = false;
@@ -120,7 +116,6 @@ public class NoCompilador extends javax.swing.JFrame {
         operProdDer = new ArrayList<>();
         operProdDoble = new ArrayList<>();
         funcProd = new ArrayList<>();
-        codObj = new ArrayList<>();
         codObjComp = new ArrayList<>();
         variables = new ArrayList<>();
 
@@ -365,6 +360,7 @@ public class NoCompilador extends javax.swing.JFrame {
             clearFields();
         }
     }//GEN-LAST:event_jButton2ActionPerformed
+   //inicio metodo abrir archivo
     public void archivoT(String ruta, String Objeto) {
         try {
             //String ruta = "D:\\Pollo\\Descargas\\COMPILADORES COMPAÑEROS\\MicroCompiler_09\\src\\MicroC\\codigoTres.txt";
@@ -391,8 +387,8 @@ public class NoCompilador extends javax.swing.JFrame {
             System.out.println(ex);
         }
     }//fin_AbrirArchivo
+    
     //inicio metodo compilar
-
     private void compile() {
         clearFields();
         lexicalAnalysis();
@@ -401,17 +397,10 @@ public class NoCompilador extends javax.swing.JFrame {
         semanticAnalysis();
 
         printConsole();
-        /*int resp = JOptionPane.showConfirmDialog(null, "¿Presentó algún Error?", "", JOptionPane.YES_NO_OPTION);
-        if (resp == JOptionPane.YES_OPTION) {
-        } else {
-            codigoIntermedio();
-        }*/
-
-        //codigoIntermedio();
         codeHasBeenCompiled = true;
     } // fin metodo compilar
+    
     //metodo analizador lexico
-
     private void lexicalAnalysis() {
         // Extraer tokens de la clase lexer
         Lexer lexer;
@@ -864,226 +853,6 @@ public class NoCompilador extends javax.swing.JFrame {
         }// FOR  OPERPRODDOBLE
     } // fin metodo analizador semantico
 
-    private void codigoIntermedio() {
-        ArrayList<Token> toks = new ArrayList<Token>();
-        codigoIntermedio = ("--Código intermedio--\n");
-        int temp;
-        //revisa las declaraciones
-        for (Production id : identProd) {
-            temp = 1;
-            if (id.lexicalCompRank(2).equals("ASIGNACION") && id.getSizeTokens() > 5) {
-                codigoIntermedio = codigoIntermedio + ("\n\n=============================\n" + id.lexemeRank(0, -1) + "\n=============================");
-                codObj.add("\n\n=============================\n;" + id.lexemeRank(0, -1) + "\n=============================");
-
-                toks = id.getTokens();
-                for (int i = 0; i < toks.size(); i++) {
-                    if (toks.get(i).getLexeme().equals("*") || toks.get(i).getLexeme().equals("/")) {
-                        i--;
-                        codigoIntermedio = codigoIntermedio + ("\nT" + temp + " = " + toks.get(i).getLexeme() + toks.get(i + 1).getLexeme() + toks.get(i + 2).getLexeme());
-
-                        codObj.add("\nT" + temp + " = " + toks.get(i).getLexeme() + toks.get(i + 1).getLexeme() + toks.get(i + 2).getLexeme());
-
-                        toks.remove(i);
-                        toks.remove(i);
-                        toks.remove(i);
-                        toks.add(i, new Token("T" + temp, "ID", i, i));
-                        temp++;
-                    }//if token = * /
-
-                }//for cada 
-                for (int i = 0; i < toks.size(); i++) {
-                    if (toks.get(i).getLexeme().equals("+") || toks.get(i).getLexeme().equals("-")) {
-                        i--;
-                        codigoIntermedio = codigoIntermedio + ("\nT" + temp + " = " + toks.get(i).getLexeme() + toks.get(i + 1).getLexeme() + toks.get(i + 2).getLexeme());
-
-                        codObj.add("\nT" + temp + " = " + toks.get(i).getLexeme() + toks.get(i + 1).getLexeme() + toks.get(i + 2).getLexeme());
-
-                        toks.remove(i);
-                        toks.remove(i);
-                        toks.remove(i);
-                        toks.add(i, new Token("T" + temp, "ID", i, i));
-                        temp++;
-                    }//if token = + -
-                }
-                codigoIntermedio = codigoIntermedio + ("\n" + id.lexemeRank(1) + " = " + "T" + (temp - 1));
-                //para guardar las variables declaradas para posteriormente utilizarlo en el metodo ensamblador               
-                variables.add(id.lexemeRank(1));
-                //codigo Objeto
-                codObjComp.add(objectCode(codObj));
-                System.out.println(codObjComp.get(0));
-                codObj.clear();
-            }//if hay asignacion
-
-        }//for producciones
-        //revisa asignaciones
-        for (Production id : asigProd) {
-            temp = 1;
-            if (id.lexicalCompRank(1).equals("ASIGNACION") && id.getSizeTokens() > 5) {
-                codigoIntermedio = codigoIntermedio + ("\n\n=============================\n" + id.lexemeRank(0, -1) + "\n=============================");
-                codObj.add("\n\n=============================\n;" + id.lexemeRank(0, -1) + "\n=============================");
-
-                toks = id.getTokens();
-                for (int i = 0; i < toks.size(); i++) {
-                    if (toks.get(i).getLexeme().equals("*") || toks.get(i).getLexeme().equals("/")) {
-                        i--;
-                        codigoIntermedio = codigoIntermedio + ("\nT" + temp + " = " + toks.get(i).getLexeme() + toks.get(i + 1).getLexeme() + toks.get(i + 2).getLexeme());
-
-                        codObj.add("\nT" + temp + " = " + toks.get(i).getLexeme() + toks.get(i + 1).getLexeme() + toks.get(i + 2).getLexeme());
-
-                        toks.remove(i);
-                        toks.remove(i);
-                        toks.remove(i);
-                        toks.add(i, new Token("T" + temp, "ID", i, i));
-                        temp++;
-                    }//if token = * /
-
-                }//for cada 
-                for (int i = 0; i < toks.size(); i++) {
-                    if (toks.get(i).getLexeme().equals("+") || toks.get(i).getLexeme().equals("-")) {
-                        i--;
-                        codigoIntermedio = codigoIntermedio + ("\nT" + temp + " = " + toks.get(i).getLexeme() + toks.get(i + 1).getLexeme() + toks.get(i + 2).getLexeme());
-
-                        codObj.add("\nT" + temp + " = " + toks.get(i).getLexeme() + toks.get(i + 1).getLexeme() + toks.get(i + 2).getLexeme());
-
-                        toks.remove(i);
-                        toks.remove(i);
-                        toks.remove(i);
-                        toks.add(i, new Token("T" + temp, "ID", i, i));
-                        temp++;
-                    }//if token = + -
-                }
-                codigoIntermedio = codigoIntermedio + ("\n" + id.lexemeRank(0) + " = " + "T" + (temp - 1));
-                //para guardar las variables declaradas para posteriormente utilizarlo en el metodo ensamblador
-                variables.add(id.lexemeRank(0));
-                //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////7
-                //codigo Objeto
-                codObjComp.add(objectCode(codObj));
-                System.out.println(codObjComp.get(0));
-                codObj.clear();
-                //System.out.println(objectCode(codObj));
-            }//if hay asignacion
-
-        }
-        //INPUT Y OUTPUT
-        for (Production id : funcProd) {
-            codigoIntermedio = codigoIntermedio + ("\n\n=============================\n" + id.lexemeRank(0, -1) + "\n=============================");
-            codigoIntermedio = codigoIntermedio + ("\nparam " + id.lexemeRank(2) + "\ncall " + id.lexemeRank(0) + ", 1");
-
-        }//FOR FUNCPROD
-        //IF
-        for (Production id : ifProd) {
-            codigoIntermedio = codigoIntermedio + ("\n\n=============================\n" + id.lexemeRank(0, -1) + "\n=============================");
-            codigoIntermedio = codigoIntermedio + ("\nT1 = " + id.lexemeRank(2, -3) + "\nif_false T1 goto L1 " + "\n.\n.\n.\nlabel L1");
-
-        }//FOR IFPROD
-        //MIENTRAS
-        for (Production id : whileProd) {
-            codigoIntermedio = codigoIntermedio + ("\n\n=============================\n" + id.lexemeRank(0, -1) + "\n=============================");
-            codigoIntermedio = codigoIntermedio + ("\nlabel L1\nT1 = " + id.lexemeRank(2, -3) + "\nif_false T1 goto L2 " + "\n.\n.\n.\ngoto L1\nlabel L2");
-
-        }//FOR MIENTRASPROD
-        //System.out.print(codigoIntermedio);
-    }//codigoIntermedio
-
-    //////////////////GENERACION DE CODIGO OBJETO///////////////////
-    private String objectCode(ArrayList<String> tripletas1) {
-        ArrayList<String> tripletas = new ArrayList<String>();
-        tripletas = tripletas1;
-        String tl = tripletas.get(0) + "\n";
-        tripletas.remove(0);
-
-        String inst, R0, R1, R2, R3, op, m;
-        int caso = 0;
-        inst = R1 = R0 = R2 = R3 = op = m = "";
-        int index = 0;
-        //oCode
-
-        for (String tripleta : tripletas) {
-
-            tripleta = tripleta.replaceAll("T[1-9] = ", "").replaceAll("\\n", "");
-
-            //JOptionPane.showMessageDialog(null,tripleta);
-            // Definimos que operacion es
-            if (tripleta.contains("*")) {
-                inst = "MUL";
-                op = "*";
-            }
-            if (tripleta.contains("/")) {
-                inst = "DIV";
-                op = "/";
-            }
-            if (tripleta.contains("-")) {
-                inst = "SUB";
-                op = "-";
-            } else if (tripleta.contains("+")) {
-                inst = "ADD";
-                op = "+";
-            }
-            // Definimos que operacion es
-
-            //Condicionales para ver el orden de la operacion
-            if (R0.isEmpty() && R1.isEmpty()) {
-                //JOptionPane.showMessageDialog(null,"caso 0");
-                R0 = (tripleta.substring(0, tripleta.indexOf(op))).replaceAll(" ", "");
-                R1 = (tripleta.substring(tripleta.indexOf(op) + 1)).replaceAll(" ", "");
-
-            } else if ((tripleta.substring(0, tripleta.indexOf(op))).contains("T") && (tripleta.substring(tripleta.indexOf(op) + 1)).contains("T")) {//2 TEMPORALES
-                R0 = "R0";
-                R1 = "R1";
-                caso = 4;
-                //JOptionPane.showMessageDialog(null,"caso 4");
-            } else if ((tripleta.substring(0, tripleta.indexOf(op))).contains("T")) {//temporal izquierdo
-                R1 = (tripleta.substring(tripleta.indexOf(op) + 1)).replaceAll(" ", "");
-                caso = 1;
-                //JOptionPane.showMessageDialog(null,"caso 1");
-            } else if ((tripleta.substring(tripleta.indexOf(op) + 1)).contains("T")) {//temporal derecho
-                R1 = (tripleta.substring(0, tripleta.indexOf(op))).replaceAll(" ", "");
-                caso = 2;
-                //JOptionPane.showMessageDialog(null,"caso 2");
-            } else {
-                R1 = (tripleta.substring(0, tripleta.indexOf(op))).replaceAll(" ", "");
-                R2 = (tripleta.substring(tripleta.indexOf(op) + 1)).replaceAll(" ", "");
-                caso = 5;
-                //JOptionPane.showMessageDialog(null,"caso 5");
-            }
-
-            //Condicionales para ver el orden de la operacion
-            switch (caso) {
-                case 1:
-                    m += "LD R1," + R1 + "\n";
-                    m += inst + " R0,R0,R1" + "\n";
-                    break;
-                case 2:
-                    m += "LD R1," + R1 + "\n";
-                    m += inst + " R0,R1,R0" + "\n";
-                    break;
-                case 3:
-                    m += "LD R1," + R2 + "\n";
-                    m += "LD R2," + R2 + "\n";
-                    m += inst + " R1,R1,R2" + "\n";
-                    break;
-                case 4:
-                    m += inst + " " + R0 + "," + R0 + "," + R1;
-                    break;
-                case 5:
-                    m += "LD R1," + R1 + "\n";
-                    m += "LD R2," + R2 + "\n";
-                    m += inst + " R1,R1,R2" + "\n";
-                    caso = 0;
-                    break;
-                default:
-                    m += "LD R0," + R0 + "\n";
-                    m += "LD R1," + R1 + "\n";
-                    m += inst + " R0,R0,R1" + "\n";
-                    caso = 0;
-            }
-
-            // caso = true;
-        }//Recorrer tripletas
-        //System.out.println(tl+m);
-        return (tl + m);
-    }//fin_codObjeto
-
     private void imprimirToks(ArrayList<Token> prod) {
         int i = 0;
         String str = "";
@@ -1119,15 +888,17 @@ public class NoCompilador extends javax.swing.JFrame {
             System.out.println("Error al escribir en el archivo... " + ex.getMessage());
         }
         Functions.colorTextPane(textsColor, jtpCode, new Color(40, 40, 40));
-    }
+    } //fin metodo para el color de las palabras reservadas
 
+    //inicio metodo llenado de los tokens
     private void fillTableTokens() {
         tokens.forEach(token -> {
             Object[] data = new Object[]{token.getLexicalComp(), token.getLexeme(), "[" + token.getLine() + ", " + token.getColumn() + "]"};
             Functions.addRowDataInTable(tblTokens, data);
         });
-    }
+    } //fin metodo llenado de la tabla de tokens 
 
+    //inicio metodo que imprime por consola la ejecucion
     private void printConsole() {
         int sizeErrors = errors.size();
         if (sizeErrors > 0) {
@@ -1190,7 +961,7 @@ public class NoCompilador extends javax.swing.JFrame {
         }
         identificadores.clear();
         codeHasBeenCompiled = false;
-    }
+    } // fin metodo impresion por consola
 
     /**
      * @param args the command line arguments
