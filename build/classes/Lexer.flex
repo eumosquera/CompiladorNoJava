@@ -98,6 +98,7 @@ Numero = 0 | [1-9][0-9]*
 "IMPRIMIR" | "imprimir" | "Imprimir" { return token(yytext(), "IMPRIMIR", yyline, yycolumn); }
 "CASO" | "caso" | "Caso" { return token(yytext(), "CASO", yyline, yycolumn); }
 "EVALUAR" | "evaluar" | "Evaluar" { return token(yytext(), "CASO", yyline, yycolumn); }
+"REAL" | "real" | "Real" { return token(yytext(), "REAL", yyline, yycolumn); }
 /*Tipo de dato*/
 "ENTERO" | "entero" | "Entero" { return token(yytext(), "ENTERO", yyline, yycolumn); }
 "FLOTANTE" | "fotante" | "Fotantet" { return token(yytext(), "FLOTANTE", yyline, yycolumn); }

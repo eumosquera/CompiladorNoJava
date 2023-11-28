@@ -604,7 +604,7 @@ public class NoCompilador extends javax.swing.JFrame {
         gramatica.group("DECL_TEXTO", "TEXTO  PUNTOCOMA", 2, "ERROR_SINTACTICO: FALTA EL ID [#, %]");
         gramatica.group("DECL_TEXTO", "TEXTO  ID", 2, "ERROR_SINTACTICO: FALTA EL PUNTO Y COMA [#, %]");
         //ERRORES SEMANTICOS DE VARIABLES -------------------------------------------------------------
-        gramatica.group("RESERV_INDEB", "(TEXTO|ENTERO|FLOTANTE|BOOLEANO) (IMPORT|DEF|CLASE|IF|ELSE|FOR|IN|WHILE|RETURN)", 2, "ERROR SEMANTICO \\{}: USO INDEBIDO DE PALABRAS RESERVADAS [#,%]");
+        gramatica.group("RESERV_INDEB", "(TEXTO|ENTERO|FLOTANTE|BOOLEANO) (IMPORT|DEF|CLASE|IF|ELSE|FOR|IN|MIENTRAS|RETURN)", 2, "ERROR SEMANTICO \\{}: USO INDEBIDO DE PALABRAS RESERVADAS [#,%]");
 
         gramatica.group("ERROR_OP_TEXTO", "(SUMA|RESTA|MULTIPLICACION|DIVISION) CADENA", 2, "ERROR SEMANTICO \\{}: OPERACION NO PERMITIDA PARA CADENA [#,%]");
         gramatica.group("ERROR_OP_TEXTO", "CADENA (SUMA|RESTA|MULTIPLICACION|DIVISION)", 2, "ERROR SEMANTICO \\{}: OPERACION NO PERMITIDA PARA CADENA [#,%]");
@@ -665,28 +665,28 @@ public class NoCompilador extends javax.swing.JFrame {
         gramatica.group("CONDICION", "REAL (IGUAL|DIFERENTE|MAYORQUE|MENORQUE|MAYORIGUALQUE|MENORIGUALQUE) (TRUE|FALSE)", 2, "ERROR_SEMANTICO \\{}: DATOS INCOMPATIBLES PARA SU COMPARACION [#, %]");
 
         //----------------------------------------------------------------------------------------------
-        //----------------WHILE Y IF-----------------------
+        //----------------MIENTRAS Y IF-----------------------
         //FORMAS CORRECTAS DE DECLARAR UN IF
-        gramatica.group("INSTR_IF", "SI PARENTESISABIERTO CONDICION PARENTESISCERRADO LLAVEABIERTO", true, ifProd);
-        //FORMAS CORRECTAS DE DECLARAR UN WHILE
-        gramatica.group("INSTR_WHILE", "WHILE PARENTESISABIERTO CONDICION PARENTESISCERRADO LLAVEABIERTO", whileProd);
+        gramatica.group("INSTR_SI", "SI PARENTESISABIERTO CONDICION PARENTESISCERRADO LLAVEABIERTO", true, ifProd);
+        //FORMAS CORRECTAS DE DECLARAR UN MIENTRAS
+        gramatica.group("INSTR_MIENTRAS", "MIENTRAS PARENTESISABIERTO CONDICION PARENTESISCERRADO LLAVEABIERTO", whileProd);
         //POSIBLES ERRORES AL DECLARAR UN IF
-        gramatica.group("INSTR_IF", "SI PARENTESISABIERTO PARENTESISCERRADO LLAVEABIERTO", true, 4, "ERROR_SINTACTICO: FALTA LA CONDICION [#, %]");
-        gramatica.group("INSTR_IF", "SI CONDICION PARENTESISCERRADO LLAVEABIERTO", true, 4, "ERROR_SINTACTICO: FALTA EL PARENTESIS ABIERTO EN LA CONDICION [#, %]");
-        gramatica.group("INSTR_IF", "SI PARENTESISABIERTO CONDICION PARENTESISCERRADO", true, 4, "ERROR_SINTACTICO: FALTA DE LLAVE DE APERTURA [#, %]");
+        gramatica.group("INSTR_SI", "SI PARENTESISABIERTO PARENTESISCERRADO LLAVEABIERTO", true, 4, "ERROR_SINTACTICO: FALTA LA CONDICION [#, %]");
+        gramatica.group("INSTR_SI", "SI CONDICION PARENTESISCERRADO LLAVEABIERTO", true, 4, "ERROR_SINTACTICO: FALTA EL PARENTESIS ABIERTO EN LA CONDICION [#, %]");
+        gramatica.group("INSTR_SI", "SI PARENTESISABIERTO CONDICION PARENTESISCERRADO", true, 4, "ERROR_SINTACTICO: FALTA DE LLAVE DE APERTURA [#, %]");
         gramatica.finalLineColumn();
-        gramatica.group("INSTR_IF", "SI PARENTESISABIERTO CONDICION", true, 4, "ERROR_SINTACTICO: ERROR EN LA CONDICION O FALTA DEL PARENTESIS [#, %]");
+        gramatica.group("INSTR_SI", "SI PARENTESISABIERTO CONDICION", true, 4, "ERROR_SINTACTICO: ERROR EN LA CONDICION O FALTA DEL PARENTESIS [#, %]");
         gramatica.initialLineColumn();
-        gramatica.group("INSTR_IF", "SI", 2, "ERROR_SENTEROATICO : ERROR SI");
+        gramatica.group("INSTR_SI", "SI", 2, "ERROR_SENTEROATICO : ERROR SI");
 
-        //POSIBLES ERRORES DE WHILE
-        gramatica.group("INSTR_WHILE", "WHILE PARENTESISABIERTO PARENTESISCERRADO", true, 4, "ERROR_SINTACTICO: FALTA LA CONDICION [#, %]");
-        gramatica.group("INSTR_WHILE", "WHILE CONDICION PARENTESISCERRADO", true, 4, "ERROR_SINTACTICO: FALTA EL PARENTESIS ABIERTO EN LA CONDICION [#, %]");
-        gramatica.group("INSTR_WHILE", "WHILE PARENTESISABIERTO CONDICION PARENTESISCERRADO", true, 4, "ERROR_SINTACTICO: FALTA DE LLAVE DE APERTURA [#, %]");
+        //POSIBLES ERRORES DE MIENTRAS
+        gramatica.group("INSTR_MIENTRAS", "MIENTRAS PARENTESISABIERTO PARENTESISCERRADO", true, 4, "ERROR_SINTACTICO: FALTA LA CONDICION [#, %]");
+        gramatica.group("INSTR_MIENTRAS", "MIENTRAS CONDICION PARENTESISCERRADO", true, 4, "ERROR_SINTACTICO: FALTA EL PARENTESIS ABIERTO EN LA CONDICION [#, %]");
+        gramatica.group("INSTR_MIENTRAS", "MIENTRAS PARENTESISABIERTO CONDICION PARENTESISCERRADO", true, 4, "ERROR_SINTACTICO: FALTA DE LLAVE DE APERTURA [#, %]");
         gramatica.finalLineColumn();
-        gramatica.group("INSTR_WHILE", "WHILE PARENTESISABIERTO CONDICION", true, 4, "ERROR_SINTACTICO: ERROR EN LA CONDICION O FALTA DEL PARENTESIS [#, %]");
+        gramatica.group("INSTR_MIENTRAS", "MIENTRAS PARENTESISABIERTO CONDICION", true, 4, "ERROR_SINTACTICO: ERROR EN LA CONDICION O FALTA DEL PARENTESIS [#, %]");
         gramatica.initialLineColumn();
-        gramatica.group("INSTR_WHILE", "WHILE", 2, "ERROR WHILE");
+        gramatica.group("INSTR_MIENTRAS", "MIENTRAS", 2, "ERROR MIENTRAS");
         //POSIBLES ERRORES EN LAS CODICIONES
         gramatica.group("CONDICION", "NUMERO (IGUAL|DIFERENTE|MAYORQUE|MENORQUE|MAYORIGUALQUE|MENORIGUALQUE) ", 2, "ERROR_SINTACTICO: ERROR EN LA CONDICION [#, %]");
         gramatica.group("CONDICION", "ID (IGUAL|DIFERENTE|MAYORQUE|MENORQUE|MAYORIGUALQUE|MENORIGUALQUE) ", 2, "ERROR_SINTACTICO: ERROR EN LA CONDICION [#, %]");
@@ -702,6 +702,7 @@ public class NoCompilador extends javax.swing.JFrame {
         HashMap<String, String> tiposDatos = new HashMap<>();
         tiposDatos.put("NUMERO", "ENTERO");
         tiposDatos.put("REAL", "FLOTANTE");
+        tiposDatos.put("REAL", "DECIMAL");
         tiposDatos.put("CADENA", "TEXTO");
         tiposDatos.put("TRUE", "BOOLEANO");
         tiposDatos.put("FALSE", "BOOLEANO");
@@ -751,7 +752,7 @@ public class NoCompilador extends javax.swing.JFrame {
                 if (identificadores.get(id.lexemeRank(0)).matches("BOOLEANO") && !id.lexicalCompRank(1).matches("IGUAL|DIFERENTE")) {
                     errors.add(new ErrorLSSL(1, "Error semántico : Variable \"" + id.lexemeRank(0) + "\" es de tipo BOOLEANO, sólo posible comparar con operadores IGUAL y DIFERENTE [#, %]", id, true));
                 }
-                if (identificadores.get(id.lexemeRank(0)).matches("BOOLEANO") && !id.lexicalCompRank(2).matches("TRUE|FALSE")) {
+                if (identificadores.get(id.lexemeRank(0)).matches("BOOLEANO") && !id.lexicalCompRank(2).matches("VERDADERO|FALSO")) {
                     errors.add(new ErrorLSSL(1, "Error semántico : Variable \"" + id.lexemeRank(0) + "\" es de tipo BOOLEANO, sólo posible comparar con valores booleanos [#, %]", id, true));
                 }
                 if (identificadores.get(id.lexemeRank(0)).matches("ENTERO|FLOTANTE")) {
@@ -775,7 +776,7 @@ public class NoCompilador extends javax.swing.JFrame {
                 if (identificadores.get(id.lexemeRank(2)).matches("BOOLEANO") && !id.lexicalCompRank(1).matches("IGUAL|DIFERENTE")) {
                     errors.add(new ErrorLSSL(1, "Error semántico : Variable \"" + id.lexemeRank(2) + "\" es de tipo BOOLEANO, sólo posible comparar con operadores IGUAL y DIFERENTE [#, %]", id, true));
                 }
-                if (identificadores.get(id.lexemeRank(2)).matches("BOOLEANO") && !id.lexicalCompRank(0).matches("TRUE|FALSE")) {
+                if (identificadores.get(id.lexemeRank(2)).matches("BOOLEANO") && !id.lexicalCompRank(0).matches("VERDADER|FALSO")) {
                     errors.add(new ErrorLSSL(1, "Error semántico : Variable \"" + id.lexemeRank(2) + "\" es de tipo BOOLEANO, sólo posible comparar con valores booleanos [#, %]", id, true));
                 }
                 if (identificadores.get(id.lexemeRank(2)).matches("ENTERO|FLOTANTE")) {
@@ -861,7 +862,7 @@ public class NoCompilador extends javax.swing.JFrame {
             }
 
         }// FOR  OPERPRODDOBLE
-    } // fin metodo analizador syntactico
+    } // fin metodo analizador semantico
 
     private void codigoIntermedio() {
         ArrayList<Token> toks = new ArrayList<Token>();
@@ -975,12 +976,12 @@ public class NoCompilador extends javax.swing.JFrame {
             codigoIntermedio = codigoIntermedio + ("\nT1 = " + id.lexemeRank(2, -3) + "\nif_false T1 goto L1 " + "\n.\n.\n.\nlabel L1");
 
         }//FOR IFPROD
-        //WHILE
+        //MIENTRAS
         for (Production id : whileProd) {
             codigoIntermedio = codigoIntermedio + ("\n\n=============================\n" + id.lexemeRank(0, -1) + "\n=============================");
             codigoIntermedio = codigoIntermedio + ("\nlabel L1\nT1 = " + id.lexemeRank(2, -3) + "\nif_false T1 goto L2 " + "\n.\n.\n.\ngoto L1\nlabel L2");
 
-        }//FOR WHILEPROD
+        }//FOR MIENTRASPROD
         //System.out.print(codigoIntermedio);
     }//codigoIntermedio
 
