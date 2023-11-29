@@ -13,7 +13,7 @@ SI (num % i == 0 || nume7 % (i + 2) == 0) {RETORNAR FALSO;}}
 RETORNAR VERDADERO; }}
  PUBLICO ESTATICO VACIO PRINCIPAL (TEXTO[] args) }
 INTENTAR {BOLEANO resultado = esPrimo(17);
-SI (resultado)
+SI(resultado)
 {IMPRIMIR("Es primo");}
 SINO {IMPRIMIR("Noe es primo");}}
 EXCEPTO (EXCEPCION e) {
