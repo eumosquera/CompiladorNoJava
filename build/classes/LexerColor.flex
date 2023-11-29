@@ -60,7 +60,7 @@ Numero = 0 | [1-9][0-9]*
 "CASO" | "caso" | "caso" { return textColor(yychar, yylength(), new Color(255, 140, 0));  }
 "EVALUAR" | "evaluar" | "evaluar" { return textColor(yychar, yylength(), new Color(0, 0,139));  }
 "ENTRADA" | "entrada" | "Entrada" | "IMPRIMIR" | "imprimir" | "Imprimir" { return textColor(yychar, yylength(), new Color(255, 140, 0));  }
-
+"HEREDA" | "hereda" | "Hereda" { return textColor( yychar, yylength(), new Color(255, 140, 0)); }
 /* Tipos de dato */
 "TEXTO" | "texto" | "Texto" { return textColor(yychar, yylength(), new Color(148, 58, 173)); }
 "ENTERO" | "entero" | "Entero" {return textColor(yychar, yylength(), new Color(148, 58, 173));}

@@ -360,7 +360,8 @@ public class NoCompilador extends javax.swing.JFrame {
             clearFields();
         }
     }//GEN-LAST:event_jButton2ActionPerformed
-   //inicio metodo abrir archivo
+    //inicio metodo abrir archivo
+
     public void archivoT(String ruta, String Objeto) {
         try {
             //String ruta = "D:\\Pollo\\Descargas\\COMPILADORES COMPAÑEROS\\MicroCompiler_09\\src\\MicroC\\codigoTres.txt";
@@ -387,7 +388,7 @@ public class NoCompilador extends javax.swing.JFrame {
             System.out.println(ex);
         }
     }//fin_AbrirArchivo
-    
+
     //inicio metodo compilar
     private void compile() {
         clearFields();
@@ -399,7 +400,7 @@ public class NoCompilador extends javax.swing.JFrame {
         printConsole();
         codeHasBeenCompiled = true;
     } // fin metodo compilar
-    
+
     //metodo analizador lexico
     private void lexicalAnalysis() {
         // Extraer tokens de la clase lexer
@@ -429,7 +430,7 @@ public class NoCompilador extends javax.swing.JFrame {
     private void syntacticAnalysis() {
         //instancia de la clase  gramar para deficnir la gramatica recibe como parametro los teokens y los  errores
         Grammar gramatica = new Grammar(tokens, errors);
-     
+
         /*error general*/
         gramatica.delete(new String[]{"ERROR"}, 1);
 
@@ -518,15 +519,17 @@ public class NoCompilador extends javax.swing.JFrame {
         gramatica.group("CLASE", "PUBLIC CLASE ID LLAVEABIERTO METODO LLAVECERRADO");
         gramatica.group("METODO", "TIPO ID PARENTESISABIERTO PARENTESISCERRADO LLAVEABIERTO LLAVECERRADO");
         gramatica.group("METODO", "TIPO ID PARENTESISABIERTO PARAMETROS PARENTESISCERRADO LLAVEABIERTO LLAVECERRADO");
-
+        //2 parametros
+        gramatica.group("METODO", "TIPO ID PARENTESISABIERTO TEXTO|ENTERO|FOTANTE ID COMA");
         gramatica.group("PARAMETROS", "TIPO ID");
         gramatica.group("PARAMETROS", "TIPO ID COMA PARAMETROS");
+        gramatica.group("PARAMETROS", "TIPO ID PARENTESISABIERTO COMA");
 
         gramatica.group("TIPO", "ENTERO");
         gramatica.group("TIPO", "FLOTANTE");
-        gramatica.group("TIPO", "VOID");
+        gramatica.group("TIPO", "VACIO");
         gramatica.group("TIPO", "CLASE");
-        gramatica.group("TIPO", "PRIVATE");
+        gramatica.group("TIPO", "PRIVADO");
 
         // ERRORES EN EL LOS METODO
         gramatica.group("CLASE", "ID LLAVEABIERTO METODO LLAVECERRADO", 1, "ERROR_SINTACTICO: Se espera la palabra clave 'class' [#, %]");
@@ -553,11 +556,14 @@ public class NoCompilador extends javax.swing.JFrame {
         gramatica.group("DECL_TEXTO", "TEXTO ID PUNTOCOMA", identProd);
         gramatica.group("DECL_TEXTO", "PRIVATE TEXTO ID PUNTOCOMA", identProd);
         gramatica.group("DECL_LINEA", "ID|PARENTESISCERRADO PUNTOCOMA", identProd);
+        gramatica.group("DECL_INCRE", "PUNTOCOMA ID INCREMENTO|DECREMENTO PARENTESISCERRADO", identProd);
+        gramatica.group("DECL_INCRE", "PARENTESISCERRADO", identProd);
         //FORMA CORRECTA DE DECLARAR UN METODO VACIO
         gramatica.group("DECL_TEXTO", "TEXTO ID PARENTESISABIERTO PARENTESISCERRADO LLAVEABIERTO LLAVECERRADO", identProd);
         gramatica.group("DECL_TEXTO", "COMA TEXTO|REAL|ENTERO ID PARENTESISCERRADO LLAVEABIERTO", identProd);
         //PARAMETRO DE LA CLASE
         gramatica.group("DECL_CLASE", "PRIVATE|PUBLIC ID PUNTOCOMA", identProd);
+        gramatica.group("DECL_CLASE", "TIPO ID PUNTOCOMA", identProd);
         //POSIBLE ERROR
         gramatica.group("ERROR_CLASE", "PRIVATE|PUBLIC ID ", 2, "ERROR_SINTACTICO FALTA EL PUNTO Y COMA  [#, %]");
         gramatica.group("ERROR_LINEA", "PUBLIC|ID|REAL|TEXTO|ENTERO|DECIMAL|PARENTESISABIERTO|PARENTESISCERRADO", 2, "ERROR_SINTACTICO FALTA EL PUNTO Y COMA  [#, %]");
@@ -594,7 +600,7 @@ public class NoCompilador extends javax.swing.JFrame {
         gramatica.group("DECL_TEXTO", "TEXTO ID ASIGNACION CADENA", 2, "ERROR_SINTACTICO: PUNTOCOMA(;) NO AGREGADO EN LA DECLARACION [#, %]");
         gramatica.group("DECL_TEXTO", "TEXTO ASIGNACION CADENA PUNTOCOMA", 2, "ERROR_SINTACTICO: ID NO AGREGADO EN LA DECLARACION [#, %]");
         gramatica.group("DECL_TEXTO", "TEXTO  PUNTOCOMA", 2, "ERROR_SINTACTICO: FALTA EL ID [#, %]");
-        gramatica.group("DECL_TEXTO", "TEXTO  ID", 2, "ERROR_SINTACTICO: FALTA EL PUNTO Y COMA [#, %]");
+        gramatica.group("DECL_TEXTO", "TEXTO ID", 2, "ERROR_SINTACTICO: FALTA EL PUNTO Y COMA [#, %]");
         //ERRORES SEMANTICOS DE VARIABLES -------------------------------------------------------------
         gramatica.group("RESERV_INDEB", "(TEXTO|ENTERO|FLOTANTE|BOOLEANO) (IMPORT|DEF|CLASE|IF|ELSE|FOR|IN|MIENTRAS|RETURN)", 2, "ERROR SEMANTICO \\{}: USO INDEBIDO DE PALABRAS RESERVADAS [#,%]");
 
@@ -656,7 +662,6 @@ public class NoCompilador extends javax.swing.JFrame {
         gramatica.group("CONDICION", "NUMERO (IGUAL|DIFERENTE|MAYORQUE|MENORQUE|MAYORIGUALQUE|MENORIGUALQUE) (TRUE|FALSE)", 2, "ERROR_SEMANTICO \\{}: DATOS INCOMPATIBLES PARA SU COMPARACION [#, %]");
         gramatica.group("CONDICION", "REAL (IGUAL|DIFERENTE|MAYORQUE|MENORQUE|MAYORIGUALQUE|MENORIGUALQUE) (TRUE|FALSE)", 2, "ERROR_SEMANTICO \\{}: DATOS INCOMPATIBLES PARA SU COMPARACION [#, %]");
 
-        //----------------------------------------------------------------------------------------------
         //----------------MIENTRAS Y IF-----------------------
         //FORMAS CORRECTAS DE DECLARAR UN IF
         gramatica.group("INSTR_SI", "SI PARENTESISABIERTO CONDICION PARENTESISCERRADO LLAVEABIERTO", true, ifProd);
@@ -696,8 +701,8 @@ public class NoCompilador extends javax.swing.JFrame {
         tiposDatos.put("REAL", "FLOTANTE");
         tiposDatos.put("REAL", "DECIMAL");
         tiposDatos.put("CADENA", "TEXTO");
-        tiposDatos.put("TRUE", "BOOLEANO");
-        tiposDatos.put("FALSE", "BOOLEANO");
+        tiposDatos.put("VERDADERO", "BOOLEANO");
+        tiposDatos.put("FALSO", "BOOLEANO");
         int i = 0;
         for (Production id : identProd) {
 

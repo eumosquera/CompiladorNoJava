@@ -42,6 +42,7 @@ Numero = 0 | [1-9][0-9]*
 
 /*Operadores*/
 "+" { return token(yytext(), "SUMA", yyline, yycolumn); }
+"%" { return token(yytext(), "MODULO", yyline, yycolumn); }
 "-" { return token(yytext(), "RESTA", yyline, yycolumn); }
 "/" { return token(yytext(), "DIVISION", yyline, yycolumn); }
 "*" { return token(yytext(), "MULTIPLICACION", yyline, yycolumn); }
@@ -55,6 +56,7 @@ Numero = 0 | [1-9][0-9]*
 "<=" { return token(yytext(), "MENORIGUALQUE", yyline, yycolumn); }
 /*signos*/
 "." { return token(yytext(), "PUNTO", yyline, yycolumn); }
+"||" { return token(yytext(), "O", yyline, yycolumn); }
 "," { return token(yytext(), "COMA", yyline, yycolumn); }
 ":" { return token(yytext(), "DOSPUNTOS", yyline, yycolumn); }
 ";" { return token(yytext(), "PUNTOCOMA", yyline, yycolumn); }
@@ -77,6 +79,7 @@ Numero = 0 | [1-9][0-9]*
 
 /*Palabras reservadas*/
 "IMPORTAR" | "importar" | "Importar" { return token(yytext(), "IMPORTAR", yyline, yycolumn); }
+"ESTATICO" | "estatico" | "Estatico" { return token(yytext(), "ESTATICO", yyline, yycolumn); }
 "PUBLICO" | "publico" | "Publico" { return token(yytext(), "PUBLICO", yyline, yycolumn); }
 "VACIO" | "vacio" | "Vacio" { return token(yytext(), "VACIO", yyline, yycolumn); }
 "PRIVADO" | "privado" | "Privado" { return token(yytext(), "PRIVADO", yyline, yycolumn); }
@@ -100,6 +103,7 @@ Numero = 0 | [1-9][0-9]*
 "EVALUAR" | "evaluar" | "Evaluar" { return token(yytext(), "CASO", yyline, yycolumn); }
 "REAL" | "real" | "Real" { return token(yytext(), "REAL", yyline, yycolumn); }
 "COMUN" | "comun" | "Comun" { return token(yytext(), "COMUN", yyline, yycolumn); }
+"HEREDA" | "hereda" | "Hereda" { return token(yytext(), "HEREDA", yyline, yycolumn); }
 /*Tipo de dato*/
 "ENTERO" | "entero" | "Entero" { return token(yytext(), "ENTERO", yyline, yycolumn); }
 "FLOTANTE" | "fotante" | "Fotantet" { return token(yytext(), "FLOTANTE", yyline, yycolumn); }

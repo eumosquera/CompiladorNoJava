@@ -1,8 +1,7 @@
 publico clase Equipo {
     privado texto nombreEquipo;
     privado entero partidosGanados;
-
-    publico Equipo(texto nombreEquip, texto partidosGanados) {
+publico Equipo(texto nombreEquip, texto partidosGanados) {
         en.nombreEquipo = nombreEquipo;
         en.partidosGanados = partidosGanados;
 
@@ -14,7 +13,9 @@ publico vacio registrarPartidoGanado() {
 
     publico vacio registrarPartidoPerdido() {
         en.partidosPerdidos++;
-    }
+}
+}
+publico clase Futbolista hereda Equipo{
 entero continuar = 3;
 mientras (continuar  ==0) {
 
@@ -30,7 +31,8 @@ mientras (continuar  ==0) {
                     romper;
                 defecto:
                     romper;
-            }
+}
+}
 
 para (entero i = 1; i <= cantidadPartidos; i++) { //declarar incremento
             
@@ -44,10 +46,10 @@ para (entero i = 1; i <= cantidadPartidos; i++) { //declarar incremento
                     equipo.registrarPartidoPerdido();
                     romper;
                 caso "empatado":
-                    equipo.registrarPartidoEmpatado();
+                    equipo = registrarPartidoEmpatado();
                     romper;
                 comun:
 
                     romper;
-            }
-        }
+}
+}

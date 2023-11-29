@@ -1,53 +1,19 @@
-publico clase Equipo {
-    privado texto nombreEquipo;
-    privado entero partidosGanados;
+CLASE Primos {
 
-    publico Equipo(texto nombreEquip, texto partidosGanados){
-        en.nombreEquipo = nombreEquipo;
-        en.partidosGanados = partidosGanados;
+    PRIVADO ESTATICO BOOLEANO esPrimo(int numero) {
 
+        SI (numero <= 1) {
+            RETORNAR FALSO;
+        } SINO SI (numero <= 3) {
+            RETORNAR VERDADERO;
+        } SINO SI (numero % 2 == 0 || numero % 3 == 0) {
+            RETORNAR FALSO;
+        } SINO {
+            PARA (ENTERO i = 5; i * i <= numero; i += 6) {
+                SI (numero % i == 0 || numero % (i + 2) == 0) {
+                    RETORNAR FALSO;
+                }
+            }
+            RETORNAR VERDADERO;
+        }
     }
-
-publico vacio registrarPartidoGanado() {
-        en.partidosGanados++;
-    }
-
-    publico vacio registrarPartidoPerdido() {
-        en.partidosPerdidos++;
-    }
-entero continuar = 3;
-mientras (continuar  ==0) {
-
-            evaluar (resultado.toLowerCase()) {
-                caso "ganado":
-                    equipo.registrarPartidoGanado();
-                    romper;
-                caso "perdido":
-                    equipo.registrarPartidoPerdido();
-                    romper;
-                caso "empatado":
-                    equipo.registrarPartidoEmpatado();
-                    romper;
-                defecto:
-                    romper;
-            }
-
-para (entero i = 1; i <= cantidadPartidos; i++) { //declarar incremento
-            
-            texto resultado;
-
-            evaluar (resultado.toLowerCase()) {
-                caso "ganado":
-                    equipo.registrarPartidoGanado();
-                    romper;
-                caso "perdido":
-                    equipo.registrarPartidoPerdido();
-                    romper;
-                caso "empatado":
-                    equipo.registrarPartidoEmpatado();
-                    romper;
-                comun:
-
-                    romper;
-            }
-        }
