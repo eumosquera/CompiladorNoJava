@@ -669,6 +669,7 @@ public class NoCompilador extends javax.swing.JFrame {
         //----------------MIENTRAS Y IF-----------------------
         //FORMAS CORRECTAS DE DECLARAR UN IF
         gramatica.group("INSTR_SI", "SI PARENTESISABIERTO CONDICION PARENTESISCERRADO LLAVEABIERTO", true, ifProd);
+        gramatica.group("INSTR_SI", "SI PARENTESISABIERTO ID PARENTESISCERRADO", true, ifProd);
         //FORMAS CORRECTAS DE DECLARAR UN MIENTRAS
         gramatica.group("INSTR_MIENTRAS", "MIENTRAS PARENTESISABIERTO CONDICION PARENTESISCERRADO LLAVEABIERTO", whileProd);
         //POSIBLES ERRORES AL DECLARAR UN IF
