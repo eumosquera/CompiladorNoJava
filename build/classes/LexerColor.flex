@@ -42,7 +42,7 @@ Numero = 0 | [1-9][0-9]*
 "PUBLICO" | "publico" | "Publico" { return textColor(yychar, yylength(), new Color(30,148,195)); }
 "PRIVADO" | "privado" | "Privado" { return textColor(yychar, yylength(), new Color(30,148,195)); }
 "VACIO" | "vacio" | "Vacio" { return textColor(yychar, yylength(), new Color(80,149,194)); }
-
+"ESTATICO" | "estatico" | "Estatico"  { return textColor(yychar, yylength(), new Color(89,179,192)); }
 /* condicion */
 "SI" | "si" | "Si" { return textColor(yychar, yylength(), new Color(0, 0, 139)); }
 "SINO" | "sino" | "Sino" { return textColor(yychar, yylength(), new Color(0, 0, 139));}
