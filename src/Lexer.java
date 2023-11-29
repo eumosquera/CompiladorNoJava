@@ -1392,7 +1392,7 @@ class Lexer {
           // fall through
           case 111: break;
           case 42:
-            { return token(yytext(), "CLASE", yyline, yycolumn);
+            { return token(yytext(), "RESERVADA", yyline, yycolumn);
             }
           // fall through
           case 112: break;

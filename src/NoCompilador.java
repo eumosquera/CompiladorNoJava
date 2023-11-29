@@ -714,9 +714,9 @@ public class NoCompilador extends javax.swing.JFrame {
             if (!identificadores.containsKey(id.lexemeRank(1))) {
                 identificadores.put(id.lexemeRank(1), id.lexicalCompRank(0));
                 i++;
-            } else {
+            } /*else {
                 errors.add(new ErrorLSSL(1, "Error semántico: Ya existe un identificador llamado " + id.lexemeRank(1), id, true));
-            }
+            } */
 
         }
         System.out.println(Arrays.asList(identificadores)); // muestra identificadores

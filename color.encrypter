@@ -2,21 +2,19 @@ CLASE Primos {
 PRIVADO BOLEANO esPrimo ( entero nume ) {
 SI(nume <=1) {
 RETORNAR FALSO;
-} SINO SI (nume <= 3) {
+} SINO SI (nume1 <= 3) {
 RETORNAR VERDADERO;
-} SINO SI (nume % 2 == 0 || nume % 3 == 0) {
+} SINO SI (nume4 % 2 == 0 || nume2 % 3 == 0) {
 RETORNAR FALSO;
 } SINO
  {
-PARA (ENTERO i = 5; i * i <= nume; i += 6) { 
-SI (nume % i == 0 || nume % (i + 2) == 0)
- {RETORNAR FALSO;}} 
+PARA (ENTERO i = 5; i * i <= nume6; i += 6) { 
+SI (num % i == 0 || nume7 % (i + 2) == 0) {RETORNAR FALSO;}} 
 RETORNAR VERDADERO; }}
  PUBLICO ESTATICO VACIO PRINCIPAL (TEXTO[] args) }
 INTENTAR {BOLEANO resultado = esPrimo(17);
-SI (resultado) 
-{IMPRIMIR("Es primo");
-}
-SINO {IMPRIMIR("No es primo");}}
+SI (resultado)
+{IMPRIMIR("Es primo");}
+SINO {IMPRIMIR("Noe es primo");}}
 EXCEPTO (EXCEPCION e) {
 IMPRIMIR("Ocurrió un error: " + e);}}}

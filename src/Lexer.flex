@@ -83,7 +83,7 @@ Numero = 0 | [1-9][0-9]*
 "PUBLICO" | "publico" | "Publico" { return token(yytext(), "PUBLICO", yyline, yycolumn); }
 "VACIO" | "vacio" | "Vacio" { return token(yytext(), "VACIO", yyline, yycolumn); }
 "PRIVADO" | "privado" | "Privado" { return token(yytext(), "PRIVADO", yyline, yycolumn); }
-"CLASE" | "clase" | "Clase" { return token(yytext(), "CLASE", yyline, yycolumn); }
+"CLASE" | "clase" | "Clase" { return token(yytext(), "RESERVADA", yyline, yycolumn); }
 "SI" | "si" | "Si" { return token(yytext(), "SI", yyline, yycolumn); }
 "SINO" | "sino" | "Sino" { return token(yytext(), "SINO", yyline, yycolumn); }
 "PARA" | "para" | "Para" { return token(yytext(), "PARA", yyline, yycolumn); }
