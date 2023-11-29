@@ -1,55 +1,21 @@
-publico clase Equipo {
-    privado texto nombreEquipo;
-    privado entero partidosGanados;
-publico Equipo(texto nombreEquip, texto partidosGanados) {
-        en.nombreEquipo = nombreEquipo;
-        en.partidosGanados = partidosGanados;
-
-    }
-
-publico vacio registrarPartidoGanado() {
-        en.partidosGanados++;
-    }
-
-    publico vacio registrarPartidoPerdido() {
-        en.partidosPerdidos++;
+CLASE Primos {
+PRIVADO BOLEANO esPrimo ( entero nume ) {
+SI(nume <=1) {
+RETORNAR FALSO;
+} SINO SI (nume <= 3) {
+RETORNAR VERDADERO;
+} SINO SI (nume % 2 == 0 || nume % 3 == 0) {
+RETORNAR FALSO;
+} SINO
+ {
+PARA (ENTERO i = 5; i * i <= nume; i += 6) { 
+SI (nume % i == 0 || nume % (i + 2) == 0)
+ {RETORNAR FALSO;}} 
+RETORNAR VERDADERO; }}
+ PUBLICO ESTATICO VACIO PRINCIPAL (TEXTO[] args) }
+INTENTAR {BOLEANO resultado = esPrimo(17);
+SI (resultado) {IMPRIMIR("Es primo");
 }
-}
-publico clase Futbolista hereda Equipo{
-entero continuar = 3;
-mientras (continuar  ==0) {
-
-            evaluar (resultado.toLowerCase()) {
-                caso "ganado":
-                    equipo.registrarPartidoGanado();
-                    romper;
-                caso "perdido":
-                    equipo.registrarPartidoPerdido();
-                    romper;
-                caso "empatado":
-                    equipo.registrarPartidoEmpatado();
-                    romper;
-                defecto:
-                    romper;
-}
-}
-
-para (entero i = 1; i <= cantidadPartidos; i++) { //declarar incremento
-            
-            texto resultado;
-
-            evaluar (resultado.toLowerCase()) {
-                caso "ganado":
-                    equipo.registrarPartidoGanado();
-                    romper;
-                caso "perdido":
-                    equipo.registrarPartidoPerdido();
-                    romper;
-                caso "empatado":
-                    equipo = registrarPartidoEmpatado();
-                    romper;
-                comun:
-
-                    romper;
-}
-}
+SINO {IMPRIMIR("No es primo");}}
+EXCEPTO (EXCEPCION e) {
+IMPRIMIR("Ocurrió un error: " + e);}}}

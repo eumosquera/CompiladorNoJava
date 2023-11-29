@@ -1,19 +1,22 @@
 CLASE Primos {
-
-    PRIVADO ESTATICO BOOLEANO esPrimo(int numero) {
-
-        SI (numero <= 1) {
-            RETORNAR FALSO;
-        } SINO SI (numero <= 3) {
-            RETORNAR VERDADERO;
-        } SINO SI (numero % 2 == 0 || numero % 3 == 0) {
-            RETORNAR FALSO;
-        } SINO {
-            PARA (ENTERO i = 5; i * i <= numero; i += 6) {
-                SI (numero % i == 0 || numero % (i + 2) == 0) {
-                    RETORNAR FALSO;
-                }
-            }
-            RETORNAR VERDADERO;
-        }
-    }
+PRIVADO BOLEANO esPrimo ( entero nume ) {
+SI(nume <=1) {
+RETORNAR FALSO;
+} SINO SI (nume <= 3) {
+RETORNAR VERDADERO;
+} SINO SI (nume % 2 == 0 || nume % 3 == 0) {
+RETORNAR FALSO;
+} SINO
+ {
+PARA (ENTERO i = 5; i * i <= nume; i += 6) { 
+SI (nume % i == 0 || nume % (i + 2) == 0)
+ {RETORNAR FALSO;}} 
+RETORNAR VERDADERO; }}
+ PUBLICO ESTATICO VACIO PRINCIPAL (TEXTO[] args) }
+INTENTAR {BOLEANO resultado = esPrimo(17);
+SI (resultado) 
+{IMPRIMIR("Es primo");
+}
+SINO {IMPRIMIR("No es primo");}}
+EXCEPTO (EXCEPCION e) {
+IMPRIMIR("Ocurrió un error: " + e);}}}

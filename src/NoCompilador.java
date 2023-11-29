@@ -520,7 +520,10 @@ public class NoCompilador extends javax.swing.JFrame {
         gramatica.group("METODO", "TIPO ID PARENTESISABIERTO PARENTESISCERRADO LLAVEABIERTO LLAVECERRADO");
         gramatica.group("METODO", "TIPO ID PARENTESISABIERTO PARAMETROS PARENTESISCERRADO LLAVEABIERTO LLAVECERRADO");
         //2 parametros
-        gramatica.group("METODO", "TIPO ID PARENTESISABIERTO TEXTO|ENTERO|FOTANTE ID COMA");
+        gramatica.group("METODO", "TIPO TIPO PARENTESISABIERTO BOLEANO|TEXTO|ENTERO|FOTANTE ID COMA");
+        //1 parametro
+        gramatica.group("METODO", "TIPO BOLEANO|TEXTO|ENTERO|FOTANTE ID PARENTESISABIERTO ENTERO|DECIMAL|TEXTO|BOLEANO ID PARENTESISCERRADO LLAVEABIERTO", identProd);
+        
         gramatica.group("PARAMETROS", "TIPO ID");
         gramatica.group("PARAMETROS", "TIPO ID COMA PARAMETROS");
         gramatica.group("PARAMETROS", "TIPO ID PARENTESISABIERTO COMA");
@@ -528,8 +531,9 @@ public class NoCompilador extends javax.swing.JFrame {
         gramatica.group("TIPO", "ENTERO");
         gramatica.group("TIPO", "FLOTANTE");
         gramatica.group("TIPO", "VACIO");
-        gramatica.group("TIPO", "CLASE");
+        //gramatica.group("TIPO", "CLASE");
         gramatica.group("TIPO", "PRIVADO");
+        gramatica.group("TIPO", "ESTATICO");
 
         // ERRORES EN EL LOS METODO
         gramatica.group("CLASE", "ID LLAVEABIERTO METODO LLAVECERRADO", 1, "ERROR_SINTACTICO: Se espera la palabra clave 'class' [#, %]");
@@ -549,7 +553,7 @@ public class NoCompilador extends javax.swing.JFrame {
 
         gramatica.group("DECL_PRIVATE", "PRIVATE ID PUNTOCOMA", identProd);
         gramatica.group("ERROR_PRIVATE", "PRIVATE PUNTOCOMA ", 2, "ERROR_SENTEROATICO NO SE HA DECLARADO EL ID [#,%]");
-        gramatica.group("ERROR_PRIVATE", "PRIVATE ID", 2, "ERROR_SENTEROATICO FALTA EL PUNTO Y COMA [#,%]");
+       // gramatica.group("ERROR_PRIVATE", "PRIVATE ID", 2, "ERROR_SENTEROATICO FALTA EL PUNTO Y COMA [#,%]");
         gramatica.group("DECL_TEXTO", "TEXTO ID PUNTOCOMA", identProd);
         gramatica.group("DECL_TEXTO", "TEXTO ID ASIGNACION ID PUNTOCOMA", identProd);
         gramatica.group("DECL_TEXTO", "TEXTO ID ASIGNACION CADENA PUNTOCOMA", identProd);
