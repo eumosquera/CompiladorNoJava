@@ -78,42 +78,42 @@ Numero = 0 | [1-9][0-9]*
 "--" { return token(yytext(), "DECREMENTO", yyline, yycolumn); }
 
 /*Palabras reservadas*/
-"IMPORTAR" | "importar" | "Importar" { return token(yytext(), "IMPORTAR", yyline, yycolumn); }
-"ESTATICO" | "estatico" | "Estatico" { return token(yytext(), "ESTATICO", yyline, yycolumn); }
-"PUBLICO" | "publico" | "Publico" { return token(yytext(), "PUBLICO", yyline, yycolumn); }
-"VACIO" | "vacio" | "Vacio" { return token(yytext(), "VACIO", yyline, yycolumn); }
-"PRIVADO" | "privado" | "Privado" { return token(yytext(), "PRIVADO", yyline, yycolumn); }
+"IMPORTAR" | "importar" | "Importar" { return token(yytext(), "RESERVADA", yyline, yycolumn); }
+"ESTATICO" | "estatico" | "Estatico" { return token(yytext(), "RESERVADA", yyline, yycolumn); }
+"PUBLICO" | "publico" | "Publico" { return token(yytext(), "RESERVADA", yyline, yycolumn); }
+"VACIO" | "vacio" | "Vacio" { return token(yytext(), "RESERVADA", yyline, yycolumn); }
+"PRIVADO" | "privado" | "Privado" { return token(yytext(), "RESERVADA", yyline, yycolumn); }
 "CLASE" | "clase" | "Clase" { return token(yytext(), "RESERVADA", yyline, yycolumn); }
-"SI" | "si" | "Si" { return token(yytext(), "SI", yyline, yycolumn); }
-"SINO" | "sino" | "Sino" { return token(yytext(), "SINO", yyline, yycolumn); }
-"PARA" | "para" | "Para" { return token(yytext(), "PARA", yyline, yycolumn); }
-"EN" | "en" | "En" { return token(yytext(), "EN", yyline, yycolumn); }
-"RANGO" | "rango" | "Rango" { return token(yytext(), "RANGO", yyline, yycolumn); }
-"MISMO" | "mismo" | "Mismo" { return token(yytext(), "MISMO", yyline, yycolumn); }
-"MIENTRAS" | "mientras" | "Mientras" { return token(yytext(), "MIENTRAS", yyline, yycolumn); }
-"INTENTAR" | "intentar" | "Intentar" { return token(yytext(), "INTENTAR", yyline, yycolumn); }
-"EXCEPTO" | "excepto" | "Excepto" { return token(yytext(), "EXCEPTO", yyline, yycolumn); }
-"RETORNAR" | "retornar" | "Retornar" { return token(yytext(), "RETORNAR", yyline, yycolumn); }
-"ROMPER" | "romper" | "Romper" { return token(yytext(), "ROMPER", yyline, yycolumn); }
-"SIGUIENTE" | "siguiente" | "Siguiente" { return token(yytext(), "SIGUIENTE", yyline, yycolumn); }
-"ENTRADA" | "entrada" | "Entrada" { return token(yytext(), "ENTRADA", yyline, yycolumn); }
-"SALIDA" | "salida" | "Salida" { return token(yytext(), "SALIDA", yyline, yycolumn); }
-"IMPRIMIR" | "imprimir" | "Imprimir" { return token(yytext(), "IMPRIMIR", yyline, yycolumn); }
-"CASO" | "caso" | "Caso" { return token(yytext(), "CASO", yyline, yycolumn); }
-"EVALUAR" | "evaluar" | "Evaluar" { return token(yytext(), "CASO", yyline, yycolumn); }
-"REAL" | "real" | "Real" { return token(yytext(), "REAL", yyline, yycolumn); }
-"COMUN" | "comun" | "Comun" { return token(yytext(), "COMUN", yyline, yycolumn); }
-"HEREDA" | "hereda" | "Hereda" { return token(yytext(), "HEREDA", yyline, yycolumn); }
-"PRINCIPAL" | "principal" | "Principal" { return token(yytext(), "PRINCIPAL", yyline, yycolumn); }
+"SI" | "si" | "Si" { return token(yytext(), "RESERVADA", yyline, yycolumn); }
+"SINO" | "sino" | "Sino" { return token(yytext(), "RESERVADA", yyline, yycolumn); }
+"PARA" | "para" | "Para" { return token(yytext(), "RESERVADA", yyline, yycolumn); }
+"EN" | "en" | "En" { return token(yytext(), "RESERVADA", yyline, yycolumn); }
+"RANGO" | "rango" | "Rango" { return token(yytext(), "RESERVADA", yyline, yycolumn); }
+"MISMO" | "mismo" | "Mismo" { return token(yytext(), "RESERVADA", yyline, yycolumn); }
+"MIENTRAS" | "mientras" | "Mientras" { return token(yytext(), "RESERVADA", yyline, yycolumn); }
+"INTENTAR" | "intentar" | "Intentar" { return token(yytext(), "RESERVADA", yyline, yycolumn); }
+"EXCEPTO" | "excepto" | "Excepto" { return token(yytext(), "RESERVADA", yyline, yycolumn); }
+"RETORNAR" | "retornar" | "Retornar" { return token(yytext(), "RESERVADA", yyline, yycolumn); }
+"ROMPER" | "romper" | "Romper" { return token(yytext(), "RESERVADA", yyline, yycolumn); }
+"SIGUIENTE" | "siguiente" | "Siguiente" { return token(yytext(), "RESERVADA", yyline, yycolumn); }
+"ENTRADA" | "entrada" | "Entrada" { return token(yytext(), "RESERVADA", yyline, yycolumn); }
+"SALIDA" | "salida" | "Salida" { return token(yytext(), "RESERVADA", yyline, yycolumn); }
+"IMPRIMIR" | "imprimir" | "Imprimir" { return token(yytext(), "RESERVADA", yyline, yycolumn); }
+"CASO" | "caso" | "Caso" { return token(yytext(), "RESERVADA", yyline, yycolumn); }
+"EVALUAR" | "evaluar" | "Evaluar" { return token(yytext(), "RESERVADA", yyline, yycolumn); }
+"REAL" | "real" | "Real" { return token(yytext(), "RESERVADA", yyline, yycolumn); }
+"COMUN" | "comun" | "Comun" { return token(yytext(), "RESERVADA", yyline, yycolumn); }
+"HEREDA" | "hereda" | "Hereda" { return token(yytext(), "RESERVADA", yyline, yycolumn); }
+"PRINCIPAL" | "principal" | "Principal" { return token(yytext(), "RESERVADA", yyline, yycolumn); }
 /*Tipo de dato*/
-"ENTERO" | "entero" | "Entero" { return token(yytext(), "ENTERO", yyline, yycolumn); }
-"FLOTANTE" | "fotante" | "Fotantet" { return token(yytext(), "FLOTANTE", yyline, yycolumn); }
-"DECIMAL" | "decimal" | "Decimal" { return token(yytext(), "DECIMAL", yyline, yycolumn); }
-"BOLEANO" | "booleano" | "Booleano" { return token(yytext(), "BOOLEANO", yyline, yycolumn); }
-"TEXTO" | "texto" | "Texto" { return token(yytext(), "TEXTO", yyline, yycolumn); }
+"ENTERO" | "entero" | "Entero" { return token(yytext(), "TIPODEDATO", yyline, yycolumn); }
+"FLOTANTE" | "fotante" | "Fotantet" { return token(yytext(), "TIPODEDATO", yyline, yycolumn); }
+"DECIMAL" | "decimal" | "Decimal" { return token(yytext(), "TIPODEDATO", yyline, yycolumn); }
+"BOLEANO" | "booleano" | "Booleano" { return token(yytext(), "TIPODEDATO", yyline, yycolumn); }
+"TEXTO" | "texto" | "Texto" { return token(yytext(), "TIPODEDATO", yyline, yycolumn); }
 /*booleano*/
-"VERDADERO" | "verdadero" | "Verdadero" { return token(yytext(), "VERDADERO", yyline, yycolumn); }
-"FALSO" | "falso" | "Falso" { return token(yytext(), "FALSO", yyline, yycolumn); }
+"VERDADERO" | "verdadero" | "Verdadero" { return token(yytext(), "RESERVADA", yyline, yycolumn); }
+"FALSO" | "falso" | "Falso" { return token(yytext(), "RESERVADA", yyline, yycolumn); }
 /*Matematicos*/
 "RAIZ" | "raiz" | "Raiz" { return token(yytext(), "RAIZ", yyline, yycolumn); }
 /*logicos*/
